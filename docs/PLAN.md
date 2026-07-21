@@ -79,8 +79,8 @@ Stored as versioned static JSON, never hardcoded in UI:
   "format": "nd-toolbox-backup",
   "schemaVersion": 1,
   "exportedAt": "<ISO>",
-  "suite": { "version": 1 },
-  "modules": { "feelings": { "datasetVersion": 1, "settings": {}, "logs": [] } }
+  "suite": { "version": 1, "settings": {} }, // settings are shell-global
+  "modules": { "feelings": { "datasetVersion": 1, "logs": [] } }
 }
 ```
 

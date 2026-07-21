@@ -267,4 +267,12 @@ export default {
     route('/outside-in', outsideIn);
     route('/n/:id', nodeView);
   },
+  // Backup slice for this module. Logs are added when opt-in logging ships;
+  // for now the slice records the dataset version so an import can detect drift.
+  serialize() {
+    return { datasetVersion: meta.datasetVersion, logs: [] };
+  },
+  deserialize() {
+    // No module-owned data to restore yet (logging arrives in a later step).
+  },
 };

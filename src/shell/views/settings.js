@@ -5,6 +5,7 @@
 import { el, focusView } from '../dom.js';
 import { route } from '../router.js';
 import { loadSettings, saveSettings, applySettings } from '../services/settings.js';
+import { exportBackup, parseBackup, applyBackup } from '../services/backup.js';
 
 function radioGroup(legend, name, options, current, onSelect) {
   return el('fieldset', { class: 'set-group' }, [
@@ -71,9 +72,51 @@ function renderSettings(ctx) {
       toggle('High contrast', 'Stronger text and border contrast.',
         s.contrast === 'high', (v) => patch({ contrast: v ? 'high' : 'normal' })),
     ]),
+
+    dataSection(ctx),
   );
   ctx.announce('Settings.');
   focusView(ctx.content);
+}
+
+// "Your data" — immutable export / import (seed a fresh start).
+function dataSection(ctx) {
+  const fileInput = el('input', { type: 'file', accept: '.json,application/json', class: 'sr-only' });
+  fileInput.addEventListener('change', async () => {
+    const file = fileInput.files?.[0];
+    if (!file) return;
+    try {
+      const envelope = parseBackup(await file.text());
+      const when = envelope.exportedAt ? new Date(envelope.exportedAt).toLocaleString() : 'an unknown date';
+      const ok = window.confirm(
+        `Import this backup from ${when}?\n\nThis starts fresh from the backup and replaces your current settings and data on this device.`);
+      if (!ok) return;
+      applyBackup(envelope);
+      ctx.announce('Backup imported. Starting fresh from it.');
+      renderSettings(ctx); // reflect the restored settings
+    } catch (e) {
+      ctx.announce(`Import failed: ${e.message}`);
+      window.alert(`Couldn’t import that file.\n\n${e.message}`);
+    } finally {
+      fileInput.value = '';
+    }
+  });
+
+  return el('fieldset', { class: 'set-group' }, [
+    el('legend', {}, 'Your data'),
+    el('p', { class: 'muted', style: 'margin: 0.1rem 0 0.4rem' },
+      'Everything stays on this device. Export a backup to keep it safe — on iPad, '
+      + 'Share → Save to Files or iCloud Drive. Backups are never changed once saved; '
+      + 'importing one starts fresh from that file.'),
+    el('div', { class: 'set-options' }, [
+      el('button', {
+        class: 'primary-btn', type: 'button',
+        onclick: () => { exportBackup(); ctx.announce('Backup file created.'); },
+      }, 'Export backup'),
+      el('button', { class: 'ghost-btn', type: 'button', onclick: () => fileInput.click() }, 'Import backup'),
+      fileInput,
+    ]),
+  ]);
 }
 
 export function registerSettings(ctx) {
