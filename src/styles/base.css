@@ -121,3 +121,80 @@ header.masthead {
 
 .muted { color: var(--ink-soft); font-size: 0.9rem; }
 .section-title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); margin: 0.25rem 0 0; }
+/* Headings receive focus on navigation so screen readers land on the new view.
+   They aren't interactive controls, so suppress the visible ring; the announced
+   heading text is the cue. Interactive controls keep their focus-visible ring. */
+[data-focus]:focus { outline: none; }
+
+.mast-home {
+  border: 0; background: none; padding: 0; margin: 0; cursor: pointer;
+  width: 32px; height: 32px; flex: none; line-height: 0;
+}
+
+/* Search typeahead */
+.search-row { display: grid; gap: 0.5rem; }
+.results { display: grid; gap: 0.4rem; }
+.result {
+  display: flex; align-items: baseline; gap: 0.6rem;
+  min-height: var(--tap); text-align: left; padding: 0.5rem 0.8rem;
+  border: 1px solid var(--line); border-left: 6px solid var(--core, var(--accent));
+  border-radius: var(--radius); background: var(--surface); color: var(--ink);
+  font: inherit; cursor: pointer;
+}
+.result:hover { background: var(--surface-2); }
+.result-label { font-weight: 600; }
+.result-trail { color: var(--ink-soft); font-size: 0.85rem; }
+
+/* Breadcrumb */
+.breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; }
+.crumb {
+  border: 0; background: none; padding: 0.15rem 0.1rem; font: inherit;
+  color: var(--accent); cursor: pointer; text-decoration: underline;
+  min-height: 32px;
+}
+.crumb.current { color: var(--ink-soft); text-decoration: none; cursor: default; }
+.crumb-sep { color: var(--ink-soft); }
+
+/* Landing */
+.landing-title {
+  display: flex; align-items: center; gap: 0.6rem; margin: 0.2rem 0 0;
+  font-size: 1.6rem; border-left: 8px solid var(--core, var(--accent));
+  padding-left: 0.6rem;
+}
+.landing-title .glyph { font-size: 1.3rem; }
+.landing-def { margin: 0; font-size: 1.05rem; }
+.landing-actions { margin-top: 0.5rem; }
+.ghost-btn {
+  min-height: var(--tap); padding: 0.6rem 1rem; font: inherit; cursor: pointer;
+  background: none; border: 1px solid var(--line); border-radius: var(--radius);
+  color: var(--ink);
+}
+.ghost-btn:hover { background: var(--surface-2); }
+
+.path-btn .more { float: right; color: var(--ink-soft); font-size: 1.2rem; }
+
+/* Nearby-word chips */
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip {
+  min-height: 36px; padding: 0.35rem 0.75rem; font: inherit; cursor: pointer;
+  background: var(--surface); color: var(--ink);
+  border: 1px solid var(--line); border-bottom: 3px solid var(--core, var(--accent));
+  border-radius: 999px;
+}
+.chip:hover { background: var(--surface-2); }
+
+/* Guidance panel — collapsed by default, calm, never blocks */
+.guidance {
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--surface); padding: 0 0.9rem;
+}
+.guidance > summary {
+  cursor: pointer; padding: 0.75rem 0; font-weight: 600; list-style: none;
+  min-height: var(--tap); display: flex; align-items: center;
+}
+.guidance > summary::before { content: '›'; margin-right: 0.5rem; color: var(--ink-soft); }
+.guidance[open] > summary::before { content: '⌄'; }
+.guidance-body { padding-bottom: 0.75rem; display: grid; gap: 0.5rem; }
+.guidance-body p { margin: 0; }
+.guidance-option { font-weight: 500; }
+.guidance-note { font-style: italic; }

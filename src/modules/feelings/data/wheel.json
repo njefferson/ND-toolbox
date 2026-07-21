@@ -1,0 +1,2374 @@
+{
+  "datasetId": "willcox-feelings-wheel",
+  "datasetVersion": 1,
+  "source": "Willcox, G. (1982), The Feeling Wheel. Secondary words follow the Willcox/Roberts lineage; tertiary words curated for ND Toolbox.",
+  "coreOrder": [
+    "joyful",
+    "powerful",
+    "peaceful",
+    "sad",
+    "mad",
+    "scared"
+  ],
+  "glyphs": {
+    "joyful": "◆",
+    "powerful": "▲",
+    "peaceful": "●",
+    "sad": "▽",
+    "mad": "✕",
+    "scared": "◇"
+  },
+  "nodes": [
+    {
+      "id": "joyful",
+      "label": "Joyful",
+      "coreId": "joyful",
+      "parentId": null,
+      "depth": 0,
+      "aliases": [
+        "joy",
+        "happy",
+        "glad"
+      ],
+      "definition": "A bright, warm feeling of gladness or delight.",
+      "neighbors": [],
+      "guidance": {
+        "pointsTo": "Joy often shows up when something matters to you and is going well.",
+        "oneOption": "If it fits, you might pause a moment to let the good feeling land."
+      },
+      "colorToken": "core.joyful",
+      "provenance": "willcox-1982"
+    },
+    {
+      "id": "content",
+      "label": "Content",
+      "coreId": "joyful",
+      "parentId": "joyful",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Quietly satisfied; you have enough right now.",
+      "neighbors": [
+        "happy",
+        "excited",
+        "playful",
+        "optimistic",
+        "interested"
+      ],
+      "guidance": {
+        "pointsTo": "Contentment often points to a need that is, for now, met.",
+        "oneOption": "You might simply notice what is going right, no need to change anything."
+      },
+      "colorToken": "core.joyful",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "satisfied",
+      "label": "Satisfied",
+      "coreId": "joyful",
+      "parentId": "content",
+      "depth": 2,
+      "aliases": [
+        "pleased"
+      ],
+      "definition": "Pleased with how something turned out.",
+      "neighbors": [
+        "fulfilled"
+      ],
+      "guidance": null,
+      "colorToken": "core.joyful",
+      "provenance": "curated"
+    },
+    {
+      "id": "fulfilled",
+      "label": "Fulfilled",
+      "coreId": "joyful",
+      "parentId": "content",
+      "depth": 2,
+      "aliases": [
+        "complete"
+      ],
+      "definition": "Full and complete, as if something meaningful is done.",
+      "neighbors": [
+        "satisfied"
+      ],
+      "guidance": null,
+      "colorToken": "core.joyful",
+      "provenance": "curated"
+    },
+    {
+      "id": "happy",
+      "label": "Happy",
+      "coreId": "joyful",
+      "parentId": "joyful",
+      "depth": 1,
+      "aliases": [],
+      "definition": "A light, glad feeling.",
+      "neighbors": [
+        "content",
+        "excited",
+        "playful",
+        "optimistic",
+        "interested"
+      ],
+      "guidance": {
+        "pointsTo": "Happiness often follows a moment that fits what you value.",
+        "oneOption": "You might name out loud one thing that sparked it."
+      },
+      "colorToken": "core.joyful",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "cheerful",
+      "label": "Cheerful",
+      "coreId": "joyful",
+      "parentId": "happy",
+      "depth": 2,
+      "aliases": [
+        "upbeat"
+      ],
+      "definition": "Bright and good-humored.",
+      "neighbors": [
+        "delighted",
+        "glad"
+      ],
+      "guidance": null,
+      "colorToken": "core.joyful",
+      "provenance": "curated"
+    },
+    {
+      "id": "delighted",
+      "label": "Delighted",
+      "coreId": "joyful",
+      "parentId": "happy",
+      "depth": 2,
+      "aliases": [
+        "thrilled"
+      ],
+      "definition": "Sharply, happily surprised by something good.",
+      "neighbors": [
+        "cheerful",
+        "glad"
+      ],
+      "guidance": null,
+      "colorToken": "core.joyful",
+      "provenance": "curated"
+    },
+    {
+      "id": "glad",
+      "label": "Glad",
+      "coreId": "joyful",
+      "parentId": "happy",
+      "depth": 2,
+      "aliases": [],
+      "definition": "Simply pleased that something is so.",
+      "neighbors": [
+        "cheerful",
+        "delighted"
+      ],
+      "guidance": null,
+      "colorToken": "core.joyful",
+      "provenance": "curated"
+    },
+    {
+      "id": "excited",
+      "label": "Excited",
+      "coreId": "joyful",
+      "parentId": "joyful",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Lit up and energized about what is ahead.",
+      "neighbors": [
+        "content",
+        "happy",
+        "playful",
+        "optimistic",
+        "interested"
+      ],
+      "guidance": {
+        "pointsTo": "Excitement often points to something you are looking forward to.",
+        "oneOption": "You might channel a little of the energy into one small first step."
+      },
+      "colorToken": "core.joyful",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "energetic",
+      "label": "Energetic",
+      "coreId": "joyful",
+      "parentId": "excited",
+      "depth": 2,
+      "aliases": [
+        "lively"
+      ],
+      "definition": "Full of ready energy.",
+      "neighbors": [
+        "eager"
+      ],
+      "guidance": null,
+      "colorToken": "core.joyful",
+      "provenance": "curated"
+    },
+    {
+      "id": "eager",
+      "label": "Eager",
+      "coreId": "joyful",
+      "parentId": "excited",
+      "depth": 2,
+      "aliases": [
+        "keen"
+      ],
+      "definition": "Keen and impatient to begin.",
+      "neighbors": [
+        "energetic"
+      ],
+      "guidance": null,
+      "colorToken": "core.joyful",
+      "provenance": "curated"
+    },
+    {
+      "id": "playful",
+      "label": "Playful",
+      "coreId": "joyful",
+      "parentId": "joyful",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Lighthearted and up for fun.",
+      "neighbors": [
+        "content",
+        "happy",
+        "excited",
+        "optimistic",
+        "interested"
+      ],
+      "guidance": {
+        "pointsTo": "Playfulness often shows up when you feel safe enough to be loose.",
+        "oneOption": "You might give yourself permission to follow it for a few minutes."
+      },
+      "colorToken": "core.joyful",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "amused",
+      "label": "Amused",
+      "coreId": "joyful",
+      "parentId": "playful",
+      "depth": 2,
+      "aliases": [],
+      "definition": "Quietly entertained; something struck you as funny.",
+      "neighbors": [
+        "lighthearted"
+      ],
+      "guidance": null,
+      "colorToken": "core.joyful",
+      "provenance": "curated"
+    },
+    {
+      "id": "lighthearted",
+      "label": "Lighthearted",
+      "coreId": "joyful",
+      "parentId": "playful",
+      "depth": 2,
+      "aliases": [
+        "carefree"
+      ],
+      "definition": "Free of weight or worry for now.",
+      "neighbors": [
+        "amused"
+      ],
+      "guidance": null,
+      "colorToken": "core.joyful",
+      "provenance": "curated"
+    },
+    {
+      "id": "optimistic",
+      "label": "Optimistic",
+      "coreId": "joyful",
+      "parentId": "joyful",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Leaning toward things working out.",
+      "neighbors": [
+        "content",
+        "happy",
+        "excited",
+        "playful",
+        "interested"
+      ],
+      "guidance": {
+        "pointsTo": "Optimism often points to a sense that effort here is worth it.",
+        "oneOption": "You might jot one hope so you can return to it later."
+      },
+      "colorToken": "core.joyful",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "hopeful",
+      "label": "Hopeful",
+      "coreId": "joyful",
+      "parentId": "optimistic",
+      "depth": 2,
+      "aliases": [],
+      "definition": "Expecting good things are possible.",
+      "neighbors": [
+        "inspired"
+      ],
+      "guidance": null,
+      "colorToken": "core.joyful",
+      "provenance": "curated"
+    },
+    {
+      "id": "inspired",
+      "label": "Inspired",
+      "coreId": "joyful",
+      "parentId": "optimistic",
+      "depth": 2,
+      "aliases": [
+        "motivated to create"
+      ],
+      "definition": "Moved to make or do something.",
+      "neighbors": [
+        "hopeful"
+      ],
+      "guidance": null,
+      "colorToken": "core.joyful",
+      "provenance": "curated"
+    },
+    {
+      "id": "interested",
+      "label": "Interested",
+      "coreId": "joyful",
+      "parentId": "joyful",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Drawn in; wanting to know more.",
+      "neighbors": [
+        "content",
+        "happy",
+        "excited",
+        "playful",
+        "optimistic"
+      ],
+      "guidance": {
+        "pointsTo": "Interest often points to something worth your attention.",
+        "oneOption": "You might follow the curiosity one question further."
+      },
+      "colorToken": "core.joyful",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "curious",
+      "label": "Curious",
+      "coreId": "joyful",
+      "parentId": "interested",
+      "depth": 2,
+      "aliases": [
+        "inquisitive"
+      ],
+      "definition": "Wanting to explore or understand.",
+      "neighbors": [
+        "absorbed",
+        "engaged"
+      ],
+      "guidance": null,
+      "colorToken": "core.joyful",
+      "provenance": "curated"
+    },
+    {
+      "id": "absorbed",
+      "label": "Absorbed",
+      "coreId": "joyful",
+      "parentId": "interested",
+      "depth": 2,
+      "aliases": [
+        "engrossed"
+      ],
+      "definition": "Fully taken up by something.",
+      "neighbors": [
+        "curious",
+        "engaged"
+      ],
+      "guidance": null,
+      "colorToken": "core.joyful",
+      "provenance": "curated"
+    },
+    {
+      "id": "engaged",
+      "label": "Engaged",
+      "coreId": "joyful",
+      "parentId": "interested",
+      "depth": 2,
+      "aliases": [],
+      "definition": "Actively involved and present.",
+      "neighbors": [
+        "curious",
+        "absorbed"
+      ],
+      "guidance": null,
+      "colorToken": "core.joyful",
+      "provenance": "curated"
+    },
+    {
+      "id": "powerful",
+      "label": "Powerful",
+      "coreId": "powerful",
+      "parentId": null,
+      "depth": 0,
+      "aliases": [
+        "strong",
+        "empowered",
+        "in control"
+      ],
+      "definition": "A feeling of capability, confidence, and agency.",
+      "neighbors": [],
+      "guidance": {
+        "pointsTo": "A sense of power often points to something you can affect or do.",
+        "oneOption": "If it fits, you might name the one thing that is yours to act on."
+      },
+      "colorToken": "core.powerful",
+      "provenance": "willcox-1982"
+    },
+    {
+      "id": "confident",
+      "label": "Confident",
+      "coreId": "powerful",
+      "parentId": "powerful",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Sure of yourself and what you can do.",
+      "neighbors": [
+        "proud",
+        "respected",
+        "capable",
+        "determined",
+        "appreciated"
+      ],
+      "guidance": {
+        "pointsTo": "Confidence often points to skill or preparation you can trust.",
+        "oneOption": "You might let one recent success stand as evidence."
+      },
+      "colorToken": "core.powerful",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "self-assured",
+      "label": "Self-assured",
+      "coreId": "powerful",
+      "parentId": "confident",
+      "depth": 2,
+      "aliases": [
+        "assured"
+      ],
+      "definition": "Steady in who you are.",
+      "neighbors": [
+        "bold",
+        "empowered"
+      ],
+      "guidance": null,
+      "colorToken": "core.powerful",
+      "provenance": "curated"
+    },
+    {
+      "id": "bold",
+      "label": "Bold",
+      "coreId": "powerful",
+      "parentId": "confident",
+      "depth": 2,
+      "aliases": [
+        "daring"
+      ],
+      "definition": "Willing to take a risk.",
+      "neighbors": [
+        "self-assured",
+        "empowered"
+      ],
+      "guidance": null,
+      "colorToken": "core.powerful",
+      "provenance": "curated"
+    },
+    {
+      "id": "empowered",
+      "label": "Empowered",
+      "coreId": "powerful",
+      "parentId": "confident",
+      "depth": 2,
+      "aliases": [],
+      "definition": "Free and able to act on your own terms.",
+      "neighbors": [
+        "self-assured",
+        "bold"
+      ],
+      "guidance": null,
+      "colorToken": "core.powerful",
+      "provenance": "curated"
+    },
+    {
+      "id": "proud",
+      "label": "Proud",
+      "coreId": "powerful",
+      "parentId": "powerful",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Warmly pleased with something you did or are.",
+      "neighbors": [
+        "confident",
+        "respected",
+        "capable",
+        "determined",
+        "appreciated"
+      ],
+      "guidance": {
+        "pointsTo": "Pride often points to effort or values you lived up to.",
+        "oneOption": "You might let yourself take quiet credit for it."
+      },
+      "colorToken": "core.powerful",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "accomplished",
+      "label": "Accomplished",
+      "coreId": "powerful",
+      "parentId": "proud",
+      "depth": 2,
+      "aliases": [
+        "achieved"
+      ],
+      "definition": "You achieved something that took work.",
+      "neighbors": [
+        "worthy",
+        "triumphant"
+      ],
+      "guidance": null,
+      "colorToken": "core.powerful",
+      "provenance": "curated"
+    },
+    {
+      "id": "worthy",
+      "label": "Worthy",
+      "coreId": "powerful",
+      "parentId": "proud",
+      "depth": 2,
+      "aliases": [
+        "deserving"
+      ],
+      "definition": "Deserving of respect and care.",
+      "neighbors": [
+        "accomplished",
+        "triumphant"
+      ],
+      "guidance": null,
+      "colorToken": "core.powerful",
+      "provenance": "curated"
+    },
+    {
+      "id": "triumphant",
+      "label": "Triumphant",
+      "coreId": "powerful",
+      "parentId": "proud",
+      "depth": 2,
+      "aliases": [],
+      "definition": "Victorious after a real effort.",
+      "neighbors": [
+        "accomplished",
+        "worthy"
+      ],
+      "guidance": null,
+      "colorToken": "core.powerful",
+      "provenance": "curated"
+    },
+    {
+      "id": "respected",
+      "label": "Respected",
+      "coreId": "powerful",
+      "parentId": "powerful",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Seen and regarded by others.",
+      "neighbors": [
+        "confident",
+        "proud",
+        "capable",
+        "determined",
+        "appreciated"
+      ],
+      "guidance": {
+        "pointsTo": "Feeling respected often points to a need to be taken seriously being met.",
+        "oneOption": "You might notice who offered it, and let it register."
+      },
+      "colorToken": "core.powerful",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "valued",
+      "label": "Valued",
+      "coreId": "powerful",
+      "parentId": "respected",
+      "depth": 2,
+      "aliases": [
+        "valued"
+      ],
+      "definition": "Treated as if you matter.",
+      "neighbors": [
+        "admired"
+      ],
+      "guidance": null,
+      "colorToken": "core.powerful",
+      "provenance": "curated"
+    },
+    {
+      "id": "admired",
+      "label": "Admired",
+      "coreId": "powerful",
+      "parentId": "respected",
+      "depth": 2,
+      "aliases": [],
+      "definition": "Looked up to for who you are or what you do.",
+      "neighbors": [
+        "valued"
+      ],
+      "guidance": null,
+      "colorToken": "core.powerful",
+      "provenance": "curated"
+    },
+    {
+      "id": "capable",
+      "label": "Capable",
+      "coreId": "powerful",
+      "parentId": "powerful",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Up to the task in front of you.",
+      "neighbors": [
+        "confident",
+        "proud",
+        "respected",
+        "determined",
+        "appreciated"
+      ],
+      "guidance": {
+        "pointsTo": "Capability often points to a match between the task and your skills.",
+        "oneOption": "You might start with the part you already know how to do."
+      },
+      "colorToken": "core.powerful",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "competent",
+      "label": "Competent",
+      "coreId": "powerful",
+      "parentId": "capable",
+      "depth": 2,
+      "aliases": [
+        "skilled"
+      ],
+      "definition": "Skilled and reliable at this.",
+      "neighbors": [
+        "resourceful"
+      ],
+      "guidance": null,
+      "colorToken": "core.powerful",
+      "provenance": "curated"
+    },
+    {
+      "id": "resourceful",
+      "label": "Resourceful",
+      "coreId": "powerful",
+      "parentId": "capable",
+      "depth": 2,
+      "aliases": [
+        "inventive"
+      ],
+      "definition": "Good at finding a way through.",
+      "neighbors": [
+        "competent"
+      ],
+      "guidance": null,
+      "colorToken": "core.powerful",
+      "provenance": "curated"
+    },
+    {
+      "id": "determined",
+      "label": "Determined",
+      "coreId": "powerful",
+      "parentId": "powerful",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Set on seeing something through.",
+      "neighbors": [
+        "confident",
+        "proud",
+        "respected",
+        "capable",
+        "appreciated"
+      ],
+      "guidance": {
+        "pointsTo": "Determination often points to a goal that matters to you.",
+        "oneOption": "You might define the next single step and stop there."
+      },
+      "colorToken": "core.powerful",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "motivated",
+      "label": "Motivated",
+      "coreId": "powerful",
+      "parentId": "determined",
+      "depth": 2,
+      "aliases": [
+        "driven"
+      ],
+      "definition": "Moved and ready to act.",
+      "neighbors": [
+        "focused"
+      ],
+      "guidance": null,
+      "colorToken": "core.powerful",
+      "provenance": "curated"
+    },
+    {
+      "id": "focused",
+      "label": "Focused",
+      "coreId": "powerful",
+      "parentId": "determined",
+      "depth": 2,
+      "aliases": [
+        "locked in"
+      ],
+      "definition": "Attention gathered on one thing.",
+      "neighbors": [
+        "motivated"
+      ],
+      "guidance": null,
+      "colorToken": "core.powerful",
+      "provenance": "curated"
+    },
+    {
+      "id": "appreciated",
+      "label": "Appreciated",
+      "coreId": "powerful",
+      "parentId": "powerful",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Your contribution was noticed.",
+      "neighbors": [
+        "confident",
+        "proud",
+        "respected",
+        "capable",
+        "determined"
+      ],
+      "guidance": {
+        "pointsTo": "Feeling appreciated often points to a need to be seen being met.",
+        "oneOption": "You might let the acknowledgment fully arrive before moving on."
+      },
+      "colorToken": "core.powerful",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "recognized",
+      "label": "Recognized",
+      "coreId": "powerful",
+      "parentId": "appreciated",
+      "depth": 2,
+      "aliases": [
+        "acknowledged"
+      ],
+      "definition": "Acknowledged for what you did.",
+      "neighbors": [
+        "important"
+      ],
+      "guidance": null,
+      "colorToken": "core.powerful",
+      "provenance": "curated"
+    },
+    {
+      "id": "important",
+      "label": "Important",
+      "coreId": "powerful",
+      "parentId": "appreciated",
+      "depth": 2,
+      "aliases": [
+        "significant"
+      ],
+      "definition": "Your presence makes a difference here.",
+      "neighbors": [
+        "recognized"
+      ],
+      "guidance": null,
+      "colorToken": "core.powerful",
+      "provenance": "curated"
+    },
+    {
+      "id": "peaceful",
+      "label": "Peaceful",
+      "coreId": "peaceful",
+      "parentId": null,
+      "depth": 0,
+      "aliases": [
+        "calm",
+        "serene",
+        "at peace"
+      ],
+      "definition": "A settled, calm, unhurried ease.",
+      "neighbors": [],
+      "guidance": {
+        "pointsTo": "Peace often shows up when nothing urgent is pulling at you.",
+        "oneOption": "If it fits, you might slow one breath and stay here a beat longer."
+      },
+      "colorToken": "core.peaceful",
+      "provenance": "willcox-1982"
+    },
+    {
+      "id": "calm",
+      "label": "Calm",
+      "coreId": "peaceful",
+      "parentId": "peaceful",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Settled and unbothered.",
+      "neighbors": [
+        "relaxed",
+        "secure",
+        "loving",
+        "grateful",
+        "trusting"
+      ],
+      "guidance": {
+        "pointsTo": "Calm often points to a nervous system that feels safe enough.",
+        "oneOption": "You might let your shoulders drop and notice the quiet."
+      },
+      "colorToken": "core.peaceful",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "settled",
+      "label": "Settled",
+      "coreId": "peaceful",
+      "parentId": "calm",
+      "depth": 2,
+      "aliases": [
+        "at rest"
+      ],
+      "definition": "At rest, not stirred up.",
+      "neighbors": [
+        "still"
+      ],
+      "guidance": null,
+      "colorToken": "core.peaceful",
+      "provenance": "curated"
+    },
+    {
+      "id": "still",
+      "label": "Still",
+      "coreId": "peaceful",
+      "parentId": "calm",
+      "depth": 2,
+      "aliases": [
+        "quiet"
+      ],
+      "definition": "Quiet and unmoving inside.",
+      "neighbors": [
+        "settled"
+      ],
+      "guidance": null,
+      "colorToken": "core.peaceful",
+      "provenance": "curated"
+    },
+    {
+      "id": "relaxed",
+      "label": "Relaxed",
+      "coreId": "peaceful",
+      "parentId": "peaceful",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Loose and free of tension.",
+      "neighbors": [
+        "calm",
+        "secure",
+        "loving",
+        "grateful",
+        "trusting"
+      ],
+      "guidance": {
+        "pointsTo": "Relaxation often points to a load that has, for now, lifted.",
+        "oneOption": "You might let one part of your body soften a little more."
+      },
+      "colorToken": "core.peaceful",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "at-ease",
+      "label": "At ease",
+      "coreId": "peaceful",
+      "parentId": "relaxed",
+      "depth": 2,
+      "aliases": [
+        "comfortable"
+      ],
+      "definition": "Comfortable and unworried.",
+      "neighbors": [
+        "unhurried"
+      ],
+      "guidance": null,
+      "colorToken": "core.peaceful",
+      "provenance": "curated"
+    },
+    {
+      "id": "unhurried",
+      "label": "Unhurried",
+      "coreId": "peaceful",
+      "parentId": "relaxed",
+      "depth": 2,
+      "aliases": [
+        "leisurely"
+      ],
+      "definition": "No need to rush anything.",
+      "neighbors": [
+        "at-ease"
+      ],
+      "guidance": null,
+      "colorToken": "core.peaceful",
+      "provenance": "curated"
+    },
+    {
+      "id": "secure",
+      "label": "Secure",
+      "coreId": "peaceful",
+      "parentId": "peaceful",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Safe and steady.",
+      "neighbors": [
+        "calm",
+        "relaxed",
+        "loving",
+        "grateful",
+        "trusting"
+      ],
+      "guidance": {
+        "pointsTo": "Security often points to a need for safety being met right now.",
+        "oneOption": "You might notice one thing that is holding you steady."
+      },
+      "colorToken": "core.peaceful",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "safe",
+      "label": "Safe",
+      "coreId": "peaceful",
+      "parentId": "secure",
+      "depth": 2,
+      "aliases": [
+        "protected"
+      ],
+      "definition": "Out of harm; protected.",
+      "neighbors": [
+        "grounded",
+        "protected"
+      ],
+      "guidance": null,
+      "colorToken": "core.peaceful",
+      "provenance": "curated"
+    },
+    {
+      "id": "grounded",
+      "label": "Grounded",
+      "coreId": "peaceful",
+      "parentId": "secure",
+      "depth": 2,
+      "aliases": [
+        "centered"
+      ],
+      "definition": "Rooted and present in your body.",
+      "neighbors": [
+        "safe",
+        "protected"
+      ],
+      "guidance": null,
+      "colorToken": "core.peaceful",
+      "provenance": "curated"
+    },
+    {
+      "id": "protected",
+      "label": "Protected",
+      "coreId": "peaceful",
+      "parentId": "secure",
+      "depth": 2,
+      "aliases": [],
+      "definition": "Shielded from what could harm you.",
+      "neighbors": [
+        "safe",
+        "grounded"
+      ],
+      "guidance": null,
+      "colorToken": "core.peaceful",
+      "provenance": "curated"
+    },
+    {
+      "id": "loving",
+      "label": "Loving",
+      "coreId": "peaceful",
+      "parentId": "peaceful",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Warm and caring toward someone.",
+      "neighbors": [
+        "calm",
+        "relaxed",
+        "secure",
+        "grateful",
+        "trusting"
+      ],
+      "guidance": {
+        "pointsTo": "Love often points to a connection that matters to you.",
+        "oneOption": "You might let the person know, in a small way, if it feels right."
+      },
+      "colorToken": "core.peaceful",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "affectionate",
+      "label": "Affectionate",
+      "coreId": "peaceful",
+      "parentId": "loving",
+      "depth": 2,
+      "aliases": [
+        "fond"
+      ],
+      "definition": "Warmly fond.",
+      "neighbors": [
+        "tender",
+        "devoted"
+      ],
+      "guidance": null,
+      "colorToken": "core.peaceful",
+      "provenance": "curated"
+    },
+    {
+      "id": "tender",
+      "label": "Tender",
+      "coreId": "peaceful",
+      "parentId": "loving",
+      "depth": 2,
+      "aliases": [
+        "gentle"
+      ],
+      "definition": "Gentle and soft-hearted.",
+      "neighbors": [
+        "affectionate",
+        "devoted"
+      ],
+      "guidance": null,
+      "colorToken": "core.peaceful",
+      "provenance": "curated"
+    },
+    {
+      "id": "devoted",
+      "label": "Devoted",
+      "coreId": "peaceful",
+      "parentId": "loving",
+      "depth": 2,
+      "aliases": [],
+      "definition": "Committed and loyal in care.",
+      "neighbors": [
+        "affectionate",
+        "tender"
+      ],
+      "guidance": null,
+      "colorToken": "core.peaceful",
+      "provenance": "curated"
+    },
+    {
+      "id": "grateful",
+      "label": "Grateful",
+      "coreId": "peaceful",
+      "parentId": "peaceful",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Thankful for something you have or received.",
+      "neighbors": [
+        "calm",
+        "relaxed",
+        "secure",
+        "loving",
+        "trusting"
+      ],
+      "guidance": {
+        "pointsTo": "Gratitude often points to something good you have noticed.",
+        "oneOption": "You might name one thing, however small, that you are glad of."
+      },
+      "colorToken": "core.peaceful",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "thankful",
+      "label": "Thankful",
+      "coreId": "peaceful",
+      "parentId": "grateful",
+      "depth": 2,
+      "aliases": [
+        "appreciative"
+      ],
+      "definition": "Appreciative of a specific good.",
+      "neighbors": [
+        "warm"
+      ],
+      "guidance": null,
+      "colorToken": "core.peaceful",
+      "provenance": "curated"
+    },
+    {
+      "id": "warm",
+      "label": "Warm",
+      "coreId": "peaceful",
+      "parentId": "grateful",
+      "depth": 2,
+      "aliases": [],
+      "definition": "Softly glowing toward someone or something.",
+      "neighbors": [
+        "thankful"
+      ],
+      "guidance": null,
+      "colorToken": "core.peaceful",
+      "provenance": "curated"
+    },
+    {
+      "id": "trusting",
+      "label": "Trusting",
+      "coreId": "peaceful",
+      "parentId": "peaceful",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Willing to be open and rely on someone.",
+      "neighbors": [
+        "calm",
+        "relaxed",
+        "secure",
+        "loving",
+        "grateful"
+      ],
+      "guidance": {
+        "pointsTo": "Trust often points to a bond that has felt safe over time.",
+        "oneOption": "You might let one small honesty pass between you."
+      },
+      "colorToken": "core.peaceful",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "open",
+      "label": "Open",
+      "coreId": "peaceful",
+      "parentId": "trusting",
+      "depth": 2,
+      "aliases": [
+        "receptive"
+      ],
+      "definition": "Willing to receive and share.",
+      "neighbors": [
+        "connected"
+      ],
+      "guidance": null,
+      "colorToken": "core.peaceful",
+      "provenance": "curated"
+    },
+    {
+      "id": "connected",
+      "label": "Connected",
+      "coreId": "peaceful",
+      "parentId": "trusting",
+      "depth": 2,
+      "aliases": [
+        "close"
+      ],
+      "definition": "In genuine contact with someone.",
+      "neighbors": [
+        "open"
+      ],
+      "guidance": null,
+      "colorToken": "core.peaceful",
+      "provenance": "curated"
+    },
+    {
+      "id": "sad",
+      "label": "Sad",
+      "coreId": "sad",
+      "parentId": null,
+      "depth": 0,
+      "aliases": [
+        "unhappy",
+        "down",
+        "low",
+        "blue"
+      ],
+      "definition": "A heavy, low feeling, often tied to loss.",
+      "neighbors": [],
+      "guidance": {
+        "pointsTo": "Sadness often points to something you care about that has been lost or missed.",
+        "oneOption": "If it fits, you might let the feeling be here without needing to fix it."
+      },
+      "colorToken": "core.sad",
+      "provenance": "willcox-1982"
+    },
+    {
+      "id": "lonely",
+      "label": "Lonely",
+      "coreId": "sad",
+      "parentId": "sad",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Disconnected; missing closeness.",
+      "neighbors": [
+        "hurt",
+        "disappointed",
+        "depressed",
+        "guilty",
+        "vulnerable"
+      ],
+      "guidance": {
+        "pointsTo": "Loneliness often points to a need for connection that is not being met right now.",
+        "oneOption": "You might send one small message to someone you trust — no pressure to."
+      },
+      "colorToken": "core.sad",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "isolated",
+      "label": "Isolated",
+      "coreId": "sad",
+      "parentId": "lonely",
+      "depth": 2,
+      "aliases": [
+        "alone",
+        "cut off"
+      ],
+      "definition": "Cut off from others.",
+      "neighbors": [
+        "abandoned",
+        "disconnected"
+      ],
+      "guidance": null,
+      "colorToken": "core.sad",
+      "provenance": "curated"
+    },
+    {
+      "id": "abandoned",
+      "label": "Abandoned",
+      "coreId": "sad",
+      "parentId": "lonely",
+      "depth": 2,
+      "aliases": [
+        "deserted"
+      ],
+      "definition": "Left behind by someone you counted on.",
+      "neighbors": [
+        "isolated",
+        "disconnected"
+      ],
+      "guidance": null,
+      "colorToken": "core.sad",
+      "provenance": "curated"
+    },
+    {
+      "id": "disconnected",
+      "label": "Disconnected",
+      "coreId": "sad",
+      "parentId": "lonely",
+      "depth": 2,
+      "aliases": [
+        "distant"
+      ],
+      "definition": "Present with others but not in contact.",
+      "neighbors": [
+        "isolated",
+        "abandoned"
+      ],
+      "guidance": null,
+      "colorToken": "core.sad",
+      "provenance": "curated"
+    },
+    {
+      "id": "hurt",
+      "label": "Hurt",
+      "coreId": "sad",
+      "parentId": "sad",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Wounded by something that happened.",
+      "neighbors": [
+        "lonely",
+        "disappointed",
+        "depressed",
+        "guilty",
+        "vulnerable"
+      ],
+      "guidance": {
+        "pointsTo": "Hurt often points to something that mattered being damaged or dismissed.",
+        "oneOption": "You might place a hand where you feel it and breathe once, slowly."
+      },
+      "colorToken": "core.sad",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "wounded",
+      "label": "Wounded",
+      "coreId": "sad",
+      "parentId": "hurt",
+      "depth": 2,
+      "aliases": [
+        "injured"
+      ],
+      "definition": "Cut deeply by words or actions.",
+      "neighbors": [
+        "heartbroken"
+      ],
+      "guidance": null,
+      "colorToken": "core.sad",
+      "provenance": "curated"
+    },
+    {
+      "id": "heartbroken",
+      "label": "Heartbroken",
+      "coreId": "sad",
+      "parentId": "hurt",
+      "depth": 2,
+      "aliases": [
+        "devastated"
+      ],
+      "definition": "In deep grief over a loss.",
+      "neighbors": [
+        "wounded"
+      ],
+      "guidance": null,
+      "colorToken": "core.sad",
+      "provenance": "curated"
+    },
+    {
+      "id": "disappointed",
+      "label": "Disappointed",
+      "coreId": "sad",
+      "parentId": "sad",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Let down when things fell short.",
+      "neighbors": [
+        "lonely",
+        "hurt",
+        "depressed",
+        "guilty",
+        "vulnerable"
+      ],
+      "guidance": {
+        "pointsTo": "Disappointment often points to a hope that did not come to pass.",
+        "oneOption": "You might name what you had wanted, plainly, to yourself."
+      },
+      "colorToken": "core.sad",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "let-down",
+      "label": "Let down",
+      "coreId": "sad",
+      "parentId": "disappointed",
+      "depth": 2,
+      "aliases": [],
+      "definition": "Failed by someone or something.",
+      "neighbors": [
+        "discouraged"
+      ],
+      "guidance": null,
+      "colorToken": "core.sad",
+      "provenance": "curated"
+    },
+    {
+      "id": "discouraged",
+      "label": "Discouraged",
+      "coreId": "sad",
+      "parentId": "disappointed",
+      "depth": 2,
+      "aliases": [
+        "disheartened"
+      ],
+      "definition": "Losing heart to keep going.",
+      "neighbors": [
+        "let-down"
+      ],
+      "guidance": null,
+      "colorToken": "core.sad",
+      "provenance": "curated"
+    },
+    {
+      "id": "depressed",
+      "label": "Depressed",
+      "coreId": "sad",
+      "parentId": "sad",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Heavily low, often flat or empty.",
+      "neighbors": [
+        "lonely",
+        "hurt",
+        "disappointed",
+        "guilty",
+        "vulnerable"
+      ],
+      "guidance": {
+        "pointsTo": "This heaviness often points to being depleted or grieving, not to a flaw in you.",
+        "oneOption": "You might make the next step very small — a glass of water counts."
+      },
+      "colorToken": "core.sad",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "empty",
+      "label": "Empty",
+      "coreId": "sad",
+      "parentId": "depressed",
+      "depth": 2,
+      "aliases": [
+        "numb inside"
+      ],
+      "definition": "Hollow, as if something is missing.",
+      "neighbors": [
+        "hopeless",
+        "numb"
+      ],
+      "guidance": null,
+      "colorToken": "core.sad",
+      "provenance": "curated"
+    },
+    {
+      "id": "hopeless",
+      "label": "Hopeless",
+      "coreId": "sad",
+      "parentId": "depressed",
+      "depth": 2,
+      "aliases": [
+        "despairing"
+      ],
+      "definition": "As if nothing will change.",
+      "neighbors": [
+        "empty",
+        "numb"
+      ],
+      "guidance": null,
+      "colorToken": "core.sad",
+      "provenance": "curated"
+    },
+    {
+      "id": "numb",
+      "label": "Numb",
+      "coreId": "sad",
+      "parentId": "depressed",
+      "depth": 2,
+      "aliases": [
+        "flat"
+      ],
+      "definition": "Feeling little or nothing at all.",
+      "neighbors": [
+        "empty",
+        "hopeless"
+      ],
+      "guidance": null,
+      "colorToken": "core.sad",
+      "provenance": "curated"
+    },
+    {
+      "id": "guilty",
+      "label": "Guilty",
+      "coreId": "sad",
+      "parentId": "sad",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Uneasy that you did something wrong.",
+      "neighbors": [
+        "lonely",
+        "hurt",
+        "disappointed",
+        "depressed",
+        "vulnerable"
+      ],
+      "guidance": {
+        "pointsTo": "Guilt often points to a value of yours that you feel you crossed.",
+        "oneOption": "You might ask what, if anything, is actually yours to repair."
+      },
+      "colorToken": "core.sad",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "ashamed",
+      "label": "Ashamed",
+      "coreId": "sad",
+      "parentId": "guilty",
+      "depth": 2,
+      "aliases": [
+        "humiliated"
+      ],
+      "definition": "Wanting to hide, as if you are bad.",
+      "neighbors": [
+        "remorseful"
+      ],
+      "guidance": null,
+      "colorToken": "core.sad",
+      "provenance": "curated"
+    },
+    {
+      "id": "remorseful",
+      "label": "Remorseful",
+      "coreId": "sad",
+      "parentId": "guilty",
+      "depth": 2,
+      "aliases": [
+        "regretful"
+      ],
+      "definition": "Sorry and wishing you had acted differently.",
+      "neighbors": [
+        "ashamed"
+      ],
+      "guidance": null,
+      "colorToken": "core.sad",
+      "provenance": "curated"
+    },
+    {
+      "id": "vulnerable",
+      "label": "Vulnerable",
+      "coreId": "sad",
+      "parentId": "sad",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Exposed and open to being hurt.",
+      "neighbors": [
+        "lonely",
+        "hurt",
+        "disappointed",
+        "depressed",
+        "guilty"
+      ],
+      "guidance": {
+        "pointsTo": "Vulnerability often points to something tender being close to the surface.",
+        "oneOption": "You might choose who, if anyone, is safe enough to see it."
+      },
+      "colorToken": "core.sad",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "fragile",
+      "label": "Fragile",
+      "coreId": "sad",
+      "parentId": "vulnerable",
+      "depth": 2,
+      "aliases": [
+        "delicate"
+      ],
+      "definition": "Easily overwhelmed right now.",
+      "neighbors": [
+        "exposed"
+      ],
+      "guidance": null,
+      "colorToken": "core.sad",
+      "provenance": "curated"
+    },
+    {
+      "id": "exposed",
+      "label": "Exposed",
+      "coreId": "sad",
+      "parentId": "vulnerable",
+      "depth": 2,
+      "aliases": [
+        "unprotected"
+      ],
+      "definition": "Uncomfortably seen or unguarded.",
+      "neighbors": [
+        "fragile"
+      ],
+      "guidance": null,
+      "colorToken": "core.sad",
+      "provenance": "curated"
+    },
+    {
+      "id": "mad",
+      "label": "Mad",
+      "coreId": "mad",
+      "parentId": null,
+      "depth": 0,
+      "aliases": [
+        "angry",
+        "anger",
+        "pissed",
+        "upset"
+      ],
+      "definition": "A charged feeling that something is wrong or unfair.",
+      "neighbors": [],
+      "guidance": {
+        "pointsTo": "Anger often points to a boundary crossed or a need going unmet.",
+        "oneOption": "If it fits, you might ask what the anger is trying to protect."
+      },
+      "colorToken": "core.mad",
+      "provenance": "willcox-1982"
+    },
+    {
+      "id": "frustrated",
+      "label": "Frustrated",
+      "coreId": "mad",
+      "parentId": "mad",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Blocked from something you want.",
+      "neighbors": [
+        "irritated",
+        "resentful",
+        "hostile",
+        "jealous",
+        "disrespected"
+      ],
+      "guidance": {
+        "pointsTo": "Frustration often points to an obstacle between you and a goal.",
+        "oneOption": "You might name the specific blocker; it is often smaller once named."
+      },
+      "colorToken": "core.mad",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "blocked",
+      "label": "Blocked",
+      "coreId": "mad",
+      "parentId": "frustrated",
+      "depth": 2,
+      "aliases": [
+        "stuck"
+      ],
+      "definition": "Stopped from moving forward.",
+      "neighbors": [
+        "exasperated",
+        "fed-up"
+      ],
+      "guidance": null,
+      "colorToken": "core.mad",
+      "provenance": "curated"
+    },
+    {
+      "id": "exasperated",
+      "label": "Exasperated",
+      "coreId": "mad",
+      "parentId": "frustrated",
+      "depth": 2,
+      "aliases": [
+        "fed up"
+      ],
+      "definition": "Worn thin by repeated trouble.",
+      "neighbors": [
+        "blocked",
+        "fed-up"
+      ],
+      "guidance": null,
+      "colorToken": "core.mad",
+      "provenance": "curated"
+    },
+    {
+      "id": "fed-up",
+      "label": "Fed up",
+      "coreId": "mad",
+      "parentId": "frustrated",
+      "depth": 2,
+      "aliases": [],
+      "definition": "Done with putting up with it.",
+      "neighbors": [
+        "blocked",
+        "exasperated"
+      ],
+      "guidance": null,
+      "colorToken": "core.mad",
+      "provenance": "curated"
+    },
+    {
+      "id": "irritated",
+      "label": "Irritated",
+      "coreId": "mad",
+      "parentId": "mad",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Bothered and on edge.",
+      "neighbors": [
+        "frustrated",
+        "resentful",
+        "hostile",
+        "jealous",
+        "disrespected"
+      ],
+      "guidance": {
+        "pointsTo": "Irritation often points to a small, repeated friction — or to being depleted.",
+        "oneOption": "You might check whether you are hungry, tired, or overstimulated first."
+      },
+      "colorToken": "core.mad",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "annoyed",
+      "label": "Annoyed",
+      "coreId": "mad",
+      "parentId": "irritated",
+      "depth": 2,
+      "aliases": [
+        "bugged"
+      ],
+      "definition": "Mildly bothered.",
+      "neighbors": [
+        "agitated"
+      ],
+      "guidance": null,
+      "colorToken": "core.mad",
+      "provenance": "curated"
+    },
+    {
+      "id": "agitated",
+      "label": "Agitated",
+      "coreId": "mad",
+      "parentId": "irritated",
+      "depth": 2,
+      "aliases": [
+        "restless"
+      ],
+      "definition": "Restless and stirred up.",
+      "neighbors": [
+        "annoyed"
+      ],
+      "guidance": null,
+      "colorToken": "core.mad",
+      "provenance": "curated"
+    },
+    {
+      "id": "resentful",
+      "label": "Resentful",
+      "coreId": "mad",
+      "parentId": "mad",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Holding onto an old unfairness.",
+      "neighbors": [
+        "frustrated",
+        "irritated",
+        "hostile",
+        "jealous",
+        "disrespected"
+      ],
+      "guidance": {
+        "pointsTo": "Resentment often points to a hurt that was never fully addressed.",
+        "oneOption": "You might name the unmet expectation underneath it."
+      },
+      "colorToken": "core.mad",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "bitter",
+      "label": "Bitter",
+      "coreId": "mad",
+      "parentId": "resentful",
+      "depth": 2,
+      "aliases": [
+        "embittered"
+      ],
+      "definition": "Sour from lasting hurt.",
+      "neighbors": [
+        "indignant"
+      ],
+      "guidance": null,
+      "colorToken": "core.mad",
+      "provenance": "curated"
+    },
+    {
+      "id": "indignant",
+      "label": "Indignant",
+      "coreId": "mad",
+      "parentId": "resentful",
+      "depth": 2,
+      "aliases": [
+        "affronted"
+      ],
+      "definition": "Angry at something clearly unfair.",
+      "neighbors": [
+        "bitter"
+      ],
+      "guidance": null,
+      "colorToken": "core.mad",
+      "provenance": "curated"
+    },
+    {
+      "id": "hostile",
+      "label": "Hostile",
+      "coreId": "mad",
+      "parentId": "mad",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Strongly angry, ready to push back.",
+      "neighbors": [
+        "frustrated",
+        "irritated",
+        "resentful",
+        "jealous",
+        "disrespected"
+      ],
+      "guidance": {
+        "pointsTo": "Hostility often points to feeling attacked or deeply wronged.",
+        "oneOption": "You might give the heat somewhere safe to go — move, or step away."
+      },
+      "colorToken": "core.mad",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "furious",
+      "label": "Furious",
+      "coreId": "mad",
+      "parentId": "hostile",
+      "depth": 2,
+      "aliases": [
+        "livid"
+      ],
+      "definition": "Intensely angry.",
+      "neighbors": [
+        "enraged",
+        "seething"
+      ],
+      "guidance": null,
+      "colorToken": "core.mad",
+      "provenance": "curated"
+    },
+    {
+      "id": "enraged",
+      "label": "Enraged",
+      "coreId": "mad",
+      "parentId": "hostile",
+      "depth": 2,
+      "aliases": [
+        "irate"
+      ],
+      "definition": "Overtaken by anger.",
+      "neighbors": [
+        "furious",
+        "seething"
+      ],
+      "guidance": null,
+      "colorToken": "core.mad",
+      "provenance": "curated"
+    },
+    {
+      "id": "seething",
+      "label": "Seething",
+      "coreId": "mad",
+      "parentId": "hostile",
+      "depth": 2,
+      "aliases": [],
+      "definition": "Anger held tightly under the surface.",
+      "neighbors": [
+        "furious",
+        "enraged"
+      ],
+      "guidance": null,
+      "colorToken": "core.mad",
+      "provenance": "curated"
+    },
+    {
+      "id": "jealous",
+      "label": "Jealous",
+      "coreId": "mad",
+      "parentId": "mad",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Threatened by what someone else has.",
+      "neighbors": [
+        "frustrated",
+        "irritated",
+        "resentful",
+        "hostile",
+        "disrespected"
+      ],
+      "guidance": {
+        "pointsTo": "Jealousy often points to something you want or fear losing.",
+        "oneOption": "You might name what you actually want underneath the comparison."
+      },
+      "colorToken": "core.mad",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "envious",
+      "label": "Envious",
+      "coreId": "mad",
+      "parentId": "jealous",
+      "depth": 2,
+      "aliases": [
+        "covetous"
+      ],
+      "definition": "Wanting what another has.",
+      "neighbors": [
+        "possessive"
+      ],
+      "guidance": null,
+      "colorToken": "core.mad",
+      "provenance": "curated"
+    },
+    {
+      "id": "possessive",
+      "label": "Possessive",
+      "coreId": "mad",
+      "parentId": "jealous",
+      "depth": 2,
+      "aliases": [
+        "clingy"
+      ],
+      "definition": "Afraid of losing someone or something.",
+      "neighbors": [
+        "envious"
+      ],
+      "guidance": null,
+      "colorToken": "core.mad",
+      "provenance": "curated"
+    },
+    {
+      "id": "disrespected",
+      "label": "Disrespected",
+      "coreId": "mad",
+      "parentId": "mad",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Treated as if you do not matter.",
+      "neighbors": [
+        "frustrated",
+        "irritated",
+        "resentful",
+        "hostile",
+        "jealous"
+      ],
+      "guidance": {
+        "pointsTo": "Feeling disrespected often points to a need to be valued being crossed.",
+        "oneOption": "You might decide what boundary, if any, you want to name later."
+      },
+      "colorToken": "core.mad",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "dismissed",
+      "label": "Dismissed",
+      "coreId": "mad",
+      "parentId": "disrespected",
+      "depth": 2,
+      "aliases": [
+        "brushed aside"
+      ],
+      "definition": "Waved off or ignored.",
+      "neighbors": [
+        "belittled"
+      ],
+      "guidance": null,
+      "colorToken": "core.mad",
+      "provenance": "curated"
+    },
+    {
+      "id": "belittled",
+      "label": "Belittled",
+      "coreId": "mad",
+      "parentId": "disrespected",
+      "depth": 2,
+      "aliases": [
+        "put down"
+      ],
+      "definition": "Made to feel small.",
+      "neighbors": [
+        "dismissed"
+      ],
+      "guidance": null,
+      "colorToken": "core.mad",
+      "provenance": "curated"
+    },
+    {
+      "id": "scared",
+      "label": "Scared",
+      "coreId": "scared",
+      "parentId": null,
+      "depth": 0,
+      "aliases": [
+        "afraid",
+        "fearful",
+        "fear",
+        "frightened",
+        "nervous"
+      ],
+      "definition": "A guarded feeling of threat or uncertainty.",
+      "neighbors": [],
+      "guidance": {
+        "pointsTo": "Fear often points to something that feels unsafe or unknown.",
+        "oneOption": "If it fits, you might ask whether the danger is here now, or anticipated."
+      },
+      "colorToken": "core.scared",
+      "provenance": "willcox-1982"
+    },
+    {
+      "id": "anxious",
+      "label": "Anxious",
+      "coreId": "scared",
+      "parentId": "scared",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Keyed up and uneasy about what might happen.",
+      "neighbors": [
+        "insecure",
+        "overwhelmed",
+        "rejected",
+        "confused",
+        "threatened"
+      ],
+      "guidance": {
+        "pointsTo": "Anxiety often points to uncertainty your mind is trying to solve ahead of time.",
+        "oneOption": "You might bring attention to one thing you can sense right now."
+      },
+      "colorToken": "core.scared",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "nervous",
+      "label": "Nervous",
+      "coreId": "scared",
+      "parentId": "anxious",
+      "depth": 2,
+      "aliases": [
+        "on edge"
+      ],
+      "definition": "Jittery before something.",
+      "neighbors": [
+        "worried",
+        "uneasy"
+      ],
+      "guidance": null,
+      "colorToken": "core.scared",
+      "provenance": "curated"
+    },
+    {
+      "id": "worried",
+      "label": "Worried",
+      "coreId": "scared",
+      "parentId": "anxious",
+      "depth": 2,
+      "aliases": [
+        "fretful"
+      ],
+      "definition": "Turning a concern over and over.",
+      "neighbors": [
+        "nervous",
+        "uneasy"
+      ],
+      "guidance": null,
+      "colorToken": "core.scared",
+      "provenance": "curated"
+    },
+    {
+      "id": "uneasy",
+      "label": "Uneasy",
+      "coreId": "scared",
+      "parentId": "anxious",
+      "depth": 2,
+      "aliases": [],
+      "definition": "Something feels off, hard to name.",
+      "neighbors": [
+        "nervous",
+        "worried"
+      ],
+      "guidance": null,
+      "colorToken": "core.scared",
+      "provenance": "curated"
+    },
+    {
+      "id": "insecure",
+      "label": "Insecure",
+      "coreId": "scared",
+      "parentId": "scared",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Unsure of your footing or worth.",
+      "neighbors": [
+        "anxious",
+        "overwhelmed",
+        "rejected",
+        "confused",
+        "threatened"
+      ],
+      "guidance": {
+        "pointsTo": "Insecurity often points to a fear of not being enough in this moment.",
+        "oneOption": "You might recall one time you handled something like this."
+      },
+      "colorToken": "core.scared",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "inadequate",
+      "label": "Inadequate",
+      "coreId": "scared",
+      "parentId": "insecure",
+      "depth": 2,
+      "aliases": [
+        "not enough"
+      ],
+      "definition": "As if you fall short.",
+      "neighbors": [
+        "self-conscious"
+      ],
+      "guidance": null,
+      "colorToken": "core.scared",
+      "provenance": "curated"
+    },
+    {
+      "id": "self-conscious",
+      "label": "Self-conscious",
+      "coreId": "scared",
+      "parentId": "insecure",
+      "depth": 2,
+      "aliases": [
+        "exposed"
+      ],
+      "definition": "Overly aware of being watched or judged.",
+      "neighbors": [
+        "inadequate"
+      ],
+      "guidance": null,
+      "colorToken": "core.scared",
+      "provenance": "curated"
+    },
+    {
+      "id": "overwhelmed",
+      "label": "Overwhelmed",
+      "coreId": "scared",
+      "parentId": "scared",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Too much coming at once.",
+      "neighbors": [
+        "anxious",
+        "insecure",
+        "rejected",
+        "confused",
+        "threatened"
+      ],
+      "guidance": {
+        "pointsTo": "Overwhelm often points to more input or demand than capacity right now.",
+        "oneOption": "You might reduce the field to the single next action, and hide the rest."
+      },
+      "colorToken": "core.scared",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "stressed",
+      "label": "Stressed",
+      "coreId": "scared",
+      "parentId": "overwhelmed",
+      "depth": 2,
+      "aliases": [
+        "pressured"
+      ],
+      "definition": "Under heavy pressure.",
+      "neighbors": [
+        "frazzled",
+        "swamped"
+      ],
+      "guidance": null,
+      "colorToken": "core.scared",
+      "provenance": "curated"
+    },
+    {
+      "id": "frazzled",
+      "label": "Frazzled",
+      "coreId": "scared",
+      "parentId": "overwhelmed",
+      "depth": 2,
+      "aliases": [
+        "scattered"
+      ],
+      "definition": "Frayed and scattered.",
+      "neighbors": [
+        "stressed",
+        "swamped"
+      ],
+      "guidance": null,
+      "colorToken": "core.scared",
+      "provenance": "curated"
+    },
+    {
+      "id": "swamped",
+      "label": "Swamped",
+      "coreId": "scared",
+      "parentId": "overwhelmed",
+      "depth": 2,
+      "aliases": [],
+      "definition": "Buried under too much to do.",
+      "neighbors": [
+        "stressed",
+        "frazzled"
+      ],
+      "guidance": null,
+      "colorToken": "core.scared",
+      "provenance": "curated"
+    },
+    {
+      "id": "rejected",
+      "label": "Rejected",
+      "coreId": "scared",
+      "parentId": "scared",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Pushed away or not wanted.",
+      "neighbors": [
+        "anxious",
+        "insecure",
+        "overwhelmed",
+        "confused",
+        "threatened"
+      ],
+      "guidance": {
+        "pointsTo": "Rejection often points to a need to belong that feels threatened.",
+        "oneOption": "You might remind yourself that one no is not a verdict on your worth."
+      },
+      "colorToken": "core.scared",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "excluded",
+      "label": "Excluded",
+      "coreId": "scared",
+      "parentId": "rejected",
+      "depth": 2,
+      "aliases": [
+        "left out"
+      ],
+      "definition": "Left out of something.",
+      "neighbors": [
+        "unwanted"
+      ],
+      "guidance": null,
+      "colorToken": "core.scared",
+      "provenance": "curated"
+    },
+    {
+      "id": "unwanted",
+      "label": "Unwanted",
+      "coreId": "scared",
+      "parentId": "rejected",
+      "depth": 2,
+      "aliases": [
+        "unwelcome"
+      ],
+      "definition": "As if your presence is not welcome.",
+      "neighbors": [
+        "excluded"
+      ],
+      "guidance": null,
+      "colorToken": "core.scared",
+      "provenance": "curated"
+    },
+    {
+      "id": "confused",
+      "label": "Confused",
+      "coreId": "scared",
+      "parentId": "scared",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Unable to make sense of things.",
+      "neighbors": [
+        "anxious",
+        "insecure",
+        "overwhelmed",
+        "rejected",
+        "threatened"
+      ],
+      "guidance": {
+        "pointsTo": "Confusion often points to missing information or mixed signals.",
+        "oneOption": "You might write down the one question you most want answered."
+      },
+      "colorToken": "core.scared",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "bewildered",
+      "label": "Bewildered",
+      "coreId": "scared",
+      "parentId": "confused",
+      "depth": 2,
+      "aliases": [
+        "baffled"
+      ],
+      "definition": "Thoroughly lost or puzzled.",
+      "neighbors": [
+        "uncertain"
+      ],
+      "guidance": null,
+      "colorToken": "core.scared",
+      "provenance": "curated"
+    },
+    {
+      "id": "uncertain",
+      "label": "Uncertain",
+      "coreId": "scared",
+      "parentId": "confused",
+      "depth": 2,
+      "aliases": [
+        "unsure"
+      ],
+      "definition": "Unsure which way to go.",
+      "neighbors": [
+        "bewildered"
+      ],
+      "guidance": null,
+      "colorToken": "core.scared",
+      "provenance": "curated"
+    },
+    {
+      "id": "threatened",
+      "label": "Threatened",
+      "coreId": "scared",
+      "parentId": "scared",
+      "depth": 1,
+      "aliases": [],
+      "definition": "Sensing something could harm you.",
+      "neighbors": [
+        "anxious",
+        "insecure",
+        "overwhelmed",
+        "rejected",
+        "confused"
+      ],
+      "guidance": {
+        "pointsTo": "Feeling threatened often points to a real or perceived danger to you or what you hold.",
+        "oneOption": "You might create a little distance or a barrier while you assess."
+      },
+      "colorToken": "core.scared",
+      "provenance": "willcox-1982-lineage"
+    },
+    {
+      "id": "alarmed",
+      "label": "Alarmed",
+      "coreId": "scared",
+      "parentId": "threatened",
+      "depth": 2,
+      "aliases": [
+        "startled"
+      ],
+      "definition": "Suddenly on high alert.",
+      "neighbors": [
+        "defensive"
+      ],
+      "guidance": null,
+      "colorToken": "core.scared",
+      "provenance": "curated"
+    },
+    {
+      "id": "defensive",
+      "label": "Defensive",
+      "coreId": "scared",
+      "parentId": "threatened",
+      "depth": 2,
+      "aliases": [
+        "guarded"
+      ],
+      "definition": "Braced to protect yourself.",
+      "neighbors": [
+        "alarmed"
+      ],
+      "guidance": null,
+      "colorToken": "core.scared",
+      "provenance": "curated"
+    }
+  ]
+}

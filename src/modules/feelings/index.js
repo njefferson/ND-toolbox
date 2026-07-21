@@ -1,23 +1,26 @@
-// Feelings module. Step-1 scope: data-driven home + a minimal core preview so
-// the drill-down is demonstrably reading from the dataset, not hardcoded.
-// Full inside-out / outside-in / search / landing arrive in later build steps.
-import dataset from './data/seed.json';
+// Feelings module. Inside-out drill-down, a unified landing/node view, and
+// direct search. Outside-in (multi-select) is the next build step and is a
+// clearly-labeled stub for now.
+import {
+  meta, cores, getNode, childrenOf, glyphFor, pathTo, search,
+} from './loader.js';
 import { route, navigate, startRouter } from '../../shell/router.js';
 
-const byId = new Map(dataset.nodes.map((n) => [n.id, n]));
-const childrenOf = (id) => dataset.nodes.filter((n) => n.parentId === id);
-const cores = dataset.coreOrder.map((id) => byId.get(id));
-
+// --- tiny DOM helper ---
 function el(tag, props = {}, children = []) {
   const node = document.createElement(tag);
   for (const [k, v] of Object.entries(props)) {
+    if (v === null || v === undefined) continue;
     if (k === 'class') node.className = v;
     else if (k === 'html') node.innerHTML = v;
-    else if (k.startsWith('on') && typeof v === 'function') node.addEventListener(k.slice(2), v);
     else if (k === 'dataset') Object.assign(node.dataset, v);
-    else if (v !== null && v !== undefined) node.setAttribute(k, v);
+    else if (k.startsWith('on') && typeof v === 'function') node.addEventListener(k.slice(2), v);
+    else node.setAttribute(k, v);
   }
-  for (const c of [].concat(children)) node.append(c?.nodeType ? c : document.createTextNode(String(c)));
+  for (const c of [].concat(children)) {
+    if (c === null || c === undefined || c === false) continue;
+    node.append(c?.nodeType ? c : document.createTextNode(String(c)));
+  }
   return node;
 }
 
@@ -25,79 +28,176 @@ const MARK = `<svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><g transf
 
 let root;
 let status;
-
-function announce(msg) {
-  if (status) status.textContent = msg;
-}
+const announce = (msg) => { if (status) status.textContent = msg; };
 
 function masthead() {
   return el('header', { class: 'masthead' }, [
-    el('span', { html: MARK }),
+    el('button', {
+      class: 'mast-home', type: 'button', 'aria-label': 'Home',
+      onclick: () => navigate('/'),
+    }, el('span', { html: MARK })),
     el('h1', {}, 'Feelings'),
   ]);
 }
 
-function coreCard(core) {
-  return el(
-    'button',
-    {
-      class: 'core-card',
-      type: 'button',
-      style: `--core: var(--core-${core.id})`,
-      'aria-label': `${core.label}. ${core.definition}`,
-      onclick: () => navigate(`/feelings/core/${core.id}`),
-    },
-    [
-      el('span', { class: 'glyph', 'aria-hidden': 'true' }, dataset.glyphs[core.id] || '•'),
-      el('span', { class: 'label' }, core.label),
-    ]
-  );
+// Focus the primary heading so screen readers land on the new view.
+function focusHeading() {
+  const h = root.querySelector('[data-focus]');
+  if (h) h.focus();
 }
 
+// ---------------- Home ----------------
 function home() {
+  const results = el('div', { id: 'results', class: 'results', role: 'list' });
+  const input = el('input', {
+    id: 'q', type: 'search', autocomplete: 'off', 'aria-controls': 'results',
+    placeholder: 'Type a feeling…', 'aria-label': 'Search for a feeling word',
+    oninput: (e) => renderResults(e.target.value, results),
+    onkeydown: (e) => {
+      if (e.key === 'Enter') {
+        const first = results.querySelector('[data-id]');
+        if (first) navigate(`/n/${first.dataset.id}`);
+      }
+    },
+  });
+
   root.replaceChildren(
     masthead(),
-    el('div', { class: 'search-row' }, [
-      el('label', { for: 'q', class: 'section-title' }, 'Search a word'),
-      el('input', {
-        id: 'q',
-        type: 'search',
-        placeholder: 'Type a feeling…',
-        'aria-describedby': 'q-hint',
-        onkeydown: (e) => { if (e.key === 'Enter') announce('Direct search arrives in a later build step.'); },
-      }),
-      el('p', { id: 'q-hint', class: 'muted' }, 'Or choose a path below.'),
-    ]),
+    el('h2', { class: 'section-title', tabindex: '-1', 'data-focus': '' }, 'Find a feeling'),
+    el('div', { class: 'search-row' }, [input, results]),
     el('h2', { class: 'section-title' }, 'Start from a core feeling'),
     el('div', { class: 'core-grid', role: 'list' },
       cores.map((c) => el('div', { role: 'listitem' }, coreCard(c)))),
-    el('div', { class: 'paths' }, [
-      el('button', { class: 'path-btn', type: 'button',
-        onclick: () => announce('Outside-in (pick the words that fit) arrives in a later build step.') }, [
-        el('span', { class: 'lead' }, 'Pick the words that fit'),
-        el('span', { class: 'sub' }, 'Check every word that rings true, then trace inward.'),
-      ]),
-    ])
+    el('button', {
+      class: 'path-btn', type: 'button',
+      onclick: () => announce('Outside-in — pick the words that fit — arrives in the next build step.'),
+    }, [
+      el('span', { class: 'lead' }, 'Pick the words that fit'),
+      el('span', { class: 'sub' }, 'Check every word that rings true, then trace inward. (Coming next.)'),
+    ]),
   );
+  focusHeading();
 }
 
-function corePreview({ id }) {
-  const core = byId.get(id);
-  if (!core) return home();
+function coreCard(core) {
+  return el('button', {
+    class: 'core-card', type: 'button', style: `--core: var(--core-${core.id})`,
+    'aria-label': `${core.label}. ${core.definition}`,
+    onclick: () => navigate(`/n/${core.id}`),
+  }, [
+    el('span', { class: 'glyph', 'aria-hidden': 'true' }, meta.glyphs[core.id] || '•'),
+    el('span', { class: 'label' }, core.label),
+  ]);
+}
+
+function renderResults(query, container) {
+  const matches = search(query);
+  container.replaceChildren();
+  if (!query.trim()) { announce(''); return; }
+  if (!matches.length) {
+    container.append(el('p', { class: 'muted' }, `No match for "${query.trim()}".`));
+    announce('No matches.');
+    return;
+  }
+  for (const n of matches) {
+    const trail = pathTo(n.id).slice(0, -1).map((p) => p.label).join(' › ');
+    container.append(el('button', {
+      class: 'result', type: 'button', role: 'listitem', dataset: { id: n.id },
+      style: `--core: var(--core-${n.coreId})`,
+      onclick: () => navigate(`/n/${n.id}`),
+    }, [
+      el('span', { class: 'result-label' }, n.label),
+      trail ? el('span', { class: 'result-trail' }, trail) : null,
+    ]));
+  }
+  announce(`${matches.length} ${matches.length === 1 ? 'match' : 'matches'}.`);
+}
+
+// ---------------- Node / landing view ----------------
+function nodeView({ id }) {
+  const node = getNode(id);
+  if (!node) return home();
+  const trail = pathTo(id);
   const kids = childrenOf(id);
+  const parent = node.parentId ? getNode(node.parentId) : null;
+  const neighbors = (node.neighbors || []).map(getNode).filter(Boolean);
+
   root.replaceChildren(
     masthead(),
-    el('button', { class: 'path-btn', type: 'button', onclick: () => navigate('/') }, '← Back'),
-    el('h2', { style: `border-left:8px solid var(--core-${id});padding-left:.6rem` }, core.label),
-    el('p', { class: 'muted' }, core.definition),
-    el('h3', { class: 'section-title' }, kids.length ? 'Narrows into' : 'More words land here in step 2'),
-    el('div', { class: 'paths' },
-      kids.map((k) => el('div', { class: 'path-btn' }, [
-        el('span', { class: 'lead' }, k.label),
-        el('span', { class: 'sub' }, k.definition),
-      ]))),
-    (() => { announce(`${core.label}: ${core.definition}`); return document.createComment('x'); })()
+    breadcrumb(trail),
+    el('h2', {
+      class: 'landing-title', tabindex: '-1', 'data-focus': '',
+      style: `--core: var(--core-${node.coreId})`,
+    }, [
+      el('span', { class: 'glyph', 'aria-hidden': 'true' }, glyphFor(node)),
+      node.label,
+    ]),
+    el('p', { class: 'landing-def' }, node.definition),
+
+    kids.length
+      ? el('section', { 'aria-label': `Words within ${node.label}` }, [
+          el('h3', { class: 'section-title' }, node.depth === 0 ? 'Branches into' : 'Narrows into'),
+          el('div', { class: 'paths' }, kids.map(drillButton)),
+        ])
+      : null,
+
+    neighbors.length
+      ? el('section', { 'aria-label': 'Nearby words' }, [
+          el('h3', { class: 'section-title' }, 'Nearby words'),
+          el('div', { class: 'chips' }, neighbors.map((nb) => el('button', {
+            class: 'chip', type: 'button', style: `--core: var(--core-${nb.coreId})`,
+            onclick: () => navigate(`/n/${nb.id}`),
+          }, nb.label))),
+        ])
+      : null,
+
+    node.guidance ? guidancePanel(node.guidance) : null,
+
+    el('div', { class: 'landing-actions' }, [
+      parent
+        ? el('button', { class: 'ghost-btn', type: 'button', onclick: () => navigate(`/n/${parent.id}`) },
+            `← Back to ${parent.label}`)
+        : el('button', { class: 'ghost-btn', type: 'button', onclick: () => navigate('/') }, '← All core feelings'),
+    ]),
   );
+  announce(`${node.label}. ${node.definition}`);
+  focusHeading();
+}
+
+function breadcrumb(trail) {
+  const nav = el('nav', { class: 'breadcrumb', 'aria-label': 'Path' });
+  trail.forEach((n, i) => {
+    const last = i === trail.length - 1;
+    if (i > 0) nav.append(el('span', { class: 'crumb-sep', 'aria-hidden': 'true' }, '›'));
+    nav.append(last
+      ? el('span', { class: 'crumb current', 'aria-current': 'page' }, n.label)
+      : el('button', { class: 'crumb', type: 'button', onclick: () => navigate(`/n/${n.id}`) }, n.label));
+  });
+  return nav;
+}
+
+function drillButton(child) {
+  const hasKids = childrenOf(child.id).length > 0;
+  return el('button', {
+    class: 'path-btn', type: 'button', style: `--core: var(--core-${child.coreId})`,
+    onclick: () => navigate(`/n/${child.id}`),
+  }, [
+    el('span', { class: 'lead' }, child.label),
+    el('span', { class: 'sub' }, child.definition),
+    hasKids ? el('span', { class: 'more', 'aria-hidden': 'true' }, '›') : null,
+  ]);
+}
+
+function guidancePanel(g) {
+  return el('details', { class: 'guidance' }, [
+    el('summary', {}, 'What this often points to · one option'),
+    el('div', { class: 'guidance-body' }, [
+      el('p', {}, g.pointsTo),
+      g.oneOption ? el('p', { class: 'guidance-option' }, g.oneOption) : null,
+      el('p', { class: 'muted guidance-note' },
+        'A gentle note, not advice or a diagnosis. Take it or leave it.'),
+    ]),
+  ]);
 }
 
 export default {
@@ -111,7 +211,7 @@ export default {
     mountRoot.replaceChildren(root, status);
 
     route('/', home);
-    route('/feelings/core/:id', corePreview);
+    route('/n/:id', nodeView);
     startRouter();
   },
 };
