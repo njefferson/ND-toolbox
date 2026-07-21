@@ -1,50 +1,17 @@
-// Feelings module. Inside-out drill-down, a unified landing/node view, and
-// direct search. Outside-in (multi-select) is the next build step and is a
-// clearly-labeled stub for now.
+// Feelings module. Inside-out drill-down, a unified landing/node view, direct
+// search, and the outside-in multi-select path. Renders into the shell's
+// content root and shares the shell's announce channel.
 import {
-  meta, cores, getNode, childrenOf, glyphFor, pathTo, search,
+  meta, cores, getNode, childrenOf, glyphFor, pathTo, search, tertiary,
 } from './loader.js';
-import { route, navigate, startRouter } from '../../shell/router.js';
-
-// --- tiny DOM helper ---
-function el(tag, props = {}, children = []) {
-  const node = document.createElement(tag);
-  for (const [k, v] of Object.entries(props)) {
-    if (v === null || v === undefined) continue;
-    if (k === 'class') node.className = v;
-    else if (k === 'html') node.innerHTML = v;
-    else if (k === 'dataset') Object.assign(node.dataset, v);
-    else if (k.startsWith('on') && typeof v === 'function') node.addEventListener(k.slice(2), v);
-    else node.setAttribute(k, v);
-  }
-  for (const c of [].concat(children)) {
-    if (c === null || c === undefined || c === false) continue;
-    node.append(c?.nodeType ? c : document.createTextNode(String(c)));
-  }
-  return node;
-}
-
-const MARK = `<svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(32 32)"><circle r="30" fill="var(--surface-2)"/><g><path d="M0 0 L26 0 A26 26 0 0 1 13 22.5 Z" fill="var(--core-joyful)"/><path d="M0 0 L26 0 A26 26 0 0 1 13 22.5 Z" fill="var(--core-powerful)" transform="rotate(60)"/><path d="M0 0 L26 0 A26 26 0 0 1 13 22.5 Z" fill="var(--core-peaceful)" transform="rotate(120)"/><path d="M0 0 L26 0 A26 26 0 0 1 13 22.5 Z" fill="var(--core-sad)" transform="rotate(180)"/><path d="M0 0 L26 0 A26 26 0 0 1 13 22.5 Z" fill="var(--core-mad)" transform="rotate(240)"/><path d="M0 0 L26 0 A26 26 0 0 1 13 22.5 Z" fill="var(--core-scared)" transform="rotate(300)"/></g><circle r="10" fill="var(--surface)"/></g></svg>`;
+import { route, navigate } from '../../shell/router.js';
+import { el, focusView } from '../../shell/dom.js';
 
 let root;
-let status;
-const announce = (msg) => { if (status) status.textContent = msg; };
+let announce = () => {};
 
-function masthead() {
-  return el('header', { class: 'masthead' }, [
-    el('button', {
-      class: 'mast-home', type: 'button', 'aria-label': 'Home',
-      onclick: () => navigate('/'),
-    }, el('span', { html: MARK })),
-    el('h1', {}, 'Feelings'),
-  ]);
-}
-
-// Focus the primary heading so screen readers land on the new view.
-function focusHeading() {
-  const h = root.querySelector('[data-focus]');
-  if (h) h.focus();
-}
+// Outside-in selection persists while the app is open (cleared on demand).
+const selection = new Set();
 
 // ---------------- Home ----------------
 function home() {
@@ -62,21 +29,19 @@ function home() {
   });
 
   root.replaceChildren(
-    masthead(),
     el('h2', { class: 'section-title', tabindex: '-1', 'data-focus': '' }, 'Find a feeling'),
     el('div', { class: 'search-row' }, [input, results]),
     el('h2', { class: 'section-title' }, 'Start from a core feeling'),
     el('div', { class: 'core-grid', role: 'list' },
       cores.map((c) => el('div', { role: 'listitem' }, coreCard(c)))),
     el('button', {
-      class: 'path-btn', type: 'button',
-      onclick: () => announce('Outside-in — pick the words that fit — arrives in the next build step.'),
+      class: 'path-btn', type: 'button', onclick: () => navigate('/outside-in'),
     }, [
       el('span', { class: 'lead' }, 'Pick the words that fit'),
-      el('span', { class: 'sub' }, 'Check every word that rings true, then trace inward. (Coming next.)'),
+      el('span', { class: 'sub' }, 'Check every word that rings true, then trace inward.'),
     ]),
   );
-  focusHeading();
+  focusView(root);
 }
 
 function coreCard(core) {
@@ -123,7 +88,6 @@ function nodeView({ id }) {
   const neighbors = (node.neighbors || []).map(getNode).filter(Boolean);
 
   root.replaceChildren(
-    masthead(),
     breadcrumb(trail),
     el('h2', {
       class: 'landing-title', tabindex: '-1', 'data-focus': '',
@@ -161,7 +125,7 @@ function nodeView({ id }) {
     ]),
   );
   announce(`${node.label}. ${node.definition}`);
-  focusHeading();
+  focusView(root);
 }
 
 function breadcrumb(trail) {
@@ -200,18 +164,107 @@ function guidancePanel(g) {
   ]);
 }
 
+// ---------------- Outside-in ----------------
+// Scan the specific words, check the ones that resonate, then trace inward to
+// see which core feeling(s) they cluster under. The standard alexithymia method.
+function outsideIn() {
+  const resultBox = el('div', { id: 'trace-result', 'aria-live': 'polite' });
+  const countLabel = el('span', { class: 'tray-count' });
+  const traceBtn = el('button', { class: 'primary-btn', type: 'button', onclick: () => trace() }, 'Trace inward →');
+  const clearBtn = el('button', {
+    class: 'ghost-btn', type: 'button',
+    onclick: () => { selection.clear(); syncChecks(); resultBox.replaceChildren(); update(); },
+  }, 'Clear');
+
+  function update() {
+    countLabel.textContent = selection.size ? `${selection.size} selected` : 'None selected yet';
+    traceBtn.disabled = selection.size === 0;
+    clearBtn.disabled = selection.size === 0;
+  }
+
+  const fieldset = el('fieldset', { class: 'wordgrid' }, [
+    el('legend', { class: 'section-title' }, 'Specific feelings — check the ones that fit'),
+    ...tertiary.map((n) => {
+      const cb = el('input', { type: 'checkbox', value: n.id });
+      cb.checked = selection.has(n.id);
+      cb.addEventListener('change', () => {
+        if (cb.checked) selection.add(n.id); else selection.delete(n.id);
+        update();
+      });
+      return el('label', { class: 'check-item' }, [cb, el('span', {}, n.label)]);
+    }),
+  ]);
+
+  function syncChecks() {
+    fieldset.querySelectorAll('input[type=checkbox]').forEach((cb) => {
+      cb.checked = selection.has(cb.value);
+    });
+  }
+
+  function trace() {
+    const chosen = [...selection].map(getNode).filter(Boolean);
+    if (!chosen.length) return;
+    const byCore = new Map();
+    for (const n of chosen) {
+      if (!byCore.has(n.coreId)) byCore.set(n.coreId, []);
+      byCore.get(n.coreId).push(n);
+    }
+    const total = chosen.length;
+    const rows = [...byCore.entries()]
+      .map(([coreId, words]) => ({ core: getNode(coreId), words }))
+      .sort((a, b) => b.words.length - a.words.length || a.core.label.localeCompare(b.core.label));
+    const top = rows[0];
+
+    resultBox.replaceChildren(
+      el('h3', { class: 'section-title', tabindex: '-1' }, 'Where these point'),
+      el('p', { class: 'cluster-lead' }, rows.length === 1
+        ? `All ${total} point to ${top.core.label}.`
+        : `Mostly ${top.core.label} — ${top.words.length} of your ${total} words.`),
+      el('div', { class: 'clusters' }, rows.map((row) => {
+        const pct = Math.round((row.words.length / total) * 100);
+        return el('div', { class: 'cluster', style: `--core: var(--core-${row.core.id})` }, [
+          el('div', { class: 'cluster-head' }, [
+            el('span', { class: 'glyph', 'aria-hidden': 'true' }, meta.glyphs[row.core.id]),
+            el('span', { class: 'cluster-name' }, row.core.label),
+            el('span', { class: 'cluster-count' }, `${row.words.length} of ${total}`),
+          ]),
+          el('div', { class: 'cluster-bar', 'aria-hidden': 'true' },
+            el('span', { style: `width:${pct}%` })),
+          el('div', { class: 'chips' }, row.words.map((w) => el('button', {
+            class: 'chip', type: 'button', style: `--core: var(--core-${w.coreId})`,
+            onclick: () => navigate(`/n/${w.id}`),
+          }, w.label))),
+        ]);
+      })),
+    );
+    announce(rows.length === 1
+      ? `All your words point to ${top.core.label}.`
+      : `These point mostly to ${top.core.label}.`);
+    resultBox.querySelector('[tabindex]')?.focus();
+  }
+
+  root.replaceChildren(
+    el('button', { class: 'crumb', type: 'button', onclick: () => navigate('/') }, '‹ Home'),
+    el('h2', { class: 'landing-title', tabindex: '-1', 'data-focus': '' }, 'Pick the words that fit'),
+    el('p', { class: 'muted' },
+      'Check every word that rings true — no need to overthink it. Then trace inward to see where they point.'),
+    fieldset,
+    resultBox,
+    el('div', { class: 'tray' }, [countLabel, clearBtn, traceBtn]),
+  );
+  update();
+  focusView(root);
+}
+
 export default {
   id: 'feelings',
   name: 'Feelings Wheel',
   icon: '🎡',
-  mount(mountRoot) {
-    root = el('main', { id: 'main', class: 'app-shell', tabindex: '-1' });
-    status = el('div', { class: 'sr-only', role: 'status', 'aria-live': 'polite' });
-    status.style.cssText = 'position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)';
-    mountRoot.replaceChildren(root, status);
-
+  mount(ctx) {
+    root = ctx.content;
+    announce = ctx.announce;
     route('/', home);
+    route('/outside-in', outsideIn);
     route('/n/:id', nodeView);
-    startRouter();
   },
 };

@@ -63,9 +63,27 @@ header.masthead {
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--gap, 1rem) var(--gap, 1rem) 0;
 }
-.masthead h1 { font-size: 1.15rem; margin: 0; }
-.masthead .mark { width: 28px; height: 28px; flex: none; }
+.masthead .mast-title { font-size: 1.15rem; font-weight: 700; margin-right: auto; }
+.masthead .mark { width: 30px; height: 30px; flex: none; }
+.mast-home, .mast-settings {
+  border: 0; background: none; padding: 0; margin: 0; cursor: pointer;
+  flex: none; line-height: 0; color: var(--ink);
+}
+.mast-home { width: 32px; height: 32px; }
+.mast-settings {
+  width: var(--tap); height: var(--tap); font-size: 1.4rem; line-height: 1;
+  display: flex; align-items: center; justify-content: center; border-radius: 999px;
+}
+.mast-settings:hover { background: var(--surface-2); }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
 
 .search-row input[type='search'] {
   width: 100%;
@@ -126,11 +144,6 @@ header.masthead {
    heading text is the cue. Interactive controls keep their focus-visible ring. */
 [data-focus]:focus { outline: none; }
 
-.mast-home {
-  border: 0; background: none; padding: 0; margin: 0; cursor: pointer;
-  width: 32px; height: 32px; flex: none; line-height: 0;
-}
-
 /* Search typeahead */
 .search-row { display: grid; gap: 0.5rem; }
 .results { display: grid; gap: 0.4rem; }
@@ -182,6 +195,68 @@ header.masthead {
   border-radius: 999px;
 }
 .chip:hover { background: var(--surface-2); }
+
+/* Outside-in: word grid, tray, cluster result */
+.wordgrid {
+  border: 0; padding: 0; margin: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.4rem;
+}
+.wordgrid legend { padding: 0; margin-bottom: 0.5rem; }
+.check-item {
+  display: flex; align-items: center; gap: 0.55rem; min-height: var(--tap);
+  padding: 0.4rem 0.7rem; border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--surface); cursor: pointer;
+}
+.check-item:hover { background: var(--surface-2); }
+.check-item input { width: 1.15rem; height: 1.15rem; flex: none; }
+.check-item:has(input:checked) { border-color: var(--accent); background: var(--surface-2); }
+
+.tray {
+  position: sticky; bottom: 0; z-index: 5; display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.7rem 0.2rem; margin-top: 0.5rem;
+  background: var(--bg); border-top: 1px solid var(--line);
+}
+.tray-count { margin-right: auto; font-weight: 600; }
+.primary-btn {
+  min-height: var(--tap); padding: 0.6rem 1.1rem; font: inherit; cursor: pointer;
+  border: 1px solid var(--accent); border-radius: var(--radius);
+  background: var(--accent); color: var(--bg); font-weight: 600;
+}
+.primary-btn:hover { filter: brightness(0.95); }
+.primary-btn:disabled, .ghost-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.clusters { margin-top: 0.6rem; }
+.cluster-lead { font-size: 1.05rem; margin: 0.3rem 0; }
+.cluster {
+  border: 1px solid var(--line); border-left: 8px solid var(--core, var(--accent));
+  border-radius: var(--radius); background: var(--surface);
+  padding: 0.7rem 0.9rem; margin-bottom: 0.6rem; display: grid; gap: 0.5rem;
+}
+.cluster-head { display: flex; align-items: center; gap: 0.5rem; }
+.cluster-head .glyph { font-size: 1.1rem; }
+.cluster-name { font-weight: 600; }
+.cluster-count { margin-left: auto; color: var(--ink-soft); font-size: 0.9rem; }
+.cluster-bar { height: 8px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+.cluster-bar > span { display: block; height: 100%; background: var(--core, var(--accent)); }
+
+/* Settings */
+.set-group {
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 0.6rem 0.9rem 0.8rem; margin: 0; display: grid; gap: 0.5rem;
+}
+.set-group > legend { padding: 0 0.4rem; font-weight: 600; }
+.set-options { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.set-radio, .set-toggle {
+  display: flex; align-items: center; gap: 0.55rem; min-height: var(--tap);
+  padding: 0.4rem 0.75rem; border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--surface); cursor: pointer;
+}
+.set-radio:has(input:checked) { border-color: var(--accent); background: var(--surface-2); }
+.set-radio input, .set-toggle input { width: 1.15rem; height: 1.15rem; flex: none; }
+.set-toggle { align-items: flex-start; }
+.set-toggle-text { display: grid; gap: 0.1rem; }
+.set-toggle-label { font-weight: 600; }
+.set-toggle-hint { color: var(--ink-soft); font-size: 0.9rem; }
 
 /* Guidance panel — collapsed by default, calm, never blocks */
 .guidance {

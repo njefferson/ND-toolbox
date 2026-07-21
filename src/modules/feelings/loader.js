@@ -43,6 +43,11 @@ export const meta = {
 };
 
 export const cores = dataset.coreOrder.map((id) => byId.get(id));
+export const allNodes = dataset.nodes;
+// The specific, most-granular words — what the outside-in path scans.
+export const tertiary = dataset.nodes
+  .filter((n) => n.depth === 2)
+  .sort((a, b) => a.label.localeCompare(b.label));
 
 export const getNode = (id) => byId.get(id);
 export const childrenOf = (id) => childrenByParent.get(id) || [];
