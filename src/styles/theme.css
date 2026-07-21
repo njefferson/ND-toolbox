@@ -1,0 +1,95 @@
+/* Design tokens. Meaning is never carried by color alone — hues are decorative;
+   labels and icons always carry the information. */
+:root {
+  --text-scale: 1;
+
+  /* Six core hues (calm, desaturated). Referenced by colorToken in the data. */
+  --core-joyful: #C99A2E;
+  --core-powerful: #C57A2E;
+  --core-peaceful: #4E8C63;
+  --core-sad: #3E6E97;
+  --core-mad: #A84A4A;
+  --core-scared: #6E5D93;
+
+  /* Light surface (default). */
+  --bg: #F5F1E8;
+  --surface: #FFFFFF;
+  --surface-2: #EFEADD;
+  --ink: #23262B;
+  --ink-soft: #55595F;
+  --line: #D9D2C4;
+  --accent: #3E6E97;
+  --focus: #1B65C4;
+  --radius: 14px;
+  --tap: 44px;
+}
+
+/* Dark surface. */
+@media (prefers-color-scheme: dark) {
+  :root[data-theme='auto'] {
+    --bg: #23262B;
+    --surface: #2C3037;
+    --surface-2: #333841;
+    --ink: #ECEEF1;
+    --ink-soft: #AEB4BD;
+    --line: #3C424B;
+    --accent: #8FB6DC;
+    --focus: #8FB6DC;
+  }
+}
+:root[data-theme='dark'] {
+  --bg: #23262B;
+  --surface: #2C3037;
+  --surface-2: #333841;
+  --ink: #ECEEF1;
+  --ink-soft: #AEB4BD;
+  --line: #3C424B;
+  --accent: #8FB6DC;
+  --focus: #8FB6DC;
+}
+
+/* Calm monochrome — neutralize the core hues to greys. Shape + label carry all. */
+:root[data-theme='mono'] {
+  --bg: #F3F3F3;
+  --surface: #FFFFFF;
+  --surface-2: #E8E8E8;
+  --ink: #1C1C1C;
+  --ink-soft: #55595F;
+  --line: #CFCFCF;
+  --accent: #333333;
+  --focus: #000000;
+  --core-joyful: #6B6B6B;
+  --core-powerful: #6B6B6B;
+  --core-peaceful: #6B6B6B;
+  --core-sad: #6B6B6B;
+  --core-mad: #6B6B6B;
+  --core-scared: #6B6B6B;
+}
+
+/* High contrast option. */
+:root[data-contrast='high'] {
+  --ink: #000000;
+  --ink-soft: #1a1a1a;
+  --line: #000000;
+  --surface: #FFFFFF;
+  --bg: #FFFFFF;
+  --focus: #0033CC;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme='auto'][data-contrast='high'] {
+    --ink: #FFFFFF;
+    --ink-soft: #EDEDED;
+    --line: #FFFFFF;
+    --surface: #000000;
+    --bg: #000000;
+    --focus: #7FB0FF;
+  }
+}
+:root[data-theme='dark'][data-contrast='high'] {
+  --ink: #FFFFFF;
+  --ink-soft: #EDEDED;
+  --line: #FFFFFF;
+  --surface: #000000;
+  --bg: #000000;
+  --focus: #7FB0FF;
+}

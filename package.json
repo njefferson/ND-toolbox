@@ -1,0 +1,20 @@
+{
+  "name": "nd-toolbox",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local-first PWA suite of neurodivergent internal-state tools. First module: the Feelings Wheel.",
+  "type": "module",
+  "scripts": {
+    "icons": "node scripts/generate-icons.mjs",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "idb-keyval": "^6.2.1"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0",
+    "vite-plugin-pwa": "^0.20.5"
+  }
+}

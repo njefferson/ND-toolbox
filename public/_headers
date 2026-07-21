@@ -1,0 +1,9 @@
+# Cloudflare Pages headers. Local-first: no third-party anything.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), interest-cohort=()
+
+# Never let the service worker be stale-cached by the edge.
+/sw.js
+  Cache-Control: no-cache

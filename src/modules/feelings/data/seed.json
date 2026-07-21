@@ -1,0 +1,28 @@
+{
+  "datasetId": "willcox-feelings-wheel",
+  "datasetVersion": 1,
+  "source": "Willcox (1982) lineage; Roberts expansion. Word list curated for ND Toolbox.",
+  "note": "Seed subset for scaffold. Full ~130-word ring-3 lands in build step 2.",
+  "coreOrder": ["joyful", "powerful", "peaceful", "sad", "mad", "scared"],
+  "glyphs": {
+    "joyful": "◆",
+    "powerful": "▲",
+    "peaceful": "●",
+    "sad": "▽",
+    "mad": "✕",
+    "scared": "◇"
+  },
+  "nodes": [
+    { "id": "joyful", "label": "Joyful", "coreId": "joyful", "parentId": null, "depth": 0, "colorToken": "core.joyful", "definition": "A bright, warm feeling of gladness or delight.", "provenance": "willcox-1982" },
+    { "id": "powerful", "label": "Powerful", "coreId": "powerful", "parentId": null, "depth": 0, "colorToken": "core.powerful", "definition": "A feeling of capability, confidence, and agency.", "provenance": "willcox-1982" },
+    { "id": "peaceful", "label": "Peaceful", "coreId": "peaceful", "parentId": null, "depth": 0, "colorToken": "core.peaceful", "definition": "A settled, calm, unhurried ease.", "provenance": "willcox-1982" },
+    { "id": "sad", "label": "Sad", "coreId": "sad", "parentId": null, "depth": 0, "colorToken": "core.sad", "definition": "A heavy, low feeling, often tied to loss.", "provenance": "willcox-1982" },
+    { "id": "mad", "label": "Mad", "coreId": "mad", "parentId": null, "depth": 0, "colorToken": "core.mad", "definition": "A charged feeling that something is wrong or unfair.", "provenance": "willcox-1982" },
+    { "id": "scared", "label": "Scared", "coreId": "scared", "parentId": null, "depth": 0, "colorToken": "core.scared", "definition": "A guarded feeling of threat or uncertainty.", "provenance": "willcox-1982" },
+
+    { "id": "content", "label": "Content", "coreId": "joyful", "parentId": "joyful", "depth": 1, "colorToken": "core.joyful", "definition": "Quietly satisfied; enough.", "provenance": "roberts-expansion" },
+    { "id": "confident", "label": "Confident", "coreId": "powerful", "parentId": "powerful", "depth": 1, "colorToken": "core.powerful", "definition": "Sure of yourself and what you can do.", "provenance": "roberts-expansion" },
+    { "id": "lonely", "label": "Lonely", "coreId": "sad", "parentId": "sad", "depth": 1, "colorToken": "core.sad", "definition": "Disconnected; missing closeness.", "provenance": "roberts-expansion" },
+    { "id": "anxious", "label": "Anxious", "coreId": "scared", "parentId": "scared", "depth": 1, "colorToken": "core.scared", "definition": "Keyed up and uneasy about what might happen.", "provenance": "roberts-expansion" }
+  ]
+}
