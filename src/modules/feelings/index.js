@@ -7,6 +7,26 @@ import {
 import { route, navigate } from '../../shell/router.js';
 import { el, focusView } from '../../shell/dom.js';
 import { loadSettings } from '../../shell/services/settings.js';
+import {
+  ensureLoaded, getLogsSync, addLog, deleteLog, clearLogs, setLogs, newId,
+} from './logs.js';
+
+const loggingOn = () => loadSettings().loggingEnabled;
+
+function makeEntry(node, trail, note, selectedSet) {
+  return {
+    id: newId(),
+    ts: new Date().toISOString(),
+    nodeId: node.id,
+    label: node.label,
+    coreId: node.coreId,
+    path: trail.map((p) => p.label),
+    note: note || undefined,
+    selectedSet: selectedSet || undefined,
+    appVersion: __APP_VERSION__,
+    datasetVersion: meta.datasetVersion,
+  };
+}
 
 // Deepest ring the user sees. Simple mode (or wordDepth 2) stops at the
 // secondary level: fewer, gentler words and a shorter path to a landing.
@@ -50,6 +70,12 @@ function home() {
       el('span', { class: 'lead' }, 'Pick the words that fit'),
       el('span', { class: 'sub' }, 'Check every word that rings true, then trace inward.'),
     ]),
+    loggingOn() ? el('button', {
+      class: 'path-btn', type: 'button', onclick: () => navigate('/history'),
+    }, [
+      el('span', { class: 'lead' }, 'Your history'),
+      el('span', { class: 'sub' }, 'Feelings you’ve saved on this device.'),
+    ]) : null,
   );
   focusView(root);
 }
@@ -128,6 +154,8 @@ function nodeView({ id }) {
 
     node.guidance ? guidancePanel(node.guidance) : null,
 
+    loggingOn() ? logSection(node, trail) : null,
+
     el('div', { class: 'landing-actions' }, [
       parent
         ? el('button', { class: 'ghost-btn', type: 'button', onclick: () => navigate(`/n/${parent.id}`) },
@@ -160,6 +188,28 @@ function drillButton(child) {
     el('span', { class: 'lead' }, child.label),
     el('span', { class: 'sub' }, child.definition),
     hasKids ? el('span', { class: 'more', 'aria-hidden': 'true' }, '›') : null,
+  ]);
+}
+
+function logSection(node, trail) {
+  const note = el('textarea', {
+    class: 'log-note', rows: '2', placeholder: 'Optional note…', 'aria-label': 'Optional note',
+  });
+  const btn = el('button', {
+    class: 'primary-btn', type: 'button',
+    onclick: async () => {
+      await addLog(makeEntry(node, trail, note.value.trim()));
+      note.value = '';
+      announce(`Saved ${node.label} to your history.`);
+      btn.textContent = 'Saved ✓';
+      btn.disabled = true;
+      setTimeout(() => { btn.textContent = 'Save to history'; btn.disabled = false; }, 1600);
+    },
+  }, 'Save to history');
+  return el('section', { class: 'log-section', 'aria-label': 'Save to history' }, [
+    el('h3', { class: 'section-title' }, 'History'),
+    note,
+    el('div', {}, btn),
   ]);
 }
 
@@ -250,6 +300,23 @@ function outsideIn() {
           }, w.label))),
         ]);
       })),
+      loggingOn() ? el('button', {
+        class: 'ghost-btn', type: 'button', style: 'margin-top:.5rem',
+        onclick: async (e) => {
+          await addLog({
+            id: newId(), ts: new Date().toISOString(),
+            nodeId: top.core.id, coreId: top.core.id, path: [top.core.label],
+            label: rows.length === 1
+              ? `${total} words → ${top.core.label}`
+              : `${total} words → mostly ${top.core.label}`,
+            selectedSet: chosen.map((n) => n.id),
+            appVersion: __APP_VERSION__, datasetVersion: meta.datasetVersion,
+          });
+          announce('Saved to your history.');
+          e.target.textContent = 'Saved ✓';
+          e.target.disabled = true;
+        },
+      }, 'Save these to history') : null,
     );
     announce(rows.length === 1
       ? `All your words point to ${top.core.label}.`
@@ -270,6 +337,57 @@ function outsideIn() {
   focusView(root);
 }
 
+// ---------------- History ----------------
+async function history() {
+  await ensureLoaded();
+  const items = getLogsSync();
+  root.replaceChildren(
+    el('button', { class: 'crumb', type: 'button', onclick: () => navigate('/') }, '‹ Home'),
+    el('h2', { class: 'landing-title', tabindex: '-1', 'data-focus': '' }, 'Your history'),
+    el('p', { class: 'muted' }, loggingOn()
+      ? 'Saved on this device only. Export a backup (Settings → Your data) to keep it safe.'
+      : 'History is off. Turn it on in Settings to save feelings here.'),
+    items.length
+      ? el('div', { class: 'history' }, items.map(historyEntry))
+      : el('p', { class: 'muted' }, 'No saved feelings yet.'),
+    items.length
+      ? el('button', {
+          class: 'ghost-btn', type: 'button',
+          onclick: async () => {
+            if (window.confirm('Delete all saved history? This cannot be undone.')) {
+              await clearLogs();
+              history();
+            }
+          },
+        }, 'Clear all history')
+      : null,
+  );
+  announce('Your history.');
+  focusView(root);
+}
+
+function historyEntry(e) {
+  const when = new Date(e.ts).toLocaleString();
+  return el('div', { class: 'history-entry', style: `--core: var(--core-${e.coreId || 'sad'})` }, [
+    el('div', { class: 'history-head' }, [
+      el('button', {
+        class: 'history-label', type: 'button',
+        onclick: () => e.nodeId && navigate(`/n/${e.nodeId}`),
+      }, e.label),
+      el('button', {
+        class: 'bar-dismiss', type: 'button', 'aria-label': `Delete ${e.label}`,
+        onclick: async () => { await deleteLog(e.id); history(); },
+      }, '✕'),
+    ]),
+    el('div', { class: 'history-when muted' }, when),
+    e.path?.length ? el('div', { class: 'muted' }, e.path.join(' › ')) : null,
+    e.note ? el('p', { class: 'history-note' }, e.note) : null,
+    e.selectedSet?.length
+      ? el('div', { class: 'muted' }, `Words: ${e.selectedSet.map((id) => getNode(id)?.label || id).join(', ')}`)
+      : null,
+  ]);
+}
+
 export default {
   id: 'feelings',
   name: 'Feelings Wheel',
@@ -277,16 +395,17 @@ export default {
   mount(ctx) {
     root = ctx.content;
     announce = ctx.announce;
+    ensureLoaded(); // warm the logs cache so backup export is complete
     route('/', home);
     route('/outside-in', outsideIn);
+    route('/history', history);
     route('/n/:id', nodeView);
   },
-  // Backup slice for this module. Logs are added when opt-in logging ships;
-  // for now the slice records the dataset version so an import can detect drift.
+  // Backup slice for this module: dataset version + the on-device history.
   serialize() {
-    return { datasetVersion: meta.datasetVersion, logs: [] };
+    return { datasetVersion: meta.datasetVersion, logs: getLogsSync() };
   },
-  deserialize() {
-    // No module-owned data to restore yet (logging arrives in a later step).
+  deserialize(data) {
+    if (data && Array.isArray(data.logs)) setLogs(data.logs);
   },
 };

@@ -73,6 +73,17 @@ function renderSettings(ctx) {
     ]),
 
     el('fieldset', { class: 'set-group' }, [
+      el('legend', {}, 'History'),
+      toggle('Save a history', 'Off by default. When on, you can save the feelings you name to a private history on this device.',
+        s.loggingEnabled, (v) => { patch({ loggingEnabled: v }); renderSettings(ctx); }),
+      s.loggingEnabled
+        ? el('div', { class: 'set-options' }, [
+            el('button', { class: 'ghost-btn', type: 'button', onclick: () => ctx.navigate('/history') }, 'View history'),
+          ])
+        : null,
+    ]),
+
+    el('fieldset', { class: 'set-group' }, [
       el('legend', {}, 'Motion & contrast'),
       toggle('Reduce motion', 'Turn off animations and transitions.',
         s.reducedMotion, (v) => patch({ reducedMotion: v })),

@@ -120,6 +120,30 @@ header.masthead {
 :root[data-simple='on'] .path-btn .lead { font-size: 1.15rem; }
 :root[data-simple='on'] .check-item { min-height: 52px; }
 
+/* Logging + history */
+.log-section {
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+  padding: 0.7rem 0.9rem; display: grid; gap: 0.5rem;
+}
+.log-note {
+  width: 100%; font: inherit; padding: 0.5rem 0.6rem; resize: vertical;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--surface); color: var(--ink);
+}
+.history { display: grid; gap: 0.6rem; }
+.history-entry {
+  border: 1px solid var(--line); border-left: 8px solid var(--core, var(--accent));
+  border-radius: var(--radius); background: var(--surface);
+  padding: 0.6rem 0.85rem; display: grid; gap: 0.2rem;
+}
+.history-head { display: flex; align-items: center; gap: 0.5rem; }
+.history-label {
+  flex: 1 1 auto; text-align: left; border: 0; background: none; font: inherit;
+  font-weight: 600; color: var(--ink); cursor: pointer; min-height: 32px; text-decoration: underline;
+}
+.history-when { font-size: 0.85rem; }
+.history-note { margin: 0.2rem 0 0; }
+
 /* About / prose */
 .prose p { margin: 0.4rem 0; }
 .about-list { margin: 0.3rem 0 0.7rem 1.1rem; padding: 0; }
