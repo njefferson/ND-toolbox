@@ -14,12 +14,19 @@ export function createShell(mountEl) {
       el('span', { html: MARK })),
     el('span', { class: 'mast-title' }, 'Feelings'),
     el('button', {
-      class: 'mast-settings', type: 'button', 'aria-label': 'Settings',
+      class: 'mast-icon', type: 'button', 'aria-label': 'About',
+      onclick: () => navigate('/about'),
+    }, el('span', { 'aria-hidden': 'true' }, 'ⓘ')),
+    el('button', {
+      class: 'mast-icon', type: 'button', 'aria-label': 'Settings',
       onclick: () => navigate('/settings'),
     }, el('span', { 'aria-hidden': 'true' }, '⚙')),
   ]);
 
-  mountEl.replaceChildren(masthead, content, status);
+  // Discreet version stamp, present on every screen so it lands in screenshots.
+  const footer = el('footer', { class: 'app-footer' }, `v${__APP_VERSION__} · ${__BUILD_ID__}`);
+
+  mountEl.replaceChildren(masthead, content, footer, status);
 
   return {
     content,

@@ -1,9 +1,23 @@
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
+import { readFileSync } from 'node:fs';
+import { execSync } from 'node:child_process';
 
 // Local-first PWA. No analytics, no third-party runtime. The service worker is
 // generated at build time (Workbox) purely for offline precaching.
+const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url)));
+let buildId = 'dev';
+try {
+  buildId = execSync('git rev-parse --short HEAD', { stdio: ['ignore', 'pipe', 'ignore'] })
+    .toString().trim();
+} catch { /* not a git checkout — leave as 'dev' */ }
+
 export default defineConfig({
+  // A discreet version + build id, baked in so it appears in screenshots.
+  define: {
+    __APP_VERSION__: JSON.stringify(pkg.version),
+    __BUILD_ID__: JSON.stringify(buildId),
+  },
   build: { target: 'es2020', sourcemap: true },
   plugins: [
     VitePWA({

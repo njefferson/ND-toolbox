@@ -69,16 +69,28 @@ header.masthead {
 }
 .masthead .mast-title { font-size: 1.15rem; font-weight: 700; margin-right: auto; }
 .masthead .mark { width: 30px; height: 30px; flex: none; }
-.mast-home, .mast-settings {
+.mast-home, .mast-icon {
   border: 0; background: none; padding: 0; margin: 0; cursor: pointer;
   flex: none; line-height: 0; color: var(--ink);
 }
 .mast-home { width: 32px; height: 32px; }
-.mast-settings {
-  width: var(--tap); height: var(--tap); font-size: 1.4rem; line-height: 1;
+.mast-icon {
+  width: var(--tap); height: var(--tap); font-size: 1.3rem; line-height: 1;
   display: flex; align-items: center; justify-content: center; border-radius: 999px;
 }
-.mast-settings:hover { background: var(--surface-2); }
+.mast-icon:hover { background: var(--surface-2); }
+
+.app-footer {
+  max-width: 720px; margin: 0 auto; padding: 0.4rem 1rem 1rem;
+  color: var(--ink-soft); font-size: 0.72rem; text-align: center; letter-spacing: 0.02em;
+}
+
+/* About / prose */
+.prose p { margin: 0.4rem 0; }
+.about-list { margin: 0.3rem 0 0.7rem 1.1rem; padding: 0; }
+.about-list li { margin: 0.25rem 0; }
+.changelog-entry { margin-bottom: 0.6rem; }
+.changelog-entry p { margin: 0.2rem 0; }
 
 .sr-only {
   position: absolute; width: 1px; height: 1px; overflow: hidden;

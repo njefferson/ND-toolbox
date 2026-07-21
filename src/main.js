@@ -3,6 +3,7 @@ import { loadSettings, applySettings } from './shell/services/settings.js';
 import { register, getModule } from './shell/registry.js';
 import { createShell } from './shell/app.js';
 import { registerSettings } from './shell/views/settings.js';
+import { registerAbout } from './shell/views/about.js';
 import { startRouter } from './shell/router.js';
 import feelings from './modules/feelings/index.js';
 
@@ -16,6 +17,7 @@ const ctx = createShell(document.getElementById('app'));
 // 3. Register modules and shell-level screens (each registers its own routes).
 register(feelings);
 registerSettings(ctx);
+registerAbout(ctx);
 getModule('feelings').mount(ctx);
 
 // 4. Start routing once every route is registered.
