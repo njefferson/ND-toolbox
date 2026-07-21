@@ -1,0 +1,52 @@
+# Build and deploy the PWA to Cloudflare Pages.
+#
+# Requires two repository secrets (already set):
+#   CLOUDFLARE_API_TOKEN   - token with the "Cloudflare Pages: Edit" permission
+#   CLOUDFLARE_ACCOUNT_ID  - the target account id
+#
+# The Pages project is auto-created on first run. Its production branch is set to
+# whichever branch first triggers this workflow (currently the dev branch, so the
+# deploy lands on the canonical nd-toolbox.pages.dev URL). When a real `main` is
+# adopted later, flip the production branch in the Cloudflare Pages dashboard.
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - claude/feelings-wheel-pwa-plan-1idba4
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: '3'
+          # Create the project if it doesn't exist yet; ignore the error if it does.
+          preCommands: wrangler pages project create nd-toolbox --production-branch=${{ github.ref_name }} 2>/dev/null || true
+          command: pages deploy dist --project-name=nd-toolbox --branch=${{ github.ref_name }}
