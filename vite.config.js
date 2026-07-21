@@ -31,9 +31,10 @@ export default defineConfig({
       // App updates must never touch user data — we only precache app shell assets.
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,json,woff2}'],
-        // The social tile is only for link-preview crawlers — don't precache it
-        // into every user's offline cache.
-        globIgnores: ['**/social/**'],
+        // Keep the offline precache lean: the social tile is only for crawlers,
+        // and the large 512px install icons aren't used by the running app (its
+        // mark is inline SVG) — the OS fetches them at install time.
+        globIgnores: ['**/social/**', '**/icons/*-512.png'],
         cleanupOutdatedCaches: true,
         navigateFallback: '/index.html',
       },
