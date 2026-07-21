@@ -2,10 +2,20 @@
 // search, and the outside-in multi-select path. Renders into the shell's
 // content root and shares the shell's announce channel.
 import {
-  meta, cores, getNode, childrenOf, glyphFor, pathTo, search, tertiary,
+  meta, cores, getNode, childrenOf, glyphFor, pathTo, search, allNodes,
 } from './loader.js';
 import { route, navigate } from '../../shell/router.js';
 import { el, focusView } from '../../shell/dom.js';
+import { loadSettings } from '../../shell/services/settings.js';
+
+// Deepest ring the user sees. Simple mode (or wordDepth 2) stops at the
+// secondary level: fewer, gentler words and a shorter path to a landing.
+function maxDepth() {
+  const s = loadSettings();
+  if (s.simpleMode) return 1;
+  return s.wordDepth === 2 ? 1 : 2;
+}
+const leafChildren = (id, node) => (node.depth < maxDepth() ? childrenOf(id) : []);
 
 let root;
 let announce = () => {};
@@ -56,7 +66,8 @@ function coreCard(core) {
 }
 
 function renderResults(query, container) {
-  const matches = search(query);
+  const md = maxDepth();
+  const matches = search(query).filter((n) => n.depth <= md);
   container.replaceChildren();
   if (!query.trim()) { announce(''); return; }
   if (!matches.length) {
@@ -83,7 +94,7 @@ function nodeView({ id }) {
   const node = getNode(id);
   if (!node) return home();
   const trail = pathTo(id);
-  const kids = childrenOf(id);
+  const kids = leafChildren(id, node);
   const parent = node.parentId ? getNode(node.parentId) : null;
   const neighbors = (node.neighbors || []).map(getNode).filter(Boolean);
 
@@ -141,7 +152,7 @@ function breadcrumb(trail) {
 }
 
 function drillButton(child) {
-  const hasKids = childrenOf(child.id).length > 0;
+  const hasKids = leafChildren(child.id, child).length > 0;
   return el('button', {
     class: 'path-btn', type: 'button', style: `--core: var(--core-${child.coreId})`,
     onclick: () => navigate(`/n/${child.id}`),
@@ -182,9 +193,12 @@ function outsideIn() {
     clearBtn.disabled = selection.size === 0;
   }
 
+  const scan = allNodes
+    .filter((n) => n.depth === maxDepth())
+    .sort((a, b) => a.label.localeCompare(b.label));
   const fieldset = el('fieldset', { class: 'wordgrid' }, [
     el('legend', { class: 'section-title' }, 'Specific feelings — check the ones that fit'),
-    ...tertiary.map((n) => {
+    ...scan.map((n) => {
       const cb = el('input', { type: 'checkbox', value: n.id });
       cb.checked = selection.has(n.id);
       cb.addEventListener('change', () => {

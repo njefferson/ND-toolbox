@@ -1,5 +1,6 @@
 node_modules/
 dist/
+public/changelog.json
 dev-dist/
 *.local
 .DS_Store

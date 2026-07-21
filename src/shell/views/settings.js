@@ -6,6 +6,7 @@ import { el, focusView } from '../dom.js';
 import { route } from '../router.js';
 import { loadSettings, saveSettings, applySettings } from '../services/settings.js';
 import { exportBackup, parseBackup, applyBackup } from '../services/backup.js';
+import { isPaused, setPaused, checkForUpdates, fetchPendingChanges } from '../services/updates.js';
 
 function radioGroup(legend, name, options, current, onSelect) {
   return el('fieldset', { class: 'set-group' }, [
@@ -66,6 +67,12 @@ function renderSettings(ctx) {
     ], s.density, (v) => patch({ density: v }, 'Layout updated.')),
 
     el('fieldset', { class: 'set-group' }, [
+      el('legend', {}, 'Simple mode'),
+      toggle('Simple mode', 'Fewer words and bigger buttons — good for kids, or for overwhelming days.',
+        s.simpleMode, (v) => patch({ simpleMode: v }, v ? 'Simple mode on.' : 'Simple mode off.')),
+    ]),
+
+    el('fieldset', { class: 'set-group' }, [
       el('legend', {}, 'Motion & contrast'),
       toggle('Reduce motion', 'Turn off animations and transitions.',
         s.reducedMotion, (v) => patch({ reducedMotion: v })),
@@ -73,10 +80,53 @@ function renderSettings(ctx) {
         s.contrast === 'high', (v) => patch({ contrast: v ? 'high' : 'normal' })),
     ]),
 
+    updatesSection(ctx),
     dataSection(ctx),
   );
   ctx.announce('Settings.');
   focusView(ctx.content);
+}
+
+// Updates — opt-in, with a clear "blocked" status, how to resume, and a preview
+// of what an update would change.
+function updatesSection(ctx) {
+  const paused = isPaused();
+  const pendingBox = el('div', { class: 'pending-box' });
+
+  async function showPending() {
+    pendingBox.replaceChildren(el('p', { class: 'muted' }, 'Checking…'));
+    const changes = await fetchPendingChanges();
+    if (!changes.length) {
+      pendingBox.replaceChildren(el('p', { class: 'muted' }, 'You’re on the latest version — nothing to change.'));
+      return;
+    }
+    pendingBox.replaceChildren(
+      el('p', {}, 'An update would add:'),
+      ...changes.map((rel) => el('div', { class: 'changelog-entry' }, [
+        el('p', {}, [el('strong', {}, `v${rel.version} — ${rel.title}`)]),
+        el('ul', { class: 'about-list' }, rel.notes.map((n) => el('li', {}, n))),
+      ])),
+    );
+  }
+
+  const children = [
+    el('legend', {}, 'Updates'),
+    toggle('Pause updates', 'Block all changes. The app stays exactly as it is now, and won’t update until you turn this back on.',
+      paused, (v) => { setPaused(v); renderSettings(ctx); }),
+  ];
+  if (paused) {
+    children.push(el('p', { class: 'status-blocked' },
+      '● Updates are paused. Nothing will change. Turn the toggle above off to allow updates again.'));
+  }
+  children.push(el('div', { class: 'set-options' }, [
+    paused ? null : el('button', {
+      class: 'ghost-btn', type: 'button',
+      onclick: async () => { ctx.announce('Checking for updates…'); await checkForUpdates(); showPending(); },
+    }, 'Check for updates'),
+    el('button', { class: 'ghost-btn', type: 'button', onclick: showPending }, 'See what an update would change'),
+  ].filter(Boolean)));
+  children.push(pendingBox);
+  return el('fieldset', { class: 'set-group' }, children);
 }
 
 // "Your data" — immutable export / import (seed a fresh start).

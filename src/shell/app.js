@@ -23,13 +23,18 @@ export function createShell(mountEl) {
     }, el('span', { 'aria-hidden': 'true' }, '⚙')),
   ]);
 
+  // Quiet notices (update available / what's new) live here — above content,
+  // never modal, shown only on Home.
+  const bars = el('div', { class: 'bars', role: 'region', 'aria-label': 'Notices' });
+
   // Discreet version stamp, present on every screen so it lands in screenshots.
   const footer = el('footer', { class: 'app-footer' }, `v${__APP_VERSION__} · ${__BUILD_ID__}`);
 
-  mountEl.replaceChildren(masthead, content, footer, status);
+  mountEl.replaceChildren(masthead, bars, content, footer, status);
 
   return {
     content,
+    bars,
     announce: (msg) => { status.textContent = msg; },
     navigate,
   };

@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "icons": "node scripts/generate-icons.mjs",
-    "dev": "vite",
-    "build": "vite build",
+    "changelog": "node scripts/emit-changelog.mjs",
+    "dev": "npm run changelog && vite",
+    "build": "npm run changelog && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

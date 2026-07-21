@@ -21,7 +21,12 @@ export default defineConfig({
   build: { target: 'es2020', sourcemap: true },
   plugins: [
     VitePWA({
-      registerType: 'autoUpdate',
+      // Opt-in updates: a new version is downloaded but NEVER applied until the
+      // user taps "Update now". Combined with the in-app "Pause updates" toggle,
+      // nothing changes under someone who is settled in. Registration is driven
+      // manually via virtual:pwa-register (see shell/services/updates.js).
+      registerType: 'prompt',
+      injectRegister: false,
       includeAssets: ['icons/apple-touch-icon.png', 'favicon.svg'],
       // App updates must never touch user data — we only precache app shell assets.
       workbox: {

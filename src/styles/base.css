@@ -85,6 +85,41 @@ header.masthead {
   color: var(--ink-soft); font-size: 0.72rem; text-align: center; letter-spacing: 0.02em;
 }
 
+/* Quiet notice bars (update available / what's new) */
+.bars { max-width: 720px; margin: 0 auto; padding: 0 var(--gap, 1rem); }
+.bar {
+  display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+  background: var(--surface); border: 1px solid var(--line);
+  border-left: 6px solid var(--accent); border-radius: var(--radius);
+  padding: 0.6rem 0.8rem; margin-top: 0.6rem;
+}
+.bar-text { flex: 1 1 12rem; }
+.bar-actions { display: flex; align-items: center; gap: 0.4rem; margin-left: auto; }
+.bar-btn {
+  min-height: 40px; padding: 0.4rem 0.85rem; font: inherit; font-weight: 600; cursor: pointer;
+  border: 1px solid var(--accent); border-radius: var(--radius);
+  background: var(--accent); color: var(--bg);
+}
+.bar-btn:hover { filter: brightness(0.95); }
+.bar-dismiss {
+  min-height: 40px; min-width: 40px; border: 0; background: none; cursor: pointer;
+  color: var(--ink-soft); font-size: 0.95rem; border-radius: 999px;
+}
+.bar-dismiss:hover { background: var(--surface-2); }
+
+/* Settings: updates status + pending preview */
+.status-blocked { font-weight: 600; margin: 0.2rem 0 0.3rem; }
+.pending-box { margin-top: 0.5rem; }
+.pending-box:empty { display: none; }
+
+/* Simple mode: fewer, bigger, calmer targets */
+:root[data-simple='on'] { --tap: 52px; }
+:root[data-simple='on'] .core-card { min-height: 104px; }
+:root[data-simple='on'] .core-card .label { font-size: 1.2rem; }
+:root[data-simple='on'] .path-btn { padding: 1.1rem 1rem; }
+:root[data-simple='on'] .path-btn .lead { font-size: 1.15rem; }
+:root[data-simple='on'] .check-item { min-height: 52px; }
+
 /* About / prose */
 .prose p { margin: 0.4rem 0; }
 .about-list { margin: 0.3rem 0 0.7rem 1.1rem; padding: 0; }

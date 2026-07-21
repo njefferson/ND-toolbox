@@ -10,6 +10,8 @@ export const DEFAULT_SETTINGS = {
   textScale: 1, // 0.9 .. 1.6
   navMode: 'columns', // columns | wheel
   wordDepth: 3, // 2 | 3
+  simpleMode: false, // fewer words, bigger targets (kids / overwhelming days)
+  updatesPaused: false, // block updates entirely until turned back on
   loggingEnabled: false,
   datasetVersion: 1,
 };
@@ -38,5 +40,6 @@ export function applySettings(settings) {
   root.dataset.contrast = settings.contrast;
   root.dataset.density = settings.density;
   root.dataset.motion = settings.reducedMotion ? 'reduced' : 'full';
+  root.dataset.simple = settings.simpleMode ? 'on' : 'off';
   root.style.setProperty('--text-scale', String(settings.textScale));
 }
