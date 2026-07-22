@@ -1,0 +1,82 @@
+{
+  "datasetId": "interoception-checkin",
+  "datasetVersion": 1,
+  "note": "Body signals for the check-in. Editable data, not hardcoded UI. A state with need:true means the body may want something; its suggestion is gentle and optional, never clinical or moralizing.",
+  "signals": [
+    {
+      "id": "hunger", "label": "Hunger", "question": "How hungry are you?",
+      "states": [
+        { "value": "full", "label": "Full" },
+        { "value": "okay", "label": "Okay" },
+        { "value": "hungry", "label": "Hungry", "need": true, "suggestion": "A snack or a meal might help." }
+      ]
+    },
+    {
+      "id": "thirst", "label": "Thirst", "question": "How thirsty are you?",
+      "states": [
+        { "value": "fine", "label": "Fine" },
+        { "value": "thirsty", "label": "Thirsty", "need": true, "suggestion": "Some water might help." }
+      ]
+    },
+    {
+      "id": "energy", "label": "Energy", "question": "How is your energy?",
+      "states": [
+        { "value": "rested", "label": "Rested" },
+        { "value": "okay", "label": "Okay" },
+        { "value": "tired", "label": "Tired", "need": true, "suggestion": "Some rest, or a slower pace, might help." }
+      ]
+    },
+    {
+      "id": "bathroom", "label": "Bathroom", "question": "Do you need the bathroom?",
+      "states": [
+        { "value": "fine", "label": "Fine" },
+        { "value": "need", "label": "Need to go", "need": true, "suggestion": "It might be time for a bathroom break." }
+      ]
+    },
+    {
+      "id": "temperature", "label": "Temperature", "question": "How is your temperature?",
+      "states": [
+        { "value": "cold", "label": "Cold", "need": true, "suggestion": "A layer or a warm drink might help." },
+        { "value": "comfortable", "label": "Comfortable" },
+        { "value": "hot", "label": "Hot", "need": true, "suggestion": "Cooling down or some water might help." }
+      ]
+    },
+    {
+      "id": "tension", "label": "Body tension", "question": "How does your body feel?",
+      "states": [
+        { "value": "relaxed", "label": "Relaxed" },
+        { "value": "some", "label": "Some tension" },
+        { "value": "tense", "label": "Tense or sore", "need": true, "suggestion": "A stretch, or letting your shoulders drop, might help." }
+      ]
+    },
+    {
+      "id": "overstim", "label": "Stimulation", "question": "How much is coming at you?",
+      "states": [
+        { "value": "calm", "label": "Calm" },
+        { "value": "abitmuch", "label": "A bit much" },
+        { "value": "overstim", "label": "Overstimulated", "need": true, "suggestion": "Less input for a bit — dimmer, quieter, or a short break — might help." }
+      ]
+    },
+    {
+      "id": "breath", "label": "Breath", "question": "How is your breathing?",
+      "states": [
+        { "value": "easy", "label": "Easy" },
+        { "value": "tight", "label": "Tight or shallow", "need": true, "suggestion": "A few slow breaths might help." }
+      ]
+    },
+    {
+      "id": "restless", "label": "Restlessness", "question": "How still or restless are you?",
+      "states": [
+        { "value": "settled", "label": "Settled" },
+        { "value": "restless", "label": "Restless", "need": true, "suggestion": "Moving your body for a minute might help." }
+      ]
+    },
+    {
+      "id": "pain", "label": "Pain", "question": "Any pain or discomfort?",
+      "states": [
+        { "value": "none", "label": "None" },
+        { "value": "some", "label": "Some pain", "need": true, "suggestion": "Noticing where it is, and tending to it gently, might help." }
+      ]
+    }
+  ]
+}

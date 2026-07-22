@@ -1,15 +1,19 @@
-# ND Toolbox — Feelings
+# ND Toolbox
 
-A calm, **local-first PWA** that helps you find the precise word for what you
-feel — by narrowing from a few core feelings out to a specific one, by checking
-the words that ring true and tracing them back, or by searching. Built to be
-quick and quiet: usually under ten seconds from opening it to a named feeling.
+A calm, **local-first PWA** — a small suite of quiet neurodivergent
+"internal-state" tools for checking in with yourself. Today it has two:
+
+- **Feelings** — find the precise word for what you feel, by narrowing from a
+  few core feelings, by checking the words that ring true and tracing them back,
+  or by searching.
+- **Body check-in** (interoception) — notice what your body is telling you
+  (hunger, thirst, tiredness, tension, overstimulation…) and what it might need.
 
 **Live:** https://nd-toolbox.pages.dev
 
-This is the first module of a small suite of neurodivergent "internal-state"
-tools. Not a diagnostic or clinical tool, and not a mood tracker — identifying
-the feeling is the point; logging is optional and off by default.
+Not diagnostic or clinical tools, and not mood trackers — noticing is the point;
+logging is optional and off by default. Tools share one shell (settings,
+accessibility, immutable backup), so a new tool slots in without rework.
 
 ## Principles
 

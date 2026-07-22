@@ -1,6 +1,6 @@
 {
   "name": "nd-toolbox",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Local-first PWA suite of neurodivergent internal-state tools. First module: the Feelings Wheel.",
   "type": "module",

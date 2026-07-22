@@ -78,7 +78,7 @@ function renderSettings(ctx) {
         s.loggingEnabled, (v) => { patch({ loggingEnabled: v }); renderSettings(ctx); }),
       s.loggingEnabled
         ? el('div', { class: 'set-options' }, [
-            el('button', { class: 'ghost-btn', type: 'button', onclick: () => ctx.navigate('/history') }, 'View history'),
+            el('button', { class: 'ghost-btn', type: 'button', onclick: () => ctx.navigate('/feelings/history') }, 'View history'),
           ])
         : null,
     ]),

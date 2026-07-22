@@ -24,3 +24,9 @@ export const MARK = `<svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><g
 export function focusView(container) {
   container.querySelector('[data-focus]')?.focus();
 }
+
+// replaceChildren coerces non-Node args (like null) to the text "null". Filter
+// them so `cond ? node : null` entries simply drop out.
+export function place(target, ...children) {
+  target.replaceChildren(...children.flat(Infinity).filter((c) => c != null && c !== false));
+}

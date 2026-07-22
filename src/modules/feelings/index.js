@@ -5,7 +5,11 @@ import {
   meta, cores, getNode, childrenOf, glyphFor, pathTo, search, allNodes,
 } from './loader.js';
 import { route, navigate } from '../../shell/router.js';
-import { el, focusView } from '../../shell/dom.js';
+import { el, focusView, place, MARK } from '../../shell/dom.js';
+
+// This module lives under /feelings; go() navigates within it.
+const BASE = '/feelings';
+const go = (p = '') => navigate(BASE + p);
 import { loadSettings, saveSettings } from '../../shell/services/settings.js';
 import {
   ensureLoaded, getLogsSync, addLog, deleteLog, clearLogs, setLogs, newId,
@@ -55,12 +59,6 @@ const leafChildren = (id, node) => (node.depth < maxDepth() ? childrenOf(id) : [
 let root;
 let announce = () => {};
 
-// replaceChildren coerces non-Node args (like null) to the text "null". Filter
-// them so `cond ? node : null` entries simply drop out.
-function place(target, ...children) {
-  target.replaceChildren(...children.flat(Infinity).filter((c) => c != null && c !== false));
-}
-
 // Outside-in selection persists while the app is open (cleared on demand).
 const selection = new Set();
 
@@ -74,7 +72,7 @@ function home() {
     onkeydown: (e) => {
       if (e.key === 'Enter') {
         const first = results.querySelector('[data-id]');
-        if (first) navigate(`/n/${first.dataset.id}`);
+        if (first) go(`/n/${first.dataset.id}`);
       }
     },
   });
@@ -90,18 +88,18 @@ function home() {
       ? renderWheel({
           center: { label: 'Feelings' },
           items: cores.map((c) => ({ id: c.id, label: c.label, coreId: c.id })),
-          onSelect: (it) => navigate(`/n/${it.id}`),
+          onSelect: (it) => go(`/n/${it.id}`),
         })
       : el('div', { class: 'core-grid', role: 'list' },
           cores.map((c) => el('div', { role: 'listitem' }, coreCard(c)))),
     el('button', {
-      class: 'path-btn', type: 'button', onclick: () => navigate('/outside-in'),
+      class: 'path-btn', type: 'button', onclick: () => go('/outside-in'),
     }, [
       el('span', { class: 'lead' }, 'Pick the words that fit'),
       el('span', { class: 'sub' }, 'Check every word that rings true, then trace inward.'),
     ]),
     loggingOn() ? el('button', {
-      class: 'path-btn', type: 'button', onclick: () => navigate('/history'),
+      class: 'path-btn', type: 'button', onclick: () => go('/history'),
     }, [
       el('span', { class: 'lead' }, 'Your history'),
       el('span', { class: 'sub' }, 'Feelings you’ve saved on this device.'),
@@ -114,7 +112,7 @@ function coreCard(core) {
   return el('button', {
     class: 'core-card', type: 'button', style: `--core: var(--core-${core.id})`,
     'aria-label': `${core.label}. ${core.definition}`,
-    onclick: () => navigate(`/n/${core.id}`),
+    onclick: () => go(`/n/${core.id}`),
   }, [
     el('span', { class: 'glyph', 'aria-hidden': 'true' }, meta.glyphs[core.id] || '•'),
     el('span', { class: 'label' }, core.label),
@@ -136,7 +134,7 @@ function renderResults(query, container) {
     container.append(el('button', {
       class: 'result', type: 'button', role: 'listitem', dataset: { id: n.id },
       style: `--core: var(--core-${n.coreId})`,
-      onclick: () => navigate(`/n/${n.id}`),
+      onclick: () => go(`/n/${n.id}`),
     }, [
       el('span', { class: 'result-label' }, n.label),
       trail ? el('span', { class: 'result-trail' }, trail) : null,
@@ -182,7 +180,7 @@ function nodeView({ id }) {
           el('h3', { class: 'section-title' }, 'Nearby words'),
           el('div', { class: 'chips' }, neighbors.map((nb) => el('button', {
             class: 'chip', type: 'button', style: `--core: var(--core-${nb.coreId})`,
-            onclick: () => navigate(`/n/${nb.id}`),
+            onclick: () => go(`/n/${nb.id}`),
           }, nb.label))),
         ])
       : null,
@@ -193,9 +191,9 @@ function nodeView({ id }) {
 
     el('div', { class: 'landing-actions' }, [
       parent
-        ? el('button', { class: 'ghost-btn', type: 'button', onclick: () => navigate(`/n/${parent.id}`) },
+        ? el('button', { class: 'ghost-btn', type: 'button', onclick: () => go(`/n/${parent.id}`) },
             `← Back to ${parent.label}`)
-        : el('button', { class: 'ghost-btn', type: 'button', onclick: () => navigate('/') }, '← All core feelings'),
+        : el('button', { class: 'ghost-btn', type: 'button', onclick: () => go('') }, '← All core feelings'),
     ]),
   );
   announce(`${node.label}. ${node.definition}`);
@@ -216,8 +214,8 @@ function wheelNodeView(node, trail, kids, parent) {
     renderWheel({
       center: { label: node.label, coreId: node.coreId },
       items: kids.map((k) => ({ id: k.id, label: k.label, coreId: k.coreId })),
-      onSelect: (it) => navigate(`/n/${it.id}`),
-      onCenter: () => navigate(parent ? `/n/${parent.id}` : '/'),
+      onSelect: (it) => go(`/n/${it.id}`),
+      onCenter: () => go(parent ? `/n/${parent.id}` : ''),
     }),
     node.guidance ? guidancePanel(node.guidance) : null,
     loggingOn() ? logSection(node, trail) : null,
@@ -233,7 +231,7 @@ function breadcrumb(trail) {
     if (i > 0) nav.append(el('span', { class: 'crumb-sep', 'aria-hidden': 'true' }, '›'));
     nav.append(last
       ? el('span', { class: 'crumb current', 'aria-current': 'page' }, n.label)
-      : el('button', { class: 'crumb', type: 'button', onclick: () => navigate(`/n/${n.id}`) }, n.label));
+      : el('button', { class: 'crumb', type: 'button', onclick: () => go(`/n/${n.id}`) }, n.label));
   });
   return nav;
 }
@@ -242,7 +240,7 @@ function drillButton(child) {
   const hasKids = leafChildren(child.id, child).length > 0;
   return el('button', {
     class: 'path-btn', type: 'button', style: `--core: var(--core-${child.coreId})`,
-    onclick: () => navigate(`/n/${child.id}`),
+    onclick: () => go(`/n/${child.id}`),
   }, [
     el('span', { class: 'lead' }, child.label),
     el('span', { class: 'sub' }, child.definition),
@@ -355,7 +353,7 @@ function outsideIn() {
             el('span', { style: `width:${pct}%` })),
           el('div', { class: 'chips' }, row.words.map((w) => el('button', {
             class: 'chip', type: 'button', style: `--core: var(--core-${w.coreId})`,
-            onclick: () => navigate(`/n/${w.id}`),
+            onclick: () => go(`/n/${w.id}`),
           }, w.label))),
         ]);
       })),
@@ -384,7 +382,7 @@ function outsideIn() {
   }
 
   place(root,
-    el('button', { class: 'crumb', type: 'button', onclick: () => navigate('/') }, '‹ Home'),
+    el('button', { class: 'crumb', type: 'button', onclick: () => go('') }, '‹ Feelings'),
     el('h2', { class: 'landing-title', tabindex: '-1', 'data-focus': '' }, 'Pick the words that fit'),
     el('p', { class: 'muted' },
       'Check every word that rings true — no need to overthink it. Then trace inward to see where they point.'),
@@ -401,7 +399,7 @@ async function history() {
   await ensureLoaded();
   const items = getLogsSync();
   place(root,
-    el('button', { class: 'crumb', type: 'button', onclick: () => navigate('/') }, '‹ Home'),
+    el('button', { class: 'crumb', type: 'button', onclick: () => go('') }, '‹ Feelings'),
     el('h2', { class: 'landing-title', tabindex: '-1', 'data-focus': '' }, 'Your history'),
     el('p', { class: 'muted' }, loggingOn()
       ? 'Saved on this device only. Export a backup (Settings → Your data) to keep it safe.'
@@ -431,7 +429,7 @@ function historyEntry(e) {
     el('div', { class: 'history-head' }, [
       el('button', {
         class: 'history-label', type: 'button',
-        onclick: () => e.nodeId && navigate(`/n/${e.nodeId}`),
+        onclick: () => e.nodeId && go(`/n/${e.nodeId}`),
       }, e.label),
       el('button', {
         class: 'bar-dismiss', type: 'button', 'aria-label': `Delete ${e.label}`,
@@ -450,15 +448,18 @@ function historyEntry(e) {
 export default {
   id: 'feelings',
   name: 'Feelings Wheel',
-  icon: '🎡',
+  title: 'Feelings',
+  tagline: 'Find the word for what you feel.',
+  basePath: BASE,
+  mark: MARK,
   mount(ctx) {
     root = ctx.content;
     announce = ctx.announce;
     ensureLoaded(); // warm the logs cache so backup export is complete
-    route('/', home);
-    route('/outside-in', outsideIn);
-    route('/history', history);
-    route('/n/:id', nodeView);
+    route(BASE, home);
+    route(`${BASE}/outside-in`, outsideIn);
+    route(`${BASE}/history`, history);
+    route(`${BASE}/n/:id`, nodeView);
   },
   // Backup slice for this module: dataset version + the on-device history.
   serialize() {

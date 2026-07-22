@@ -176,6 +176,51 @@ header.masthead {
 .wheel-center:focus-visible .wheel-hub { stroke: var(--focus); stroke-width: 4; }
 .wheel-center-label { font: 700 16px system-ui, sans-serif; fill: var(--ink); pointer-events: none; }
 
+/* Suite home — module cards */
+.suite-title { font-size: 1.5rem; margin: 0.2rem 0; }
+.module-grid { display: grid; gap: var(--gap, 1rem); grid-template-columns: 1fr; margin-top: 0.4rem; }
+@media (min-width: 520px) { .module-grid { grid-template-columns: 1fr 1fr; } }
+.module-card {
+  display: flex; align-items: center; gap: 0.9rem; text-align: left;
+  padding: 1rem; min-height: 96px; font: inherit; cursor: pointer;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--surface); color: var(--ink);
+}
+.module-card:hover { background: var(--surface-2); }
+.module-icon {
+  width: 44px; height: 44px; flex: none; line-height: 0; font-size: 1.7rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.module-icon .mark { width: 44px; height: 44px; }
+.module-text { display: grid; gap: 0.15rem; }
+.module-name { font-weight: 700; font-size: 1.1rem; }
+.module-tagline { color: var(--ink-soft); font-size: 0.9rem; }
+
+/* Interoception check-in */
+.signals { display: grid; gap: 0.6rem; }
+.signal {
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+  padding: 0.6rem 0.85rem; display: grid; gap: 0.5rem;
+}
+.signal-q { margin: 0; font-size: 1rem; }
+.seg { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.seg-btn {
+  min-height: 40px; padding: 0.4rem 0.85rem; font: inherit; cursor: pointer;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--surface); color: var(--ink);
+}
+.seg-btn:hover { background: var(--surface-2); }
+.seg-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
+:root[data-simple='on'] .seg-btn { min-height: 52px; }
+
+.needs { display: grid; gap: 0.5rem; margin: 0.3rem 0; }
+.need-item {
+  border: 1px solid var(--line); border-left: 6px solid var(--accent); border-radius: var(--radius);
+  background: var(--surface); padding: 0.5rem 0.8rem; display: grid; gap: 0.15rem;
+}
+.need-label { font-weight: 600; }
+.need-suggestion { color: var(--ink-soft); }
+
 /* About / prose */
 .prose p { margin: 0.4rem 0; }
 .about-list { margin: 0.3rem 0 0.7rem 1.1rem; padding: 0; }

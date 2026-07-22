@@ -12,7 +12,7 @@ export function createShell(mountEl) {
   const masthead = el('header', { class: 'masthead' }, [
     el('button', { class: 'mast-home', type: 'button', 'aria-label': 'Home', onclick: () => navigate('/') },
       el('span', { html: MARK })),
-    el('span', { class: 'mast-title' }, 'Feelings'),
+    el('span', { class: 'mast-title' }, 'ND Toolbox'),
     el('button', {
       class: 'mast-icon', type: 'button', 'aria-label': 'About',
       onclick: () => navigate('/about'),

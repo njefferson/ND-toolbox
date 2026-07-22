@@ -35,12 +35,15 @@ function renderAbout(ctx) {
     el('h2', { class: 'landing-title', tabindex: '-1', 'data-focus': '' }, 'About'),
 
     section('What this is', [
-      'Feelings helps you find the precise word for what you feel — by narrowing from a few core feelings out to a specific one, by checking the words that ring true and tracing them back, or by searching.',
-      'It’s built to be quick and quiet: usually under ten seconds from opening it to a named feeling.',
+      'ND Toolbox is a small set of quiet tools for checking in with yourself. Today it has two:',
+    ]),
+    list('The tools', [
+      'Feelings — find the precise word for what you feel, by narrowing from a few core feelings, by checking the words that ring true and tracing them back, or by searching.',
+      'Body check-in — notice what your body is telling you (hunger, thirst, tiredness, tension, overstimulation and more), and what it might be asking for.',
     ]),
     section('Why it exists', [
-      'Naming a feeling is hard for a lot of neurodivergent people. Recognising “yes, that word fits” is often easier than producing the word from nothing — and having the right word can lower the volume on a feeling and make it easier to know what you need.',
-      'This is not a diagnostic or clinical tool, and it isn’t a mood tracker. Identifying the feeling is the point. Logging is optional and off by default.',
+      'Noticing and naming an inner state is hard for a lot of neurodivergent people. Recognising “yes, that fits” is often easier than producing it from nothing — and the right word, or spotting an unmet body need, can lower the volume on it and make it easier to know what you need.',
+      'These are not diagnostic or clinical tools, and not mood trackers. Noticing is the point. Logging is optional and off by default.',
     ]),
     list('Install it (works offline after)', [
       'iPad / iPhone (Safari): tap the Share button, then “Add to Home Screen.” Open it from the new icon — it runs full-screen and works with no connection.',
