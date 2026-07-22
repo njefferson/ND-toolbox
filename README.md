@@ -60,11 +60,19 @@ The feelings taxonomy is **data, not code** — edit `scripts/build-dataset.mjs`
 
 See [`docs/PLAN.md`](docs/PLAN.md) for the full plan.
 
-## Deployment (Cloudflare Pages)
+## Branches & deployment (Cloudflare Pages)
 
-Every push to the dev branch (and, later, `main`) triggers
-`.github/workflows/deploy.yml`, which builds and deploys `dist/` to Cloudflare
-Pages via `wrangler`.
+Branch model:
+
+| Branch | Deploys to |
+| --- | --- |
+| `main` | **production** — https://nd-toolbox.pages.dev |
+| `staging` | **preview** — https://staging.nd-toolbox.pages.dev |
+
+Development happens on `staging`; promote to `main` when ready. Each push
+triggers `.github/workflows/deploy.yml`, which builds and deploys `dist/` to
+Cloudflare Pages via `wrangler`. The workflow also ensures the project's
+production branch is `main`.
 
 **Required repository secrets:**
 
@@ -73,18 +81,9 @@ Pages via `wrangler`.
 | `CLOUDFLARE_API_TOKEN` | Token with the **Cloudflare Pages: Edit** permission |
 | `CLOUDFLARE_ACCOUNT_ID` | Target Cloudflare account id |
 
-The Pages project (`nd-toolbox`) is auto-created on the first run, with its
-**production branch** set to whichever branch first deployed — so the canonical
-`nd-toolbox.pages.dev` URL serves it. To finish setup in the Cloudflare
-dashboard:
-
-1. **Custom domain** (optional): Pages → the project → *Custom domains* → add
-   your domain and follow the DNS steps.
-2. **Production branch** (when you adopt a real `main`): Pages → *Settings* →
-   *Builds & deployments* → set the production branch to `main`.
-
-No build configuration is needed in the dashboard — the GitHub Action builds
-and uploads `dist/` directly.
+**Optional:** add a custom domain in the Cloudflare dashboard (Pages → the
+project → *Custom domains*). No build configuration is needed there — the
+GitHub Action builds and uploads `dist/` directly.
 
 ## Design assets
 

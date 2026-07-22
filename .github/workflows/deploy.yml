@@ -1,20 +1,19 @@
 # Build and deploy the PWA to Cloudflare Pages.
 #
+# Branch model:
+#   main    -> production  (https://nd-toolbox.pages.dev)
+#   staging -> preview      (https://staging.nd-toolbox.pages.dev)
+#
 # Requires two repository secrets (already set):
 #   CLOUDFLARE_API_TOKEN   - token with the "Cloudflare Pages: Edit" permission
 #   CLOUDFLARE_ACCOUNT_ID  - the target account id
-#
-# The Pages project is auto-created on first run. Its production branch is set to
-# whichever branch first triggers this workflow (currently the dev branch, so the
-# deploy lands on the canonical nd-toolbox.pages.dev URL). When a real `main` is
-# adopted later, flip the production branch in the Cloudflare Pages dashboard.
 name: Deploy to Cloudflare Pages
 
 on:
   push:
     branches:
-      - claude/feelings-wheel-pwa-plan-1idba4
       - main
+      - staging
   workflow_dispatch:
 
 permissions:
@@ -41,12 +40,29 @@ jobs:
       - name: Build
         run: npm run build
 
+      # Make sure the Pages project's production branch is `main`, so pushes to
+      # main land on the canonical URL and staging stays a preview.
+      - name: Set production branch to main
+        if: github.ref_name == 'main'
+        env:
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          curl -sS -X PATCH \
+            "https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/pages/projects/nd-toolbox" \
+            -H "Authorization: Bearer ${CF_API_TOKEN}" \
+            -H "Content-Type: application/json" \
+            --data '{"production_branch":"main"}' \
+            | grep -q '"success":true' \
+            && echo "production branch set to main" \
+            || echo "note: could not set production branch (does the token have Pages:Edit?)"
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: '3'
-          # Create the project if it doesn't exist yet; ignore the error if it does.
-          preCommands: wrangler pages project create nd-toolbox --production-branch=${{ github.ref_name }} 2>/dev/null || true
+          # Create the project on first run; ignore the error if it already exists.
+          preCommands: wrangler pages project create nd-toolbox --production-branch=main 2>/dev/null || true
           command: pages deploy dist --project-name=nd-toolbox --branch=${{ github.ref_name }}
