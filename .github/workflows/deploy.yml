@@ -48,14 +48,19 @@ jobs:
           CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          curl -sS -X PATCH \
+          resp=$(curl -sS -X PATCH \
             "https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/pages/projects/nd-toolbox" \
             -H "Authorization: Bearer ${CF_API_TOKEN}" \
             -H "Content-Type: application/json" \
-            --data '{"production_branch":"main"}' \
-            | grep -q '"success":true' \
-            && echo "production branch set to main" \
-            || echo "note: could not set production branch (does the token have Pages:Edit?)"
+            --data '{"production_branch":"main"}')
+          if printf '%s' "$resp" | grep -Eq '"success"[[:space:]]*:[[:space:]]*true'; then
+            echo "✓ production branch set to main"
+          else
+            echo "⚠ could not set production branch — set it manually in the Cloudflare"
+            echo "  dashboard (Pages → nd-toolbox → Settings → Production branch → main)."
+            echo "  API response:"
+            printf '%s' "$resp" | head -c 500
+          fi
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
