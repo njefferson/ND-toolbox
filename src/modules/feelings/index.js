@@ -6,12 +6,27 @@ import {
 } from './loader.js';
 import { route, navigate } from '../../shell/router.js';
 import { el, focusView } from '../../shell/dom.js';
-import { loadSettings } from '../../shell/services/settings.js';
+import { loadSettings, saveSettings } from '../../shell/services/settings.js';
 import {
   ensureLoaded, getLogsSync, addLog, deleteLog, clearLogs, setLogs, newId,
 } from './logs.js';
+import { renderWheel } from './wheel.js';
 
 const loggingOn = () => loadSettings().loggingEnabled;
+const navMode = () => loadSettings().navMode;
+
+// Columns / Wheel switch. Saves the choice and re-renders the current view.
+function viewToggle(rerender) {
+  const cur = navMode();
+  const btn = (mode, label) => el('button', {
+    class: `toggle-btn${cur === mode ? ' active' : ''}`, type: 'button',
+    'aria-pressed': String(cur === mode),
+    onclick: () => { const s = loadSettings(); s.navMode = mode; saveSettings(s); rerender(); },
+  }, label);
+  return el('div', { class: 'view-toggle', role: 'group', 'aria-label': 'How to browse' }, [
+    btn('columns', 'List'), btn('wheel', 'Wheel'),
+  ]);
+}
 
 function makeEntry(node, trail, note, selectedSet) {
   return {
@@ -40,6 +55,12 @@ const leafChildren = (id, node) => (node.depth < maxDepth() ? childrenOf(id) : [
 let root;
 let announce = () => {};
 
+// replaceChildren coerces non-Node args (like null) to the text "null". Filter
+// them so `cond ? node : null` entries simply drop out.
+function place(target, ...children) {
+  target.replaceChildren(...children.flat(Infinity).filter((c) => c != null && c !== false));
+}
+
 // Outside-in selection persists while the app is open (cleared on demand).
 const selection = new Set();
 
@@ -58,12 +79,21 @@ function home() {
     },
   });
 
-  root.replaceChildren(
+  place(root,
     el('h2', { class: 'section-title', tabindex: '-1', 'data-focus': '' }, 'Find a feeling'),
     el('div', { class: 'search-row' }, [input, results]),
-    el('h2', { class: 'section-title' }, 'Start from a core feeling'),
-    el('div', { class: 'core-grid', role: 'list' },
-      cores.map((c) => el('div', { role: 'listitem' }, coreCard(c)))),
+    el('div', { class: 'section-head' }, [
+      el('h2', { class: 'section-title' }, 'Start from a core feeling'),
+      viewToggle(home),
+    ]),
+    navMode() === 'wheel'
+      ? renderWheel({
+          center: { label: 'Feelings' },
+          items: cores.map((c) => ({ id: c.id, label: c.label, coreId: c.id })),
+          onSelect: (it) => navigate(`/n/${it.id}`),
+        })
+      : el('div', { class: 'core-grid', role: 'list' },
+          cores.map((c) => el('div', { role: 'listitem' }, coreCard(c)))),
     el('button', {
       class: 'path-btn', type: 'button', onclick: () => navigate('/outside-in'),
     }, [
@@ -122,9 +152,14 @@ function nodeView({ id }) {
   const trail = pathTo(id);
   const kids = leafChildren(id, node);
   const parent = node.parentId ? getNode(node.parentId) : null;
+
+  // Wheel view handles nodes that still have children; leaves fall through to
+  // the landing card below (a word's definition reads better as a card).
+  if (navMode() === 'wheel' && kids.length) return wheelNodeView(node, trail, kids, parent);
+
   const neighbors = (node.neighbors || []).map(getNode).filter(Boolean);
 
-  root.replaceChildren(
+  place(root,
     breadcrumb(trail),
     el('h2', {
       class: 'landing-title', tabindex: '-1', 'data-focus': '',
@@ -162,6 +197,30 @@ function nodeView({ id }) {
             `← Back to ${parent.label}`)
         : el('button', { class: 'ghost-btn', type: 'button', onclick: () => navigate('/') }, '← All core feelings'),
     ]),
+  );
+  announce(`${node.label}. ${node.definition}`);
+  focusView(root);
+}
+
+function wheelNodeView(node, trail, kids, parent) {
+  place(root,
+    breadcrumb(trail),
+    el('div', { class: 'section-head' }, [
+      el('h2', {
+        class: 'landing-title', tabindex: '-1', 'data-focus': '',
+        style: `--core: var(--core-${node.coreId})`,
+      }, [el('span', { class: 'glyph', 'aria-hidden': 'true' }, glyphFor(node)), node.label]),
+      viewToggle(() => nodeView({ id: node.id })),
+    ]),
+    el('p', { class: 'landing-def' }, node.definition),
+    renderWheel({
+      center: { label: node.label, coreId: node.coreId },
+      items: kids.map((k) => ({ id: k.id, label: k.label, coreId: k.coreId })),
+      onSelect: (it) => navigate(`/n/${it.id}`),
+      onCenter: () => navigate(parent ? `/n/${parent.id}` : '/'),
+    }),
+    node.guidance ? guidancePanel(node.guidance) : null,
+    loggingOn() ? logSection(node, trail) : null,
   );
   announce(`${node.label}. ${node.definition}`);
   focusView(root);
@@ -279,7 +338,7 @@ function outsideIn() {
       .sort((a, b) => b.words.length - a.words.length || a.core.label.localeCompare(b.core.label));
     const top = rows[0];
 
-    resultBox.replaceChildren(
+    place(resultBox,
       el('h3', { class: 'section-title', tabindex: '-1' }, 'Where these point'),
       el('p', { class: 'cluster-lead' }, rows.length === 1
         ? `All ${total} point to ${top.core.label}.`
@@ -324,7 +383,7 @@ function outsideIn() {
     resultBox.querySelector('[tabindex]')?.focus();
   }
 
-  root.replaceChildren(
+  place(root,
     el('button', { class: 'crumb', type: 'button', onclick: () => navigate('/') }, '‹ Home'),
     el('h2', { class: 'landing-title', tabindex: '-1', 'data-focus': '' }, 'Pick the words that fit'),
     el('p', { class: 'muted' },
@@ -341,7 +400,7 @@ function outsideIn() {
 async function history() {
   await ensureLoaded();
   const items = getLogsSync();
-  root.replaceChildren(
+  place(root,
     el('button', { class: 'crumb', type: 'button', onclick: () => navigate('/') }, '‹ Home'),
     el('h2', { class: 'landing-title', tabindex: '-1', 'data-focus': '' }, 'Your history'),
     el('p', { class: 'muted' }, loggingOn()

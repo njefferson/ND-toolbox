@@ -144,6 +144,38 @@ header.masthead {
 .history-when { font-size: 0.85rem; }
 .history-note { margin: 0.2rem 0 0; }
 
+/* View toggle (List / Wheel) */
+.section-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 0.6rem; flex-wrap: wrap;
+}
+.view-toggle { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.toggle-btn {
+  min-height: 36px; padding: 0.3rem 0.85rem; border: 0; font: inherit; cursor: pointer;
+  background: var(--surface); color: var(--ink);
+}
+.toggle-btn.active { background: var(--accent); color: var(--bg); font-weight: 600; }
+.toggle-btn:not(.active):hover { background: var(--surface-2); }
+
+/* Radial wheel */
+.wheel { width: 100%; max-width: 400px; height: auto; margin: 0.6rem auto; display: block; touch-action: manipulation; }
+.wheel-seg { cursor: pointer; }
+.wheel-seg path { transition: filter 0.12s; }
+.wheel-seg:hover path { filter: brightness(0.95); }
+.wheel-seg:focus-visible { outline: none; }
+.wheel-seg:focus-visible path { stroke: var(--focus); stroke-width: 5; }
+.wheel-label {
+  font: 600 15px system-ui, sans-serif; fill: #23262B; pointer-events: none;
+  paint-order: stroke; stroke: rgba(255, 255, 255, 0.85); stroke-width: 2.4px;
+}
+.wheel-hub { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+.wheel-center { cursor: default; }
+.wheel-center[role='button'] { cursor: pointer; }
+.wheel-center[role='button']:hover .wheel-hub { fill: var(--surface-2); }
+.wheel-center:focus-visible { outline: none; }
+.wheel-center:focus-visible .wheel-hub { stroke: var(--focus); stroke-width: 4; }
+.wheel-center-label { font: 700 16px system-ui, sans-serif; fill: var(--ink); pointer-events: none; }
+
 /* About / prose */
 .prose p { margin: 0.4rem 0; }
 .about-list { margin: 0.3rem 0 0.7rem 1.1rem; padding: 0; }
