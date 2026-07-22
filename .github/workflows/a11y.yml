@@ -1,0 +1,31 @@
+# Accessibility gate (Doctrine §4: contrast is COMPUTED, never eyeballed — a CI
+# gate that exits non-zero on any failure). Runs on every push and pull request
+# so a failing color pair blocks the merge, not just the deploy.
+name: Accessibility gate
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contrast:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # The gate has no runtime deps; it reads the theme tokens and computes
+      # WCAG contrast for every fg/bg pair across all themes.
+      - name: Contrast gate
+        run: npm run a11y:contrast

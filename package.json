@@ -7,8 +7,9 @@
   "scripts": {
     "icons": "node scripts/generate-icons.mjs",
     "changelog": "node scripts/emit-changelog.mjs",
+    "a11y:contrast": "node scripts/check-contrast.mjs",
     "dev": "npm run changelog && vite",
-    "build": "npm run changelog && vite build",
+    "build": "npm run a11y:contrast && npm run changelog && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
