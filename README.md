@@ -104,4 +104,6 @@ Files / iCloud). Nothing is ever sent anywhere.
 
 ## License
 
-[MIT](LICENSE).
+[PolyForm Noncommercial 1.0.0](LICENSE) — noncommercial use is permitted; the
+author retains commercial rights. (Relicensed off MIT in 2026-07; copies already
+released under MIT stay MIT for those copies.)
