@@ -41,12 +41,18 @@ no account, no server, no analytics, no third-party runtime.
   merge**. App updates never touch user data.
 
 ## Accessibility (hard gate — Doctrine §4)
-- Computed contrast gate: `scripts/check-contrast.mjs` (`npm run a11y:contrast`),
-  wired into `npm run build` and CI (`.github/workflows/a11y.yml`, every push +
-  PR). 66 fg/bg pairs across 6 themes; exits non-zero on any failure; has a drift
-  guard for new theme tokens. See `ACCESSIBILITY.md` (the append-only register).
-- Findings + non-hue encodings + the "needs Noah's hands" items all live in
-  `ACCESSIBILITY.md`. Tightest current margin: light-theme accent at 4.80:1.
+Two computed gates, both in `.github/workflows/a11y.yml` (every push + PR), both
+runnable together with `npm run a11y`:
+- **Static contrast** — `scripts/check-contrast.mjs` (`npm run a11y:contrast`),
+  also run first inside `npm run build`. 66 fg/bg pairs across 6 themes; exits
+  non-zero on any failure; drift guard for new theme tokens. Tightest margin:
+  light-theme accent at 4.80:1.
+- **Runtime DOM audit** — `scripts/audit-a11y.mjs` (`npm run a11y:audit`).
+  axe-core (WCAG 2.1 A/AA) over the built app on 10 routes × 4 themes = 40 checks,
+  headless Chromium via `playwright-core` (dev-only; not shipped). Fails on any
+  serious/critical violation.
+- Findings, non-hue encodings, and the "needs Noah's hands" items live in
+  `ACCESSIBILITY.md` (the append-only register).
 
 ## Branches & releases (Doctrine §7)
 - `staging` and `main` only. Product changes land on `staging` for Noah's
@@ -67,11 +73,15 @@ no account, no server, no analytics, no third-party runtime.
   second module (v0.2.0), validating the seam.
 - **2026-07 — Contrast gate + registers:** added the computed contrast CI gate,
   `ACCESSIBILITY.md`, and this `NOTES.md`. Tooling/docs — skips the staging gate.
+- **2026-07 — Runtime a11y audit:** added the axe-core runtime audit + CI job and
+  `playwright-core`/`axe-core` dev deps. It caught one real defect on first run —
+  the unlabeled Import-backup file input in Settings — fixed the same commit
+  (`aria-label`). The lone source change is invisible to sighted users and fully
+  machine-verified; the rest is tooling/docs.
 
 ## Roadmap / open loops
-- **Runtime a11y audit:** automate axe-core + custom checks over the built pages
-  in both themes (roles, names, live regions, reflow at 320px). Only the static
-  contrast gate is automated today — this is the next accessibility increment.
+- **Custom a11y checks:** complement axe with targeted assertions on `aria-live`
+  wording and where focus lands after a drill (things axe can't judge).
 - **Screen-reader passes:** VoiceOver (iPad/iPhone) + NVDA — needs Noah's hardware.
 - **Repo metadata** (Doctrine §10, manual): description / website / topics /
   social-preview are GitHub-UI steps the session token cannot set. When touched,

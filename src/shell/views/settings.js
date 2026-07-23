@@ -142,7 +142,10 @@ function updatesSection(ctx) {
 
 // "Your data" — immutable export / import (seed a fresh start).
 function dataSection(ctx) {
-  const fileInput = el('input', { type: 'file', accept: '.json,application/json', class: 'sr-only' });
+  const fileInput = el('input', {
+    type: 'file', accept: '.json,application/json', class: 'sr-only',
+    'aria-label': 'Import a backup file',
+  });
   fileInput.addEventListener('change', async () => {
     const file = fileInput.files?.[0];
     if (!file) return;

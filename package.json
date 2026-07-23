@@ -8,6 +8,8 @@
     "icons": "node scripts/generate-icons.mjs",
     "changelog": "node scripts/emit-changelog.mjs",
     "a11y:contrast": "node scripts/check-contrast.mjs",
+    "a11y:audit": "node scripts/audit-a11y.mjs",
+    "a11y": "npm run a11y:contrast && npm run build && npm run a11y:audit",
     "dev": "npm run changelog && vite",
     "build": "npm run a11y:contrast && npm run changelog && vite build",
     "preview": "vite preview"
@@ -16,6 +18,8 @@
     "idb-keyval": "^6.2.1"
   },
   "devDependencies": {
+    "axe-core": "^4.12.1",
+    "playwright-core": "^1.61.1",
     "vite": "^5.4.0",
     "vite-plugin-pwa": "^0.20.5"
   }

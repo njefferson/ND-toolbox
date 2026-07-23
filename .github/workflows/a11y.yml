@@ -29,3 +29,29 @@ jobs:
       # WCAG contrast for every fg/bg pair across all themes.
       - name: Contrast gate
         run: npm run a11y:contrast
+
+  # Runtime DOM audit: axe-core over the built pages in every theme. Uses the
+  # Chromium that ships in the runner image (playwright-core carries no browser).
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Install a Chromium whose build matches the pinned playwright-core, into
+      # the default cache where playwright-core's executablePath() resolves it.
+      - name: Install Chromium for Playwright
+        run: npx --yes playwright-core@1.61.1 install --with-deps chromium
+
+      - name: Build
+        run: npm run build
+
+      - name: Runtime a11y audit (axe-core, all themes)
+        run: npm run a11y:audit

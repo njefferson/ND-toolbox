@@ -33,6 +33,20 @@ text on page, card, and hover surfaces; the inverse button label (`--bg` on
 **drift guard**: if `theme.css` declares a color token the gate never resolved,
 the gate fails, forcing new pairs into the same commit.
 
+## The runtime audit (computed)
+
+`scripts/audit-a11y.mjs` (`npm run a11y:audit`) proves the rendered DOM, which the
+contrast gate can't see: roles, accessible names, labels, live regions, heading
+order, duplicate ids, reflow. It serves the built app, drives the pre-installed
+headless Chromium (via `playwright-core`, which carries no browser of its own),
+injects **axe-core**, and runs the WCAG 2.1 A/AA rule set on **every key route in
+every theme** — 10 routes × 4 themes (light, dark, calm-mono, high-contrast) = 40
+checks at a 390px mobile viewport. It **fails the build/CI on any serious or
+critical violation**; moderate/minor items print as advisories. Runs as the
+`audit` job in `.github/workflows/a11y.yml` (build → audit) on every push and PR.
+
+Together the two gates run with `npm run a11y`.
+
 ### Non-hue encodings (meaning must survive grayscale — Doctrine §4)
 The six `--core-*` hues are **decorative**. Meaning is always carried by a second
 channel, so a grayscale render loses nothing:
@@ -51,6 +65,14 @@ channel, so a grayscale render loses nothing:
 
 Format: `[release] — area — finding — status`. Append new rows at the top.
 
+- **[0.2.0] — Runtime audit — axe-core sweep of 10 routes × 4 themes (40 checks)
+  finds no serious/critical WCAG 2.1 A/AA violations. — VERIFIED (computed).**
+  This is now automated (`npm run a11y:audit`) and gated in CI.
+- **[0.2.0] — Settings, Import backup — the hidden file input (`.sr-only`, still
+  in the tab order) had no accessible name; axe flagged it critical in all four
+  themes. — FIXED in 0.2.0** by adding `aria-label="Import a backup file"`. Caught
+  by the new runtime audit on its first run — exactly the class of defect the
+  static contrast gate cannot see.
 - **[0.2.0] — Contrast gate — All 66 computed pairs meet WCAG AA across all six
   themes. — VERIFIED (computed).** Tightest margin is the light-theme accent used
   as link text and as the button fill: `#3E6E97` ↔ `#F5F1E8` = **4.80:1** (AA is
@@ -77,10 +99,9 @@ Format: `[release] — area — finding — status`. Append new rows at the top.
 
 ## Known gaps / roadmap
 
-- **Runtime audit not yet automated.** The Doctrine's ideal is axe-core + custom
-  checks driven over the built pages in both themes. Only the *static* contrast
-  gate is automated today; the DOM-level audit (roles, names, live regions,
-  reflow at 320px) is still a manual review. Wiring axe-core over a headless
-  Chromium render of the built app is the next accessibility increment.
+- **Custom checks beyond axe.** axe catches most machine-detectable issues but not
+  everything (e.g. whether an `aria-live` announcement is the *right* wording, or
+  whether focus lands sensibly after a drill). Targeted assertions on the live
+  regions and focus moves would be a good complement to the axe sweep.
 - **Screen-reader passes need real hardware.** VoiceOver (iPad/iPhone) and NVDA
   cannot be verified from the runner (Doctrine §5) — these stay on Noah's device.
