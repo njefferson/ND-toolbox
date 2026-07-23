@@ -3,6 +3,13 @@
 // Keep entries in plain, non-technical language.
 export const CHANGELOG = [
   {
+    version: '0.3.1',
+    title: 'A gentle bridge from body to feelings',
+    notes: [
+      'After a body check-in, there’s now an optional step to put words to how you’re feeling — it just opens the Feelings tool, and never assumes what a body signal means.',
+    ],
+  },
+  {
     version: '0.3.0',
     title: 'Easier to find the right word',
     notes: [

@@ -108,6 +108,19 @@ function summarize(resultBox) {
           },
         }, 'Save this check-in')
       : null,
+
+    // A quiet doorway to the Feelings tool. Optional, and deliberately makes NO
+    // claim that a body signal means a particular emotion — it just offers the
+    // next step for anyone who wants to put words to it too.
+    noted.length
+      ? el('button', {
+          class: 'path-btn', type: 'button', style: 'margin-top:.7rem',
+          onclick: () => navigate('/feelings'),
+        }, [
+          el('span', { class: 'lead' }, 'Put words to how you’re feeling'),
+          el('span', { class: 'sub' }, 'If it helps, name the feeling too — a separate step, whenever you like.'),
+        ])
+      : null,
   );
   announce(needs.length
     ? `Your body might want: ${needs.map((n) => n.sig.label.toLowerCase()).join(', ')}.`
