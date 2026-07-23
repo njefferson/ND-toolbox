@@ -3,6 +3,15 @@
 // Keep entries in plain, non-technical language.
 export const CHANGELOG = [
   {
+    version: '0.3.0',
+    title: 'Easier to find the right word',
+    notes: [
+      'Search now forgives typos — a slipped letter still finds the feeling.',
+      'Many more everyday words lead to the right feeling, so you can type it the way you’d say it.',
+      'The feelings you looked at recently show up on the Feelings screen for quick return — kept only while the app is open, never saved.',
+    ],
+  },
+  {
     version: '0.2.0',
     title: 'Added the Body check-in',
     notes: [

@@ -66,24 +66,76 @@ export function pathTo(id) {
 
 // Case-insensitive search over label + aliases. Ranks exact > prefix >
 // word-boundary > substring, and prefers more specific (deeper) words so a
-// direct search lands you on a precise leaf rather than a category.
+// direct search lands you on a precise leaf rather than a category. When none of
+// those match, a typo-tolerant tier catches near-misses (rank 4) so a tired,
+// overwhelmed, or dyslexic user isn't met with an empty result for one slipped
+// letter. Fuzzy matches carry their edit distance so the closest ones rank first.
 export function search(query, limit = 8) {
   const q = query.trim().toLowerCase();
   if (!q) return [];
+  const fuzzyOk = q.length >= 3; // too noisy on 1–2 char queries
+  const maxDist = q.length <= 5 ? 1 : 2;
   const scored = [];
   for (const n of dataset.nodes) {
     const hay = [n.label, ...(n.aliases || [])].map((s) => s.toLowerCase());
     let best = Infinity;
+    let bestDist = 0;
     for (const h of hay) {
       if (h === q) best = Math.min(best, 0);
       else if (h.startsWith(q)) best = Math.min(best, 1);
       else if (new RegExp(`\\b${escapeRe(q)}`).test(h)) best = Math.min(best, 2);
       else if (h.includes(q)) best = Math.min(best, 3);
     }
-    if (best < Infinity) scored.push({ node: n, rank: best });
+    if (best === Infinity && fuzzyOk) {
+      const d = fuzzyDistance(q, hay, maxDist);
+      if (d <= maxDist) { best = 4; bestDist = d; }
+    }
+    if (best < Infinity) scored.push({ node: n, rank: best, dist: bestDist });
   }
-  scored.sort((a, b) => a.rank - b.rank || b.node.depth - a.node.depth || a.node.label.localeCompare(b.node.label));
+  scored.sort((a, b) =>
+    a.rank - b.rank
+    || a.dist - b.dist
+    || b.node.depth - a.node.depth
+    || a.node.label.localeCompare(b.node.label));
   return scored.slice(0, limit).map((s) => s.node);
+}
+
+// Smallest edit distance between the query and any whole word in the haystack
+// terms (labels/aliases may be multi-word, e.g. "cut off"). Length-gated and
+// capped so it stays cheap and only fires for genuine near-misses.
+function fuzzyDistance(q, hay, maxDist) {
+  let min = Infinity;
+  for (const h of hay) {
+    for (const token of h.split(/\s+/)) {
+      if (Math.abs(token.length - q.length) > maxDist) continue;
+      const d = levenshtein(q, token, maxDist);
+      if (d < min) min = d;
+      if (min === 0) return 0;
+    }
+  }
+  return min;
+}
+
+// Levenshtein with an early-exit ceiling: returns maxDist+1 as soon as the row
+// minimum exceeds the cap, so no far-apart pair is fully computed.
+function levenshtein(a, b, cap) {
+  const m = a.length;
+  const n = b.length;
+  if (Math.abs(m - n) > cap) return cap + 1;
+  let prev = Array.from({ length: n + 1 }, (_, i) => i);
+  let curr = new Array(n + 1);
+  for (let i = 1; i <= m; i++) {
+    curr[0] = i;
+    let rowMin = curr[0];
+    for (let j = 1; j <= n; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      curr[j] = Math.min(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + cost);
+      if (curr[j] < rowMin) rowMin = curr[j];
+    }
+    if (rowMin > cap) return cap + 1;
+    [prev, curr] = [curr, prev];
+  }
+  return prev[n];
 }
 
 function escapeRe(s) {

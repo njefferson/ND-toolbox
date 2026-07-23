@@ -282,6 +282,88 @@ const TREE = [
   },
 ];
 
+// Curated search aliases, keyed by label. Merged in at flatten time so words are
+// reachable by the common terms people actually type — including informal ones —
+// without cluttering the tree literal above. Labels are unique across the tree,
+// so keying by label is collision-free. These fuel search only (never shown as
+// the word); provenance stays `curated`.
+//
+// Coverage note: every ring-2 word (secondaries) shipped with no aliases, and 15
+// leaves had none, so search could only reach them by their exact label. This map
+// closes that gap.
+const ALIASES = {
+  // Joyful
+  Content: ['satisfied', 'gratified'],
+  Happy: ['glad', 'pleased', 'cheery'],
+  Excited: ['thrilled', 'pumped', 'stoked'],
+  Playful: ['silly', 'goofy', 'fun'],
+  Optimistic: ['hopeful', 'positive'],
+  Interested: ['curious', 'intrigued'],
+  Glad: ['pleased', 'happy'],
+  Amused: ['entertained', 'tickled'],
+  Hopeful: ['encouraged', 'optimistic'],
+  Engaged: ['involved', 'present'],
+  // Powerful
+  Confident: ['self-assured', 'sure', 'assured'],
+  Proud: ['proud of myself'],
+  Respected: ['esteemed', 'honored'],
+  Capable: ['able', 'up to it'],
+  Determined: ['resolved', 'driven', 'set on it'],
+  Appreciated: ['valued', 'thanked'],
+  Empowered: ['capable', 'in control'],
+  Triumphant: ['victorious', 'on top'],
+  Admired: ['looked up to', 'respected'],
+  Valued: ['prized', 'cherished'],
+  // Peaceful
+  Calm: ['chill', 'at peace', 'mellow'],
+  Relaxed: ['loose', 'unwound', 'chilled out'],
+  Secure: ['safe', 'stable', 'steady'],
+  Loving: ['caring', 'warm', 'affection'],
+  Grateful: ['thankful', 'appreciative', 'blessed'],
+  Trusting: ['open', 'trustful'],
+  Protected: ['safe', 'shielded'],
+  Devoted: ['loyal', 'committed'],
+  Warm: ['tender', 'affectionate'],
+  // Sad
+  Lonely: ['alone', 'lonesome', 'isolated'],
+  Hurt: ['wounded', 'pained', 'aching'],
+  Disappointed: ['let down', 'deflated', 'bummed'],
+  Depressed: ['down', 'low', 'flat'],
+  Guilty: ['ashamed', 'bad about it'],
+  Vulnerable: ['exposed', 'raw', 'tender'],
+  'Let down': ['disappointed', 'failed'],
+  // Mad
+  Frustrated: ['stuck', 'fed up', 'blocked'],
+  Irritated: ['annoyed', 'bugged', 'on edge'],
+  Resentful: ['bitter', 'grudge'],
+  Hostile: ['aggressive', 'antagonistic'],
+  Jealous: ['envious', 'covetous'],
+  Disrespected: ['dismissed', 'disregarded', 'slighted'],
+  'Fed up': ['had enough', 'done with it'],
+  Seething: ['fuming', 'boiling'],
+  // Scared
+  Anxious: ['nervous', 'on edge', 'worried', 'uneasy'],
+  Insecure: ['not enough', 'unsure'],
+  Overwhelmed: ['too much', 'swamped', 'maxed out'],
+  Rejected: ['left out', 'turned away', 'shut out'],
+  Confused: ['lost', 'unsure', 'muddled'],
+  Threatened: ['in danger', 'unsafe', 'under threat'],
+  Uneasy: ['unsettled', 'off'],
+  Swamped: ['buried', 'overloaded'],
+};
+
+// Merge a node's own aliases with its curated map entry, de-duped
+// case-insensitively (keeping first-seen casing) and never echoing the label.
+function withAliases(label, base) {
+  const out = [];
+  const seen = new Set([label.toLowerCase()]);
+  for (const a of [...(base || []), ...(ALIASES[label] || [])]) {
+    const k = a.toLowerCase();
+    if (!seen.has(k)) { seen.add(k); out.push(a); }
+  }
+  return out;
+}
+
 // --- flatten to the runtime dataset ---
 const glyphs = {};
 const nodes = [];
@@ -291,7 +373,7 @@ for (const core of TREE) {
   const secIds = core.secondaries.map((sec) => slug(core.id, sec.label));
   nodes.push({
     id: core.id, label: core.label, coreId: core.id, parentId: null, depth: 0,
-    aliases: core.aliases || [], definition: core.definition, neighbors: [],
+    aliases: withAliases(core.label, core.aliases), definition: core.definition, neighbors: [],
     guidance: core.guidance, colorToken: `core.${core.id}`, provenance: 'willcox-1982',
   });
   for (const sec of core.secondaries) {
@@ -299,7 +381,7 @@ for (const core of TREE) {
     const terIds = sec.tertiaries.map((ter) => slug(secId, ter.label));
     nodes.push({
       id: secId, label: sec.label, coreId: core.id, parentId: core.id, depth: 1,
-      aliases: sec.aliases, definition: sec.definition,
+      aliases: withAliases(sec.label, sec.aliases), definition: sec.definition,
       neighbors: secIds.filter((x) => x !== secId),
       guidance: sec.guidance, colorToken: `core.${core.id}`, provenance: 'willcox-1982-lineage',
     });
@@ -307,7 +389,7 @@ for (const core of TREE) {
       const terId = slug(secId, ter.label);
       nodes.push({
         id: terId, label: ter.label, coreId: core.id, parentId: secId, depth: 2,
-        aliases: ter.aliases, definition: ter.definition,
+        aliases: withAliases(ter.label, ter.aliases), definition: ter.definition,
         neighbors: terIds.filter((x) => x !== terId),
         guidance: null, colorToken: `core.${core.id}`, provenance: 'curated',
       });
@@ -333,7 +415,7 @@ for (const n of nodes) counts[['core', 'ring2', 'ring3'][n.depth]]++;
 
 const dataset = {
   datasetId: 'willcox-feelings-wheel',
-  datasetVersion: 1,
+  datasetVersion: 2,
   source: 'Willcox, G. (1982), The Feeling Wheel. Secondary words follow the Willcox/Roberts lineage; tertiary words curated for ND Toolbox.',
   coreOrder: TREE.map((c) => c.id),
   glyphs,

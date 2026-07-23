@@ -62,6 +62,20 @@ let announce = () => {};
 // Outside-in selection persists while the app is open (cleared on demand).
 const selection = new Set();
 
+// Words visited this session, most-recent-first. In-memory ONLY — never written
+// to storage, so it speeds up re-finding a word without becoming a record of
+// anything (this is not a mood tracker). Cleared when the app closes. Cores are
+// skipped; they're always one tap away from Home anyway.
+const recent = [];
+const RECENT_MAX = 6;
+function rememberRecent(node) {
+  if (!node || node.depth === 0) return;
+  const at = recent.indexOf(node.id);
+  if (at !== -1) recent.splice(at, 1);
+  recent.unshift(node.id);
+  if (recent.length > RECENT_MAX) recent.length = RECENT_MAX;
+}
+
 // ---------------- Home ----------------
 function home() {
   const results = el('div', { id: 'results', class: 'results', role: 'list' });
@@ -77,9 +91,21 @@ function home() {
     },
   });
 
+  const recentNodes = recent.map(getNode).filter(Boolean);
+
   place(root,
     el('h2', { class: 'section-title', tabindex: '-1', 'data-focus': '' }, 'Find a feeling'),
     el('div', { class: 'search-row' }, [input, results]),
+    recentNodes.length
+      ? el('section', { class: 'recent', 'aria-label': 'Words you looked at recently' }, [
+          el('h2', { class: 'section-title' }, 'Recent'),
+          el('div', { class: 'chips' }, recentNodes.map((n) => el('button', {
+            class: 'chip', type: 'button', style: `--core: var(--core-${n.coreId})`,
+            'aria-label': `${n.label}. ${n.definition}`,
+            onclick: () => go(`/n/${n.id}`),
+          }, n.label))),
+        ])
+      : null,
     el('div', { class: 'section-head' }, [
       el('h2', { class: 'section-title' }, 'Start from a core feeling'),
       viewToggle(home),
@@ -147,6 +173,7 @@ function renderResults(query, container) {
 function nodeView({ id }) {
   const node = getNode(id);
   if (!node) return home();
+  rememberRecent(node);
   const trail = pathTo(id);
   const kids = leafChildren(id, node);
   const parent = node.parentId ? getNode(node.parentId) : null;

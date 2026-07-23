@@ -1,6 +1,6 @@
 {
   "datasetId": "willcox-feelings-wheel",
-  "datasetVersion": 1,
+  "datasetVersion": 2,
   "source": "Willcox, G. (1982), The Feeling Wheel. Secondary words follow the Willcox/Roberts lineage; tertiary words curated for ND Toolbox.",
   "coreOrder": [
     "joyful",
@@ -45,7 +45,10 @@
       "coreId": "joyful",
       "parentId": "joyful",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "satisfied",
+        "gratified"
+      ],
       "definition": "Quietly satisfied; you have enough right now.",
       "neighbors": [
         "happy",
@@ -101,7 +104,11 @@
       "coreId": "joyful",
       "parentId": "joyful",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "glad",
+        "pleased",
+        "cheery"
+      ],
       "definition": "A light, glad feeling.",
       "neighbors": [
         "content",
@@ -159,7 +166,10 @@
       "coreId": "joyful",
       "parentId": "happy",
       "depth": 2,
-      "aliases": [],
+      "aliases": [
+        "pleased",
+        "happy"
+      ],
       "definition": "Simply pleased that something is so.",
       "neighbors": [
         "cheerful",
@@ -175,7 +185,11 @@
       "coreId": "joyful",
       "parentId": "joyful",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "thrilled",
+        "pumped",
+        "stoked"
+      ],
       "definition": "Lit up and energized about what is ahead.",
       "neighbors": [
         "content",
@@ -231,7 +245,11 @@
       "coreId": "joyful",
       "parentId": "joyful",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "silly",
+        "goofy",
+        "fun"
+      ],
       "definition": "Lighthearted and up for fun.",
       "neighbors": [
         "content",
@@ -253,7 +271,10 @@
       "coreId": "joyful",
       "parentId": "playful",
       "depth": 2,
-      "aliases": [],
+      "aliases": [
+        "entertained",
+        "tickled"
+      ],
       "definition": "Quietly entertained; something struck you as funny.",
       "neighbors": [
         "lighthearted"
@@ -285,7 +306,10 @@
       "coreId": "joyful",
       "parentId": "joyful",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "hopeful",
+        "positive"
+      ],
       "definition": "Leaning toward things working out.",
       "neighbors": [
         "content",
@@ -307,7 +331,10 @@
       "coreId": "joyful",
       "parentId": "optimistic",
       "depth": 2,
-      "aliases": [],
+      "aliases": [
+        "encouraged",
+        "optimistic"
+      ],
       "definition": "Expecting good things are possible.",
       "neighbors": [
         "inspired"
@@ -339,7 +366,10 @@
       "coreId": "joyful",
       "parentId": "joyful",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "curious",
+        "intrigued"
+      ],
       "definition": "Drawn in; wanting to know more.",
       "neighbors": [
         "content",
@@ -397,7 +427,10 @@
       "coreId": "joyful",
       "parentId": "interested",
       "depth": 2,
-      "aliases": [],
+      "aliases": [
+        "involved",
+        "present"
+      ],
       "definition": "Actively involved and present.",
       "neighbors": [
         "curious",
@@ -433,7 +466,11 @@
       "coreId": "powerful",
       "parentId": "powerful",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "self-assured",
+        "sure",
+        "assured"
+      ],
       "definition": "Sure of yourself and what you can do.",
       "neighbors": [
         "proud",
@@ -491,7 +528,10 @@
       "coreId": "powerful",
       "parentId": "confident",
       "depth": 2,
-      "aliases": [],
+      "aliases": [
+        "capable",
+        "in control"
+      ],
       "definition": "Free and able to act on your own terms.",
       "neighbors": [
         "self-assured",
@@ -507,7 +547,9 @@
       "coreId": "powerful",
       "parentId": "powerful",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "proud of myself"
+      ],
       "definition": "Warmly pleased with something you did or are.",
       "neighbors": [
         "confident",
@@ -565,7 +607,10 @@
       "coreId": "powerful",
       "parentId": "proud",
       "depth": 2,
-      "aliases": [],
+      "aliases": [
+        "victorious",
+        "on top"
+      ],
       "definition": "Victorious after a real effort.",
       "neighbors": [
         "accomplished",
@@ -581,7 +626,10 @@
       "coreId": "powerful",
       "parentId": "powerful",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "esteemed",
+        "honored"
+      ],
       "definition": "Seen and regarded by others.",
       "neighbors": [
         "confident",
@@ -604,7 +652,8 @@
       "parentId": "respected",
       "depth": 2,
       "aliases": [
-        "valued"
+        "prized",
+        "cherished"
       ],
       "definition": "Treated as if you matter.",
       "neighbors": [
@@ -620,7 +669,10 @@
       "coreId": "powerful",
       "parentId": "respected",
       "depth": 2,
-      "aliases": [],
+      "aliases": [
+        "looked up to",
+        "respected"
+      ],
       "definition": "Looked up to for who you are or what you do.",
       "neighbors": [
         "valued"
@@ -635,7 +687,10 @@
       "coreId": "powerful",
       "parentId": "powerful",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "able",
+        "up to it"
+      ],
       "definition": "Up to the task in front of you.",
       "neighbors": [
         "confident",
@@ -691,7 +746,11 @@
       "coreId": "powerful",
       "parentId": "powerful",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "resolved",
+        "driven",
+        "set on it"
+      ],
       "definition": "Set on seeing something through.",
       "neighbors": [
         "confident",
@@ -747,7 +806,10 @@
       "coreId": "powerful",
       "parentId": "powerful",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "valued",
+        "thanked"
+      ],
       "definition": "Your contribution was noticed.",
       "neighbors": [
         "confident",
@@ -823,7 +885,11 @@
       "coreId": "peaceful",
       "parentId": "peaceful",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "chill",
+        "at peace",
+        "mellow"
+      ],
       "definition": "Settled and unbothered.",
       "neighbors": [
         "relaxed",
@@ -879,7 +945,11 @@
       "coreId": "peaceful",
       "parentId": "peaceful",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "loose",
+        "unwound",
+        "chilled out"
+      ],
       "definition": "Loose and free of tension.",
       "neighbors": [
         "calm",
@@ -935,7 +1005,11 @@
       "coreId": "peaceful",
       "parentId": "peaceful",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "safe",
+        "stable",
+        "steady"
+      ],
       "definition": "Safe and steady.",
       "neighbors": [
         "calm",
@@ -993,7 +1067,10 @@
       "coreId": "peaceful",
       "parentId": "secure",
       "depth": 2,
-      "aliases": [],
+      "aliases": [
+        "safe",
+        "shielded"
+      ],
       "definition": "Shielded from what could harm you.",
       "neighbors": [
         "safe",
@@ -1009,7 +1086,11 @@
       "coreId": "peaceful",
       "parentId": "peaceful",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "caring",
+        "warm",
+        "affection"
+      ],
       "definition": "Warm and caring toward someone.",
       "neighbors": [
         "calm",
@@ -1067,7 +1148,10 @@
       "coreId": "peaceful",
       "parentId": "loving",
       "depth": 2,
-      "aliases": [],
+      "aliases": [
+        "loyal",
+        "committed"
+      ],
       "definition": "Committed and loyal in care.",
       "neighbors": [
         "affectionate",
@@ -1083,7 +1167,11 @@
       "coreId": "peaceful",
       "parentId": "peaceful",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "thankful",
+        "appreciative",
+        "blessed"
+      ],
       "definition": "Thankful for something you have or received.",
       "neighbors": [
         "calm",
@@ -1122,7 +1210,10 @@
       "coreId": "peaceful",
       "parentId": "grateful",
       "depth": 2,
-      "aliases": [],
+      "aliases": [
+        "tender",
+        "affectionate"
+      ],
       "definition": "Softly glowing toward someone or something.",
       "neighbors": [
         "thankful"
@@ -1137,7 +1228,10 @@
       "coreId": "peaceful",
       "parentId": "peaceful",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "open",
+        "trustful"
+      ],
       "definition": "Willing to be open and rely on someone.",
       "neighbors": [
         "calm",
@@ -1214,7 +1308,11 @@
       "coreId": "sad",
       "parentId": "sad",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "alone",
+        "lonesome",
+        "isolated"
+      ],
       "definition": "Disconnected; missing closeness.",
       "neighbors": [
         "hurt",
@@ -1291,7 +1389,11 @@
       "coreId": "sad",
       "parentId": "sad",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "wounded",
+        "pained",
+        "aching"
+      ],
       "definition": "Wounded by something that happened.",
       "neighbors": [
         "lonely",
@@ -1347,7 +1449,11 @@
       "coreId": "sad",
       "parentId": "sad",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "let down",
+        "deflated",
+        "bummed"
+      ],
       "definition": "Let down when things fell short.",
       "neighbors": [
         "lonely",
@@ -1369,7 +1475,10 @@
       "coreId": "sad",
       "parentId": "disappointed",
       "depth": 2,
-      "aliases": [],
+      "aliases": [
+        "disappointed",
+        "failed"
+      ],
       "definition": "Failed by someone or something.",
       "neighbors": [
         "discouraged"
@@ -1401,7 +1510,11 @@
       "coreId": "sad",
       "parentId": "sad",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "down",
+        "low",
+        "flat"
+      ],
       "definition": "Heavily low, often flat or empty.",
       "neighbors": [
         "lonely",
@@ -1477,7 +1590,10 @@
       "coreId": "sad",
       "parentId": "sad",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "ashamed",
+        "bad about it"
+      ],
       "definition": "Uneasy that you did something wrong.",
       "neighbors": [
         "lonely",
@@ -1533,7 +1649,11 @@
       "coreId": "sad",
       "parentId": "sad",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "exposed",
+        "raw",
+        "tender"
+      ],
       "definition": "Exposed and open to being hurt.",
       "neighbors": [
         "lonely",
@@ -1610,7 +1730,11 @@
       "coreId": "mad",
       "parentId": "mad",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "stuck",
+        "fed up",
+        "blocked"
+      ],
       "definition": "Blocked from something you want.",
       "neighbors": [
         "irritated",
@@ -1668,7 +1792,10 @@
       "coreId": "mad",
       "parentId": "frustrated",
       "depth": 2,
-      "aliases": [],
+      "aliases": [
+        "had enough",
+        "done with it"
+      ],
       "definition": "Done with putting up with it.",
       "neighbors": [
         "blocked",
@@ -1684,7 +1811,11 @@
       "coreId": "mad",
       "parentId": "mad",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "annoyed",
+        "bugged",
+        "on edge"
+      ],
       "definition": "Bothered and on edge.",
       "neighbors": [
         "frustrated",
@@ -1740,7 +1871,10 @@
       "coreId": "mad",
       "parentId": "mad",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "bitter",
+        "grudge"
+      ],
       "definition": "Holding onto an old unfairness.",
       "neighbors": [
         "frustrated",
@@ -1796,7 +1930,10 @@
       "coreId": "mad",
       "parentId": "mad",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "aggressive",
+        "antagonistic"
+      ],
       "definition": "Strongly angry, ready to push back.",
       "neighbors": [
         "frustrated",
@@ -1854,7 +1991,10 @@
       "coreId": "mad",
       "parentId": "hostile",
       "depth": 2,
-      "aliases": [],
+      "aliases": [
+        "fuming",
+        "boiling"
+      ],
       "definition": "Anger held tightly under the surface.",
       "neighbors": [
         "furious",
@@ -1870,7 +2010,10 @@
       "coreId": "mad",
       "parentId": "mad",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "envious",
+        "covetous"
+      ],
       "definition": "Threatened by what someone else has.",
       "neighbors": [
         "frustrated",
@@ -1926,7 +2069,11 @@
       "coreId": "mad",
       "parentId": "mad",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "dismissed",
+        "disregarded",
+        "slighted"
+      ],
       "definition": "Treated as if you do not matter.",
       "neighbors": [
         "frustrated",
@@ -2004,7 +2151,12 @@
       "coreId": "scared",
       "parentId": "scared",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "nervous",
+        "on edge",
+        "worried",
+        "uneasy"
+      ],
       "definition": "Keyed up and uneasy about what might happen.",
       "neighbors": [
         "insecure",
@@ -2062,7 +2214,10 @@
       "coreId": "scared",
       "parentId": "anxious",
       "depth": 2,
-      "aliases": [],
+      "aliases": [
+        "unsettled",
+        "off"
+      ],
       "definition": "Something feels off, hard to name.",
       "neighbors": [
         "nervous",
@@ -2078,7 +2233,10 @@
       "coreId": "scared",
       "parentId": "scared",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "not enough",
+        "unsure"
+      ],
       "definition": "Unsure of your footing or worth.",
       "neighbors": [
         "anxious",
@@ -2134,7 +2292,11 @@
       "coreId": "scared",
       "parentId": "scared",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "too much",
+        "swamped",
+        "maxed out"
+      ],
       "definition": "Too much coming at once.",
       "neighbors": [
         "anxious",
@@ -2192,7 +2354,10 @@
       "coreId": "scared",
       "parentId": "overwhelmed",
       "depth": 2,
-      "aliases": [],
+      "aliases": [
+        "buried",
+        "overloaded"
+      ],
       "definition": "Buried under too much to do.",
       "neighbors": [
         "stressed",
@@ -2208,7 +2373,11 @@
       "coreId": "scared",
       "parentId": "scared",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "left out",
+        "turned away",
+        "shut out"
+      ],
       "definition": "Pushed away or not wanted.",
       "neighbors": [
         "anxious",
@@ -2264,7 +2433,11 @@
       "coreId": "scared",
       "parentId": "scared",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "lost",
+        "unsure",
+        "muddled"
+      ],
       "definition": "Unable to make sense of things.",
       "neighbors": [
         "anxious",
@@ -2320,7 +2493,11 @@
       "coreId": "scared",
       "parentId": "scared",
       "depth": 1,
-      "aliases": [],
+      "aliases": [
+        "in danger",
+        "unsafe",
+        "under threat"
+      ],
       "definition": "Sensing something could harm you.",
       "neighbors": [
         "anxious",
