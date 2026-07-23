@@ -50,7 +50,9 @@ runnable together with `npm run a11y`:
 - **Runtime DOM audit** — `scripts/audit-a11y.mjs` (`npm run a11y:audit`).
   axe-core (WCAG 2.1 A/AA) over the built app on 10 routes × 4 themes = 40 checks,
   headless Chromium via `playwright-core` (dev-only; not shipped). Fails on any
-  serious/critical violation.
+  serious/critical violation. Also runs custom assertions axe can't judge —
+  focus-lands-on-heading after navigation, aria-live region present, no
+  horizontal overflow at 320px (WCAG 1.4.10 reflow).
 - Findings, non-hue encodings, and the "needs Noah's hands" items live in
   `ACCESSIBILITY.md` (the append-only register).
 
@@ -80,9 +82,9 @@ runnable together with `npm run a11y`:
   machine-verified; the rest is tooling/docs.
 
 ## Roadmap / open loops
-- **Custom a11y checks:** complement axe with targeted assertions on `aria-live`
-  wording and where focus lands after a drill (things axe can't judge).
 - **Screen-reader passes:** VoiceOver (iPad/iPhone) + NVDA — needs Noah's hardware.
+  This is the main remaining a11y item the runner can't cover; the computed gates
+  (contrast + axe + custom focus/live-region/reflow checks) are all automated now.
 - **Repo metadata** (Doctrine §10, manual): description / website / topics /
   social-preview are GitHub-UI steps the session token cannot set. When touched,
   list exact values and have Noah confirm each.

@@ -119,7 +119,8 @@ try {
     for (const r of ROUTES) {
       const seed = { ...theme.settings };
       if (r.logging) seed.loggingEnabled = true;
-      const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+      // 320 CSS px is the WCAG 1.4.10 reflow width — the strictest realistic case.
+      const context = await browser.newContext({ viewport: { width: 320, height: 720 } });
       const page = await context.newPage();
       // Seed settings before the app boots so the theme/logging apply on first paint.
       await page.addInitScript(([key, value]) => {
@@ -148,6 +149,29 @@ try {
         };
         if (FAIL_ON.has(v.impact)) failures.push(rec); else advisories.push(rec);
       }
+
+      // Custom checks — the app's own accessibility promises, which axe can't
+      // judge: focus must land on the new view's heading after navigation, a live
+      // region must exist to announce it, and the layout must not overflow
+      // horizontally (reflow — Doctrine §4, WCAG 1.4.10) for text-scaling users.
+      const problems = await page.evaluate(() => {
+        const out = [];
+        const foci = document.querySelectorAll('[data-focus]');
+        if (foci.length !== 1) out.push(`expected exactly one [data-focus] heading, found ${foci.length}`);
+        const active = document.activeElement;
+        if (!active || !active.hasAttribute('data-focus')) {
+          out.push(`focus did not land on the view heading (active element: ${active?.tagName?.toLowerCase() || 'none'})`);
+        }
+        if (!document.querySelector('[role="status"][aria-live]')) out.push('no aria-live status region present');
+        const de = document.documentElement;
+        if (de.scrollWidth > de.clientWidth + 1) {
+          out.push(`horizontal overflow: content ${de.scrollWidth}px wide in a ${de.clientWidth}px viewport`);
+        }
+        return out;
+      });
+      for (const p of problems) {
+        failures.push({ theme: theme.label, route: r.name, path: r.path, id: 'custom', impact: 'custom', help: p, nodes: [r.path] });
+      }
       await context.close();
     }
   }
@@ -173,5 +197,5 @@ if (failures.length) {
   console.error(`\nFAIL — axe found ${failures.length} serious/critical issue(s) across ${checks} route×theme checks.`);
   process.exit(1);
 }
-console.log(`PASS — axe found no serious/critical violations across ${checks} route×theme checks`
-  + `${advisories.length ? ` (${advisories.length} advisory item(s) above)` : ''}.`);
+console.log(`PASS — axe + custom checks clean across ${checks} route×theme checks`
+  + ` (focus, live region, reflow @320px)${advisories.length ? `; ${advisories.length} advisory item(s) above` : ''}.`);

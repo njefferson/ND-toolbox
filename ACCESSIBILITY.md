@@ -41,9 +41,16 @@ order, duplicate ids, reflow. It serves the built app, drives the pre-installed
 headless Chromium (via `playwright-core`, which carries no browser of its own),
 injects **axe-core**, and runs the WCAG 2.1 A/AA rule set on **every key route in
 every theme** — 10 routes × 4 themes (light, dark, calm-mono, high-contrast) = 40
-checks at a 390px mobile viewport. It **fails the build/CI on any serious or
-critical violation**; moderate/minor items print as advisories. Runs as the
-`audit` job in `.github/workflows/a11y.yml` (build → audit) on every push and PR.
+checks at a **320px viewport** (WCAG 1.4.10 reflow width). It **fails the build/CI
+on any serious or critical violation**; moderate/minor items print as advisories.
+Runs as the `audit` job in `.github/workflows/a11y.yml` (build → audit) on every
+push and PR.
+
+Alongside axe, each check runs **custom assertions axe can't judge** — the app's
+own accessibility promises: focus lands on the new view's `[data-focus]` heading
+after navigation (the drill-down is the core interaction), an `aria-live` status
+region is present to announce it, and the layout never overflows horizontally at
+320px. These fail the gate the same as a serious axe violation.
 
 Together the two gates run with `npm run a11y`.
 
@@ -65,6 +72,10 @@ channel, so a grayscale render loses nothing:
 
 Format: `[release] — area — finding — status`. Append new rows at the top.
 
+- **[0.2.0] — Custom checks — focus lands on the view heading after navigation, an
+  aria-live region is present, and no route overflows horizontally at 320px, across
+  all 40 route×theme checks. — VERIFIED (computed).** Added to the runtime audit as
+  hard-failing assertions beyond axe.
 - **[0.2.0] — Runtime audit — axe-core sweep of 10 routes × 4 themes (40 checks)
   finds no serious/critical WCAG 2.1 A/AA violations. — VERIFIED (computed).**
   This is now automated (`npm run a11y:audit`) and gated in CI.
