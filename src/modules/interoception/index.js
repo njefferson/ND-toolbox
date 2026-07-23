@@ -85,6 +85,7 @@ function summarize(resultBox) {
     needs.length
       ? el('div', { class: 'needs' }, needs.map((n) => el('div', { class: 'need-item' }, [
           el('span', { class: 'need-label' }, n.sig.label),
+          n.st.feels ? el('span', { class: 'need-feels' }, n.st.feels) : null,
           el('span', { class: 'need-suggestion' }, n.st.suggestion),
         ])))
       : el('p', {}, noted.length

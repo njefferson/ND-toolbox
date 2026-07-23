@@ -1,6 +1,6 @@
 {
   "datasetId": "willcox-feelings-wheel",
-  "datasetVersion": 2,
+  "datasetVersion": 3,
   "source": "Willcox, G. (1982), The Feeling Wheel. Secondary words follow the Willcox/Roberts lineage; tertiary words curated for ND Toolbox.",
   "coreOrder": [
     "joyful",
@@ -77,7 +77,10 @@
       "neighbors": [
         "fulfilled"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Satisfaction often points to something that matched what you hoped for.",
+        "oneOption": "You might let yourself register that it worked out, before moving to the next thing."
+      },
       "colorToken": "core.joyful",
       "provenance": "curated"
     },
@@ -94,7 +97,10 @@
       "neighbors": [
         "satisfied"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Fulfilment often points to something that lined up with what matters to you.",
+        "oneOption": "You might note what made it meaningful, so you can seek more of it."
+      },
       "colorToken": "core.joyful",
       "provenance": "curated"
     },
@@ -138,7 +144,10 @@
         "delighted",
         "glad"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Cheerfulness often shows up when nothing is weighing on you just now.",
+        "oneOption": "You might let it be light, with no need to justify it."
+      },
       "colorToken": "core.joyful",
       "provenance": "curated"
     },
@@ -156,7 +165,10 @@
         "cheerful",
         "glad"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Delight often points to a good surprise — something better than you expected.",
+        "oneOption": "You might share it with someone; delight tends to grow when it is passed on."
+      },
       "colorToken": "core.joyful",
       "provenance": "curated"
     },
@@ -175,7 +187,10 @@
         "cheerful",
         "delighted"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Gladness often points to a small thing quietly going right.",
+        "oneOption": "You might name the one thing you are glad of, out loud or to yourself."
+      },
       "colorToken": "core.joyful",
       "provenance": "curated"
     },
@@ -218,7 +233,10 @@
       "neighbors": [
         "eager"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Energy often points to a body and mind that are ready to move.",
+        "oneOption": "You might spend a little of it on something you actually want to do."
+      },
       "colorToken": "core.joyful",
       "provenance": "curated"
     },
@@ -235,7 +253,10 @@
       "neighbors": [
         "energetic"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Eagerness often points to something ahead that you care about.",
+        "oneOption": "You might channel it into one small first step now."
+      },
       "colorToken": "core.joyful",
       "provenance": "curated"
     },
@@ -279,7 +300,10 @@
       "neighbors": [
         "lighthearted"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Amusement often shows up when something catches you pleasantly off guard.",
+        "oneOption": "You might let yourself enjoy it without analysing why it is funny."
+      },
       "colorToken": "core.joyful",
       "provenance": "curated"
     },
@@ -296,7 +320,10 @@
       "neighbors": [
         "amused"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Lightheartedness often shows up when, for now, nothing needs carrying.",
+        "oneOption": "You might let this be a break, and pick the weight back up later."
+      },
       "colorToken": "core.joyful",
       "provenance": "curated"
     },
@@ -339,7 +366,10 @@
       "neighbors": [
         "inspired"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Hope often points to a sense that things could genuinely go well.",
+        "oneOption": "You might write the hope down so you can return to it on a harder day."
+      },
       "colorToken": "core.joyful",
       "provenance": "curated"
     },
@@ -356,7 +386,10 @@
       "neighbors": [
         "hopeful"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Inspiration often points to something you would like to make or do.",
+        "oneOption": "You might capture the idea quickly, before it fades."
+      },
       "colorToken": "core.joyful",
       "provenance": "curated"
     },
@@ -399,7 +432,10 @@
         "absorbed",
         "engaged"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Curiosity often points to something worth a closer look.",
+        "oneOption": "You might follow it one question further."
+      },
       "colorToken": "core.joyful",
       "provenance": "curated"
     },
@@ -417,7 +453,10 @@
         "curious",
         "engaged"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Absorption often shows up when something fits your attention just right.",
+        "oneOption": "You might protect the focus for a while longer, if you can."
+      },
       "colorToken": "core.joyful",
       "provenance": "curated"
     },
@@ -436,7 +475,10 @@
         "curious",
         "absorbed"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Engagement often points to something holding your interest and effort.",
+        "oneOption": "You might notice what makes it click, so you can find more of it."
+      },
       "colorToken": "core.joyful",
       "provenance": "curated"
     },
@@ -500,7 +542,10 @@
         "bold",
         "empowered"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Self-assurance often points to a settled sense of who you are.",
+        "oneOption": "You might let it steady you, without needing to prove it to anyone."
+      },
       "colorToken": "core.powerful",
       "provenance": "curated"
     },
@@ -518,7 +563,10 @@
         "self-assured",
         "empowered"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Boldness often points to caring about something more than the risk of it.",
+        "oneOption": "You might take the one brave step while the nerve is here."
+      },
       "colorToken": "core.powerful",
       "provenance": "curated"
     },
@@ -537,7 +585,10 @@
         "self-assured",
         "bold"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling empowered often points to a real choice being yours to make.",
+        "oneOption": "You might name the one thing that is genuinely in your hands."
+      },
       "colorToken": "core.powerful",
       "provenance": "curated"
     },
@@ -579,7 +630,10 @@
         "worthy",
         "triumphant"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Accomplishment often points to effort that finally paid off.",
+        "oneOption": "You might take quiet credit before rushing to the next task."
+      },
       "colorToken": "core.powerful",
       "provenance": "curated"
     },
@@ -597,7 +651,10 @@
         "accomplished",
         "triumphant"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling worthy often points to a sense that you matter as you are.",
+        "oneOption": "You might let that be true without earning it today."
+      },
       "colorToken": "core.powerful",
       "provenance": "curated"
     },
@@ -616,7 +673,10 @@
         "accomplished",
         "worthy"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Triumph often points to something hard that you came through.",
+        "oneOption": "You might mark it somehow, even quietly, so it counts."
+      },
       "colorToken": "core.powerful",
       "provenance": "curated"
     },
@@ -659,7 +719,10 @@
       "neighbors": [
         "admired"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling valued often points to being treated as if you matter here.",
+        "oneOption": "You might let it land, rather than waving it off."
+      },
       "colorToken": "core.powerful",
       "provenance": "curated"
     },
@@ -677,7 +740,10 @@
       "neighbors": [
         "valued"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Being admired often points to something real in you that others can see.",
+        "oneOption": "You might consider believing them, just a little."
+      },
       "colorToken": "core.powerful",
       "provenance": "curated"
     },
@@ -719,7 +785,10 @@
       "neighbors": [
         "resourceful"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Competence often points to skill you have built and can trust.",
+        "oneOption": "You might start with the part you already know how to do."
+      },
       "colorToken": "core.powerful",
       "provenance": "curated"
     },
@@ -736,7 +805,10 @@
       "neighbors": [
         "competent"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Resourcefulness often points to your knack for finding a way through.",
+        "oneOption": "You might trust that you will figure out the next bit too."
+      },
       "colorToken": "core.powerful",
       "provenance": "curated"
     },
@@ -779,7 +851,10 @@
       "neighbors": [
         "focused"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Motivation often points to a goal that feels worth the effort.",
+        "oneOption": "You might define the single next step and stop there."
+      },
       "colorToken": "core.powerful",
       "provenance": "curated"
     },
@@ -796,7 +871,10 @@
       "neighbors": [
         "motivated"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Focus often shows up when your attention and the task line up.",
+        "oneOption": "You might guard the quiet around it while it lasts."
+      },
       "colorToken": "core.powerful",
       "provenance": "curated"
     },
@@ -838,7 +916,10 @@
       "neighbors": [
         "important"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Being recognized often points to a need to be seen being met.",
+        "oneOption": "You might let the acknowledgement fully arrive."
+      },
       "colorToken": "core.powerful",
       "provenance": "curated"
     },
@@ -855,7 +936,10 @@
       "neighbors": [
         "recognized"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling important often points to your presence making a real difference here.",
+        "oneOption": "You might notice where you are most needed, and where you are free to rest."
+      },
       "colorToken": "core.powerful",
       "provenance": "curated"
     },
@@ -918,7 +1002,10 @@
       "neighbors": [
         "still"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling settled often points to a body that feels safe enough to rest.",
+        "oneOption": "You might let your shoulders drop and stay a moment longer."
+      },
       "colorToken": "core.peaceful",
       "provenance": "curated"
     },
@@ -935,7 +1022,10 @@
       "neighbors": [
         "settled"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Stillness often shows up when nothing is pulling at you.",
+        "oneOption": "You might simply notice the quiet, without needing to fill it."
+      },
       "colorToken": "core.peaceful",
       "provenance": "curated"
     },
@@ -978,7 +1068,10 @@
       "neighbors": [
         "unhurried"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Ease often points to a load that has, for now, lifted.",
+        "oneOption": "You might let one more part of you soften."
+      },
       "colorToken": "core.peaceful",
       "provenance": "curated"
     },
@@ -995,7 +1088,10 @@
       "neighbors": [
         "at-ease"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling unhurried often points to enough time, and permission to use it.",
+        "oneOption": "You might take the next thing slowly, on purpose."
+      },
       "colorToken": "core.peaceful",
       "provenance": "curated"
     },
@@ -1039,7 +1135,10 @@
         "grounded",
         "protected"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Safety often points to a need for protection being met right now.",
+        "oneOption": "You might notice the one thing helping you feel it."
+      },
       "colorToken": "core.peaceful",
       "provenance": "curated"
     },
@@ -1057,7 +1156,10 @@
         "safe",
         "protected"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling grounded often points to being present in your body and the moment.",
+        "oneOption": "You might feel your feet on the floor and stay there a breath."
+      },
       "colorToken": "core.peaceful",
       "provenance": "curated"
     },
@@ -1076,7 +1178,10 @@
         "safe",
         "grounded"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling protected often points to something or someone keeping you safe.",
+        "oneOption": "You might let yourself lean on it a little."
+      },
       "colorToken": "core.peaceful",
       "provenance": "curated"
     },
@@ -1120,7 +1225,10 @@
         "tender",
         "devoted"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Affection often points to warmth toward someone who matters.",
+        "oneOption": "You might let them know, in a small way, if it feels right."
+      },
       "colorToken": "core.peaceful",
       "provenance": "curated"
     },
@@ -1138,7 +1246,10 @@
         "affectionate",
         "devoted"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Tenderness often points to something soft and open in you right now.",
+        "oneOption": "You might treat both yourself and them gently while it is here."
+      },
       "colorToken": "core.peaceful",
       "provenance": "curated"
     },
@@ -1157,7 +1268,10 @@
         "affectionate",
         "tender"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Devotion often points to a care you have chosen and want to keep.",
+        "oneOption": "You might notice what makes it worth it to you."
+      },
       "colorToken": "core.peaceful",
       "provenance": "curated"
     },
@@ -1200,7 +1314,10 @@
       "neighbors": [
         "warm"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Thankfulness often points to a specific good you have noticed.",
+        "oneOption": "You might name the one thing, however small."
+      },
       "colorToken": "core.peaceful",
       "provenance": "curated"
     },
@@ -1218,7 +1335,10 @@
       "neighbors": [
         "thankful"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Warmth often points to a quiet glow toward someone or something.",
+        "oneOption": "You might stay with the feeling a moment before it passes."
+      },
       "colorToken": "core.peaceful",
       "provenance": "curated"
     },
@@ -1260,7 +1380,10 @@
       "neighbors": [
         "connected"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Openness often points to feeling safe enough to receive and share.",
+        "oneOption": "You might let one honest thing pass between you."
+      },
       "colorToken": "core.peaceful",
       "provenance": "curated"
     },
@@ -1277,7 +1400,10 @@
       "neighbors": [
         "open"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Connection often points to genuine contact with someone.",
+        "oneOption": "You might do one small thing to keep the thread alive."
+      },
       "colorToken": "core.peaceful",
       "provenance": "curated"
     },
@@ -1343,7 +1469,10 @@
         "abandoned",
         "disconnected"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Isolation often points to a need for connection that is not being met right now.",
+        "oneOption": "You might make one small reach toward someone — there is no pressure to."
+      },
       "colorToken": "core.sad",
       "provenance": "curated"
     },
@@ -1361,7 +1490,10 @@
         "isolated",
         "disconnected"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling abandoned often points to counting on someone who was not there.",
+        "oneOption": "You might be extra gentle with yourself; this one cuts deep."
+      },
       "colorToken": "core.sad",
       "provenance": "curated"
     },
@@ -1379,7 +1511,10 @@
         "isolated",
         "abandoned"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Disconnection often points to being near others but not quite in contact.",
+        "oneOption": "You might name what would help you feel met, even if you cannot act on it yet."
+      },
       "colorToken": "core.sad",
       "provenance": "curated"
     },
@@ -1422,7 +1557,10 @@
       "neighbors": [
         "heartbroken"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling wounded often points to something that mattered being hurt or dismissed.",
+        "oneOption": "You might place a hand where you feel it and breathe once, slowly."
+      },
       "colorToken": "core.sad",
       "provenance": "curated"
     },
@@ -1439,7 +1577,10 @@
       "neighbors": [
         "wounded"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Heartbreak often points to the loss of something you loved — its size matches how much it meant.",
+        "oneOption": "You might let the grief be here without rushing it toward okay."
+      },
       "colorToken": "core.sad",
       "provenance": "curated"
     },
@@ -1483,7 +1624,10 @@
       "neighbors": [
         "discouraged"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling let down often points to a hope or expectation that was not met.",
+        "oneOption": "You might name plainly what you had wanted, just to yourself."
+      },
       "colorToken": "core.sad",
       "provenance": "curated"
     },
@@ -1500,7 +1644,10 @@
       "neighbors": [
         "let-down"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Discouragement often points to effort that has not paid off yet.",
+        "oneOption": "You might rest before deciding whether to keep going."
+      },
       "colorToken": "core.sad",
       "provenance": "curated"
     },
@@ -1544,7 +1691,10 @@
         "hopeless",
         "numb"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Emptiness often points to being depleted, or to something missing — not to a flaw in you.",
+        "oneOption": "You might make the next step very small; a glass of water counts."
+      },
       "colorToken": "core.sad",
       "provenance": "curated"
     },
@@ -1562,7 +1712,10 @@
         "empty",
         "numb"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Hopelessness often settles in when you are worn down, and it tends to lift more than it feels like it will right now.",
+        "oneOption": "You might hold off on big conclusions until you have rested or eaten."
+      },
       "colorToken": "core.sad",
       "provenance": "curated"
     },
@@ -1580,7 +1733,10 @@
         "empty",
         "hopeless"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Numbness is often a way the mind protects you when things are too much — not a sign that nothing matters.",
+        "oneOption": "You might let yourself feel little for now; sensation tends to return."
+      },
       "colorToken": "core.sad",
       "provenance": "curated"
     },
@@ -1622,7 +1778,10 @@
       "neighbors": [
         "remorseful"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Shame often says you ARE bad, when at most you did something you regret — those are not the same.",
+        "oneOption": "You might name the specific thing, which is smaller than the whole-self feeling."
+      },
       "colorToken": "core.sad",
       "provenance": "curated"
     },
@@ -1639,7 +1798,10 @@
       "neighbors": [
         "ashamed"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Remorse often points to a value of yours you feel you crossed.",
+        "oneOption": "You might ask what, if anything, is actually yours to repair."
+      },
       "colorToken": "core.sad",
       "provenance": "curated"
     },
@@ -1682,7 +1844,10 @@
       "neighbors": [
         "exposed"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Fragility often points to being close to your limit right now.",
+        "oneOption": "You might lower what you ask of yourself for a while."
+      },
       "colorToken": "core.sad",
       "provenance": "curated"
     },
@@ -1699,7 +1864,10 @@
       "neighbors": [
         "fragile"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling exposed often points to something tender being uncomfortably seen.",
+        "oneOption": "You might choose who, if anyone, is safe enough to see it."
+      },
       "colorToken": "core.sad",
       "provenance": "curated"
     },
@@ -1764,7 +1932,10 @@
         "exasperated",
         "fed-up"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling blocked often points to an obstacle between you and something you want.",
+        "oneOption": "You might name the specific blocker; it is often smaller once named."
+      },
       "colorToken": "core.mad",
       "provenance": "curated"
     },
@@ -1782,7 +1953,10 @@
         "blocked",
         "fed-up"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Exasperation often points to the same trouble happening one time too many.",
+        "oneOption": "You might step back before responding to the latest round."
+      },
       "colorToken": "core.mad",
       "provenance": "curated"
     },
@@ -1801,7 +1975,10 @@
         "blocked",
         "exasperated"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Being fed up often points to a limit you have quietly reached.",
+        "oneOption": "You might ask what you are no longer willing to put up with."
+      },
       "colorToken": "core.mad",
       "provenance": "curated"
     },
@@ -1844,7 +2021,10 @@
       "neighbors": [
         "agitated"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Annoyance often points to a small friction — or to being tired or hungry underneath.",
+        "oneOption": "You might check whether it is really the thing, or the state you are in."
+      },
       "colorToken": "core.mad",
       "provenance": "curated"
     },
@@ -1861,7 +2041,10 @@
       "neighbors": [
         "annoyed"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Agitation often points to stirred-up energy with nowhere to go.",
+        "oneOption": "You might give it an outlet — move, or step outside for a minute."
+      },
       "colorToken": "core.mad",
       "provenance": "curated"
     },
@@ -1903,7 +2086,10 @@
       "neighbors": [
         "indignant"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Bitterness often points to a hurt that never got fully addressed.",
+        "oneOption": "You might name the unmet expectation underneath it."
+      },
       "colorToken": "core.mad",
       "provenance": "curated"
     },
@@ -1920,7 +2106,10 @@
       "neighbors": [
         "bitter"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Indignation often points to something you see as clearly unfair.",
+        "oneOption": "You might separate what is yours to act on from what is not."
+      },
       "colorToken": "core.mad",
       "provenance": "curated"
     },
@@ -1963,7 +2152,10 @@
         "enraged",
         "seething"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Fury often points to a boundary or value that feels badly crossed.",
+        "oneOption": "You might give the heat somewhere safe to go before you act on it."
+      },
       "colorToken": "core.mad",
       "provenance": "curated"
     },
@@ -1981,7 +2173,10 @@
         "furious",
         "seething"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Rage often points to something that feels deeply wrong or threatening.",
+        "oneOption": "You might move your body or step away until the peak passes."
+      },
       "colorToken": "core.mad",
       "provenance": "curated"
     },
@@ -2000,7 +2195,10 @@
         "furious",
         "enraged"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Seething often points to anger held tightly under the surface.",
+        "oneOption": "You might let it out somewhere safe, rather than only holding it in."
+      },
       "colorToken": "core.mad",
       "provenance": "curated"
     },
@@ -2042,7 +2240,10 @@
       "neighbors": [
         "possessive"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Envy often points to something you want, shown to you by someone who has it.",
+        "oneOption": "You might name what you actually want underneath the comparison."
+      },
       "colorToken": "core.mad",
       "provenance": "curated"
     },
@@ -2059,7 +2260,10 @@
       "neighbors": [
         "envious"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Possessiveness often points to a fear of losing someone or something.",
+        "oneOption": "You might name the fear directly; it is usually softer than the grip."
+      },
       "colorToken": "core.mad",
       "provenance": "curated"
     },
@@ -2102,7 +2306,10 @@
       "neighbors": [
         "belittled"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling dismissed often points to a need to be taken seriously being crossed.",
+        "oneOption": "You might decide what, if anything, you want to name later."
+      },
       "colorToken": "core.mad",
       "provenance": "curated"
     },
@@ -2119,7 +2326,10 @@
       "neighbors": [
         "dismissed"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling belittled often points to being made smaller than you are.",
+        "oneOption": "You might remind yourself of the size you actually take up."
+      },
       "colorToken": "core.mad",
       "provenance": "curated"
     },
@@ -2186,7 +2396,10 @@
         "worried",
         "uneasy"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Nervousness often points to something ahead that matters to you.",
+        "oneOption": "You might bring your attention to one thing you can sense right now."
+      },
       "colorToken": "core.scared",
       "provenance": "curated"
     },
@@ -2204,7 +2417,10 @@
         "nervous",
         "uneasy"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Worry often points to a concern your mind is trying to solve ahead of time.",
+        "oneOption": "You might write the worry down so it can stop circling."
+      },
       "colorToken": "core.scared",
       "provenance": "curated"
     },
@@ -2223,7 +2439,10 @@
         "nervous",
         "worried"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Unease often points to something feeling off before you can name it.",
+        "oneOption": "You might trust the signal and give it time to become clearer."
+      },
       "colorToken": "core.scared",
       "provenance": "curated"
     },
@@ -2265,7 +2484,10 @@
       "neighbors": [
         "self-conscious"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling inadequate often points to a fear of not being enough in this moment.",
+        "oneOption": "You might recall one time you handled something like this."
+      },
       "colorToken": "core.scared",
       "provenance": "curated"
     },
@@ -2282,7 +2504,10 @@
       "neighbors": [
         "inadequate"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Self-consciousness often points to feeling watched or judged.",
+        "oneOption": "You might notice that most people are far more focused on themselves."
+      },
       "colorToken": "core.scared",
       "provenance": "curated"
     },
@@ -2326,7 +2551,10 @@
         "frazzled",
         "swamped"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Stress often points to more demand than capacity right now.",
+        "oneOption": "You might reduce the field to the single next action and hide the rest."
+      },
       "colorToken": "core.scared",
       "provenance": "curated"
     },
@@ -2344,7 +2572,10 @@
         "stressed",
         "swamped"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling frazzled often points to too many threads pulled at once.",
+        "oneOption": "You might drop all but one thread for a few minutes."
+      },
       "colorToken": "core.scared",
       "provenance": "curated"
     },
@@ -2363,7 +2594,10 @@
         "stressed",
         "frazzled"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling swamped often points to more to do than any one person could hold.",
+        "oneOption": "You might pick the one thing that would ease the most, and start there."
+      },
       "colorToken": "core.scared",
       "provenance": "curated"
     },
@@ -2406,7 +2640,10 @@
       "neighbors": [
         "unwanted"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling excluded often points to a need to belong that feels threatened.",
+        "oneOption": "You might remind yourself that one room is not everywhere."
+      },
       "colorToken": "core.scared",
       "provenance": "curated"
     },
@@ -2423,7 +2660,10 @@
       "neighbors": [
         "excluded"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Feeling unwanted often points to a fear that your presence is not welcome.",
+        "oneOption": "You might be gentle with yourself, and check the story against the facts later."
+      },
       "colorToken": "core.scared",
       "provenance": "curated"
     },
@@ -2466,7 +2706,10 @@
       "neighbors": [
         "uncertain"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Bewilderment often points to missing information or mixed signals.",
+        "oneOption": "You might write down the one question you most want answered."
+      },
       "colorToken": "core.scared",
       "provenance": "curated"
     },
@@ -2483,7 +2726,10 @@
       "neighbors": [
         "bewildered"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Uncertainty often points to not yet having enough to choose.",
+        "oneOption": "You might name what you would need to know to feel surer."
+      },
       "colorToken": "core.scared",
       "provenance": "curated"
     },
@@ -2526,7 +2772,10 @@
       "neighbors": [
         "defensive"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Alarm often points to something sudden your body flagged as a threat.",
+        "oneOption": "You might take one slow breath and check whether the danger is here now."
+      },
       "colorToken": "core.scared",
       "provenance": "curated"
     },
@@ -2543,7 +2792,10 @@
       "neighbors": [
         "alarmed"
       ],
-      "guidance": null,
+      "guidance": {
+        "pointsTo": "Defensiveness often points to feeling got at, and bracing to protect yourself.",
+        "oneOption": "You might pause to check whether you are actually under attack right now."
+      },
       "colorToken": "core.scared",
       "provenance": "curated"
     }

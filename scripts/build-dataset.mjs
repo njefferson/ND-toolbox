@@ -364,6 +364,110 @@ function withAliases(label, base) {
   return out;
 }
 
+// Guidance for the landing (tertiary) words, keyed by label and merged at flatten
+// time — same pattern as ALIASES, so the tree literal above stays readable. Until
+// now only cores and secondaries carried a "what this points to · one option"
+// panel; the words people actually land on had a definition and nothing more.
+//
+// VOICE (unchanged from cores/secondaries, and load-bearing here): every line is
+// non-clinical, non-moralizing, and optional in tone. `pointsTo` validates and
+// gently locates the feeling; it never pathologizes or implies a flaw. `oneOption`
+// is a small, take-it-or-leave-it thing you *might* do — never advice, never a fix,
+// never a should. The panel is collapsed by default, so it never blocks the word.
+const g = (pointsTo, oneOption) => ({ pointsTo, oneOption });
+const LEAF_GUIDANCE = {
+  // Joyful
+  Satisfied: g('Satisfaction often points to something that matched what you hoped for.', 'You might let yourself register that it worked out, before moving to the next thing.'),
+  Fulfilled: g('Fulfilment often points to something that lined up with what matters to you.', 'You might note what made it meaningful, so you can seek more of it.'),
+  Cheerful: g('Cheerfulness often shows up when nothing is weighing on you just now.', 'You might let it be light, with no need to justify it.'),
+  Delighted: g('Delight often points to a good surprise — something better than you expected.', 'You might share it with someone; delight tends to grow when it is passed on.'),
+  Glad: g('Gladness often points to a small thing quietly going right.', 'You might name the one thing you are glad of, out loud or to yourself.'),
+  Energetic: g('Energy often points to a body and mind that are ready to move.', 'You might spend a little of it on something you actually want to do.'),
+  Eager: g('Eagerness often points to something ahead that you care about.', 'You might channel it into one small first step now.'),
+  Amused: g('Amusement often shows up when something catches you pleasantly off guard.', 'You might let yourself enjoy it without analysing why it is funny.'),
+  Lighthearted: g('Lightheartedness often shows up when, for now, nothing needs carrying.', 'You might let this be a break, and pick the weight back up later.'),
+  Hopeful: g('Hope often points to a sense that things could genuinely go well.', 'You might write the hope down so you can return to it on a harder day.'),
+  Inspired: g('Inspiration often points to something you would like to make or do.', 'You might capture the idea quickly, before it fades.'),
+  Curious: g('Curiosity often points to something worth a closer look.', 'You might follow it one question further.'),
+  Absorbed: g('Absorption often shows up when something fits your attention just right.', 'You might protect the focus for a while longer, if you can.'),
+  Engaged: g('Engagement often points to something holding your interest and effort.', 'You might notice what makes it click, so you can find more of it.'),
+  // Powerful
+  'Self-assured': g('Self-assurance often points to a settled sense of who you are.', 'You might let it steady you, without needing to prove it to anyone.'),
+  Bold: g('Boldness often points to caring about something more than the risk of it.', 'You might take the one brave step while the nerve is here.'),
+  Empowered: g('Feeling empowered often points to a real choice being yours to make.', 'You might name the one thing that is genuinely in your hands.'),
+  Accomplished: g('Accomplishment often points to effort that finally paid off.', 'You might take quiet credit before rushing to the next task.'),
+  Worthy: g('Feeling worthy often points to a sense that you matter as you are.', 'You might let that be true without earning it today.'),
+  Triumphant: g('Triumph often points to something hard that you came through.', 'You might mark it somehow, even quietly, so it counts.'),
+  Valued: g('Feeling valued often points to being treated as if you matter here.', 'You might let it land, rather than waving it off.'),
+  Admired: g('Being admired often points to something real in you that others can see.', 'You might consider believing them, just a little.'),
+  Competent: g('Competence often points to skill you have built and can trust.', 'You might start with the part you already know how to do.'),
+  Resourceful: g('Resourcefulness often points to your knack for finding a way through.', 'You might trust that you will figure out the next bit too.'),
+  Motivated: g('Motivation often points to a goal that feels worth the effort.', 'You might define the single next step and stop there.'),
+  Focused: g('Focus often shows up when your attention and the task line up.', 'You might guard the quiet around it while it lasts.'),
+  Recognized: g('Being recognized often points to a need to be seen being met.', 'You might let the acknowledgement fully arrive.'),
+  Important: g('Feeling important often points to your presence making a real difference here.', 'You might notice where you are most needed, and where you are free to rest.'),
+  // Peaceful
+  Settled: g('Feeling settled often points to a body that feels safe enough to rest.', 'You might let your shoulders drop and stay a moment longer.'),
+  Still: g('Stillness often shows up when nothing is pulling at you.', 'You might simply notice the quiet, without needing to fill it.'),
+  'At ease': g('Ease often points to a load that has, for now, lifted.', 'You might let one more part of you soften.'),
+  Unhurried: g('Feeling unhurried often points to enough time, and permission to use it.', 'You might take the next thing slowly, on purpose.'),
+  Safe: g('Safety often points to a need for protection being met right now.', 'You might notice the one thing helping you feel it.'),
+  Grounded: g('Feeling grounded often points to being present in your body and the moment.', 'You might feel your feet on the floor and stay there a breath.'),
+  Protected: g('Feeling protected often points to something or someone keeping you safe.', 'You might let yourself lean on it a little.'),
+  Affectionate: g('Affection often points to warmth toward someone who matters.', 'You might let them know, in a small way, if it feels right.'),
+  Tender: g('Tenderness often points to something soft and open in you right now.', 'You might treat both yourself and them gently while it is here.'),
+  Devoted: g('Devotion often points to a care you have chosen and want to keep.', 'You might notice what makes it worth it to you.'),
+  Thankful: g('Thankfulness often points to a specific good you have noticed.', 'You might name the one thing, however small.'),
+  Warm: g('Warmth often points to a quiet glow toward someone or something.', 'You might stay with the feeling a moment before it passes.'),
+  Open: g('Openness often points to feeling safe enough to receive and share.', 'You might let one honest thing pass between you.'),
+  Connected: g('Connection often points to genuine contact with someone.', 'You might do one small thing to keep the thread alive.'),
+  // Sad
+  Isolated: g('Isolation often points to a need for connection that is not being met right now.', 'You might make one small reach toward someone — there is no pressure to.'),
+  Abandoned: g('Feeling abandoned often points to counting on someone who was not there.', 'You might be extra gentle with yourself; this one cuts deep.'),
+  Disconnected: g('Disconnection often points to being near others but not quite in contact.', 'You might name what would help you feel met, even if you cannot act on it yet.'),
+  Wounded: g('Feeling wounded often points to something that mattered being hurt or dismissed.', 'You might place a hand where you feel it and breathe once, slowly.'),
+  Heartbroken: g('Heartbreak often points to the loss of something you loved — its size matches how much it meant.', 'You might let the grief be here without rushing it toward okay.'),
+  'Let down': g('Feeling let down often points to a hope or expectation that was not met.', 'You might name plainly what you had wanted, just to yourself.'),
+  Discouraged: g('Discouragement often points to effort that has not paid off yet.', 'You might rest before deciding whether to keep going.'),
+  Empty: g('Emptiness often points to being depleted, or to something missing — not to a flaw in you.', 'You might make the next step very small; a glass of water counts.'),
+  Hopeless: g('Hopelessness often settles in when you are worn down, and it tends to lift more than it feels like it will right now.', 'You might hold off on big conclusions until you have rested or eaten.'),
+  Numb: g('Numbness is often a way the mind protects you when things are too much — not a sign that nothing matters.', 'You might let yourself feel little for now; sensation tends to return.'),
+  Ashamed: g('Shame often says you ARE bad, when at most you did something you regret — those are not the same.', 'You might name the specific thing, which is smaller than the whole-self feeling.'),
+  Remorseful: g('Remorse often points to a value of yours you feel you crossed.', 'You might ask what, if anything, is actually yours to repair.'),
+  Fragile: g('Fragility often points to being close to your limit right now.', 'You might lower what you ask of yourself for a while.'),
+  Exposed: g('Feeling exposed often points to something tender being uncomfortably seen.', 'You might choose who, if anyone, is safe enough to see it.'),
+  // Mad
+  Blocked: g('Feeling blocked often points to an obstacle between you and something you want.', 'You might name the specific blocker; it is often smaller once named.'),
+  Exasperated: g('Exasperation often points to the same trouble happening one time too many.', 'You might step back before responding to the latest round.'),
+  'Fed up': g('Being fed up often points to a limit you have quietly reached.', 'You might ask what you are no longer willing to put up with.'),
+  Annoyed: g('Annoyance often points to a small friction — or to being tired or hungry underneath.', 'You might check whether it is really the thing, or the state you are in.'),
+  Agitated: g('Agitation often points to stirred-up energy with nowhere to go.', 'You might give it an outlet — move, or step outside for a minute.'),
+  Bitter: g('Bitterness often points to a hurt that never got fully addressed.', 'You might name the unmet expectation underneath it.'),
+  Indignant: g('Indignation often points to something you see as clearly unfair.', 'You might separate what is yours to act on from what is not.'),
+  Furious: g('Fury often points to a boundary or value that feels badly crossed.', 'You might give the heat somewhere safe to go before you act on it.'),
+  Enraged: g('Rage often points to something that feels deeply wrong or threatening.', 'You might move your body or step away until the peak passes.'),
+  Seething: g('Seething often points to anger held tightly under the surface.', 'You might let it out somewhere safe, rather than only holding it in.'),
+  Envious: g('Envy often points to something you want, shown to you by someone who has it.', 'You might name what you actually want underneath the comparison.'),
+  Possessive: g('Possessiveness often points to a fear of losing someone or something.', 'You might name the fear directly; it is usually softer than the grip.'),
+  Dismissed: g('Feeling dismissed often points to a need to be taken seriously being crossed.', 'You might decide what, if anything, you want to name later.'),
+  Belittled: g('Feeling belittled often points to being made smaller than you are.', 'You might remind yourself of the size you actually take up.'),
+  // Scared
+  Nervous: g('Nervousness often points to something ahead that matters to you.', 'You might bring your attention to one thing you can sense right now.'),
+  Worried: g('Worry often points to a concern your mind is trying to solve ahead of time.', 'You might write the worry down so it can stop circling.'),
+  Uneasy: g('Unease often points to something feeling off before you can name it.', 'You might trust the signal and give it time to become clearer.'),
+  Inadequate: g('Feeling inadequate often points to a fear of not being enough in this moment.', 'You might recall one time you handled something like this.'),
+  'Self-conscious': g('Self-consciousness often points to feeling watched or judged.', 'You might notice that most people are far more focused on themselves.'),
+  Stressed: g('Stress often points to more demand than capacity right now.', 'You might reduce the field to the single next action and hide the rest.'),
+  Frazzled: g('Feeling frazzled often points to too many threads pulled at once.', 'You might drop all but one thread for a few minutes.'),
+  Swamped: g('Feeling swamped often points to more to do than any one person could hold.', 'You might pick the one thing that would ease the most, and start there.'),
+  Excluded: g('Feeling excluded often points to a need to belong that feels threatened.', 'You might remind yourself that one room is not everywhere.'),
+  Unwanted: g('Feeling unwanted often points to a fear that your presence is not welcome.', 'You might be gentle with yourself, and check the story against the facts later.'),
+  Bewildered: g('Bewilderment often points to missing information or mixed signals.', 'You might write down the one question you most want answered.'),
+  Uncertain: g('Uncertainty often points to not yet having enough to choose.', 'You might name what you would need to know to feel surer.'),
+  Alarmed: g('Alarm often points to something sudden your body flagged as a threat.', 'You might take one slow breath and check whether the danger is here now.'),
+  Defensive: g('Defensiveness often points to feeling got at, and bracing to protect yourself.', 'You might pause to check whether you are actually under attack right now.'),
+};
+
 // --- flatten to the runtime dataset ---
 const glyphs = {};
 const nodes = [];
@@ -391,7 +495,7 @@ for (const core of TREE) {
         id: terId, label: ter.label, coreId: core.id, parentId: secId, depth: 2,
         aliases: withAliases(ter.label, ter.aliases), definition: ter.definition,
         neighbors: terIds.filter((x) => x !== terId),
-        guidance: null, colorToken: `core.${core.id}`, provenance: 'curated',
+        guidance: LEAF_GUIDANCE[ter.label] || null, colorToken: `core.${core.id}`, provenance: 'curated',
       });
     }
   }
@@ -410,12 +514,21 @@ for (const n of nodes) {
   seen.add(n.id);
 }
 
+// Guard: every leaf must carry guidance now, and every guidance key must map to a
+// real leaf — so a typo in a label can't silently drop a panel or leave a dangling
+// entry. (Doctrine §4/§5: added content is verified, not assumed.)
+const leafLabels = new Set(nodes.filter((n) => n.depth === 2).map((n) => n.label));
+const missingGuidance = [...leafLabels].filter((l) => !LEAF_GUIDANCE[l]);
+const danglingGuidance = Object.keys(LEAF_GUIDANCE).filter((l) => !leafLabels.has(l));
+if (missingGuidance.length) throw new Error(`leaves without guidance: ${missingGuidance.join(', ')}`);
+if (danglingGuidance.length) throw new Error(`LEAF_GUIDANCE keys with no matching leaf: ${danglingGuidance.join(', ')}`);
+
 const counts = { core: 0, ring2: 0, ring3: 0 };
 for (const n of nodes) counts[['core', 'ring2', 'ring3'][n.depth]]++;
 
 const dataset = {
   datasetId: 'willcox-feelings-wheel',
-  datasetVersion: 2,
+  datasetVersion: 3,
   source: 'Willcox, G. (1982), The Feeling Wheel. Secondary words follow the Willcox/Roberts lineage; tertiary words curated for ND Toolbox.',
   coreOrder: TREE.map((c) => c.id),
   glyphs,

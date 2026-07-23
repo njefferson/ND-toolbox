@@ -3,6 +3,14 @@
 // Keep entries in plain, non-technical language.
 export const CHANGELOG = [
   {
+    version: '0.4.0',
+    title: 'A little more to sit with',
+    notes: [
+      'Every landing word now has an optional, gentle note — what the feeling often points to, and one small thing you might do — tucked behind a tap, never in the way. Take it or leave it; it’s not advice.',
+      'The body check-in now says what each signal can feel like, so it’s easier to recognise what you’re noticing.',
+    ],
+  },
+  {
     version: '0.3.1',
     title: 'A gentle bridge from body to feelings',
     notes: [

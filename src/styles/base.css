@@ -219,6 +219,8 @@ header.masthead {
   background: var(--surface); padding: 0.5rem 0.8rem; display: grid; gap: 0.15rem;
 }
 .need-label { font-weight: 600; }
+/* Recognition line — "what this can feel like" (ink-soft on surface: already gated). */
+.need-feels { color: var(--ink-soft); font-size: 0.85rem; }
 .need-suggestion { color: var(--ink-soft); }
 
 /* About / prose */

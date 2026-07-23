@@ -1,21 +1,21 @@
 {
   "datasetId": "interoception-checkin",
-  "datasetVersion": 1,
-  "note": "Body signals for the check-in. Editable data, not hardcoded UI. A state with need:true means the body may want something; its suggestion is gentle and optional, never clinical or moralizing.",
+  "datasetVersion": 2,
+  "note": "Body signals for the check-in. Editable data, not hardcoded UI. A state with need:true means the body may want something; its suggestion is gentle and optional, never clinical or moralizing. `feels` is a plain recognition line — what the state can feel like — to help someone notice it; it describes, never diagnoses.",
   "signals": [
     {
       "id": "hunger", "label": "Hunger", "question": "How hungry are you?",
       "states": [
         { "value": "full", "label": "Full" },
         { "value": "okay", "label": "Okay" },
-        { "value": "hungry", "label": "Hungry", "need": true, "suggestion": "A snack or a meal might help." }
+        { "value": "hungry", "label": "Hungry", "need": true, "feels": "This can feel like low focus, a dip in mood, or a gnawing stomach.", "suggestion": "A snack or a meal might help." }
       ]
     },
     {
       "id": "thirst", "label": "Thirst", "question": "How thirsty are you?",
       "states": [
         { "value": "fine", "label": "Fine" },
-        { "value": "thirsty", "label": "Thirsty", "need": true, "suggestion": "Some water might help." }
+        { "value": "thirsty", "label": "Thirsty", "need": true, "feels": "This can feel like a dry mouth, a dull head, or flagging energy.", "suggestion": "Some water might help." }
       ]
     },
     {
@@ -23,22 +23,22 @@
       "states": [
         { "value": "rested", "label": "Rested" },
         { "value": "okay", "label": "Okay" },
-        { "value": "tired", "label": "Tired", "need": true, "suggestion": "Some rest, or a slower pace, might help." }
+        { "value": "tired", "label": "Tired", "need": true, "feels": "This can feel like heavy limbs, foggy thinking, or a shorter fuse.", "suggestion": "Some rest, or a slower pace, might help." }
       ]
     },
     {
       "id": "bathroom", "label": "Bathroom", "question": "Do you need the bathroom?",
       "states": [
         { "value": "fine", "label": "Fine" },
-        { "value": "need", "label": "Need to go", "need": true, "suggestion": "It might be time for a bathroom break." }
+        { "value": "need", "label": "Need to go", "need": true, "feels": "This can feel like a background pressure that keeps tugging at your focus.", "suggestion": "It might be time for a bathroom break." }
       ]
     },
     {
       "id": "temperature", "label": "Temperature", "question": "How is your temperature?",
       "states": [
-        { "value": "cold", "label": "Cold", "need": true, "suggestion": "A layer or a warm drink might help." },
+        { "value": "cold", "label": "Cold", "need": true, "feels": "This can feel like tight shoulders, stiff hands, or fidgeting.", "suggestion": "A layer or a warm drink might help." },
         { "value": "comfortable", "label": "Comfortable" },
-        { "value": "hot", "label": "Hot", "need": true, "suggestion": "Cooling down or some water might help." }
+        { "value": "hot", "label": "Hot", "need": true, "feels": "This can feel like flushed skin, a short temper, or a foggy head.", "suggestion": "Cooling down or some water might help." }
       ]
     },
     {
@@ -46,7 +46,7 @@
       "states": [
         { "value": "relaxed", "label": "Relaxed" },
         { "value": "some", "label": "Some tension" },
-        { "value": "tense", "label": "Tense or sore", "need": true, "suggestion": "A stretch, or letting your shoulders drop, might help." }
+        { "value": "tense", "label": "Tense or sore", "need": true, "feels": "This can feel like a clenched jaw, tight shoulders, or a sore neck.", "suggestion": "A stretch, or letting your shoulders drop, might help." }
       ]
     },
     {
@@ -54,28 +54,28 @@
       "states": [
         { "value": "calm", "label": "Calm" },
         { "value": "abitmuch", "label": "A bit much" },
-        { "value": "overstim", "label": "Overstimulated", "need": true, "suggestion": "Less input for a bit — dimmer, quieter, or a short break — might help." }
+        { "value": "overstim", "label": "Overstimulated", "need": true, "feels": "This can feel like everything being too loud, too bright, or too fast.", "suggestion": "Less input for a bit — dimmer, quieter, or a short break — might help." }
       ]
     },
     {
       "id": "breath", "label": "Breath", "question": "How is your breathing?",
       "states": [
         { "value": "easy", "label": "Easy" },
-        { "value": "tight", "label": "Tight or shallow", "need": true, "suggestion": "A few slow breaths might help." }
+        { "value": "tight", "label": "Tight or shallow", "need": true, "feels": "This can feel like shallow, held, or high-in-the-chest breathing.", "suggestion": "A few slow breaths might help." }
       ]
     },
     {
       "id": "restless", "label": "Restlessness", "question": "How still or restless are you?",
       "states": [
         { "value": "settled", "label": "Settled" },
-        { "value": "restless", "label": "Restless", "need": true, "suggestion": "Moving your body for a minute might help." }
+        { "value": "restless", "label": "Restless", "need": true, "feels": "This can feel like fidgety energy, or not being able to settle.", "suggestion": "Moving your body for a minute might help." }
       ]
     },
     {
       "id": "pain", "label": "Pain", "question": "Any pain or discomfort?",
       "states": [
         { "value": "none", "label": "None" },
-        { "value": "some", "label": "Some pain", "need": true, "suggestion": "Noticing where it is, and tending to it gently, might help." }
+        { "value": "some", "label": "Some pain", "need": true, "feels": "This can feel like an ache, a sharpness, or a soreness that keeps calling.", "suggestion": "Noticing where it is, and tending to it gently, might help." }
       ]
     }
   ]
