@@ -61,8 +61,9 @@ runnable together with `npm run a11y`:
   on-device pass, then merge to `main` on his explicit "promote". `main` deploys
   to production; `staging` to a preview URL. Docs-only + tooling changes may skip
   the staging gate.
-- Numbering `version.capability.iteration`; SW cache stamp + changelog top entry
-  move together. Current app version: **0.2.0**.
+- Numbering `version.capability.iteration`; changelog top entry moves with it (the
+  SW cache is auto-revisioned by Workbox — no manual stamp). Current app version:
+  **0.3.0**.
 - Note: the web-task harness keeps designating a `claude/*` branch. Per Doctrine
   §11 the standing policy is staging/main; when a session is pinned to a `claude/*`
   branch by its task config, treat what lands there as a **staging candidate
@@ -80,11 +81,29 @@ runnable together with `npm run a11y`:
   the unlabeled Import-backup file input in Settings — fixed the same commit
   (`aria-label`). The lone source change is invisible to sighted users and fully
   machine-verified; the rest is tooling/docs.
+- **2026-07 — v0.3.0 shipped (CAPABILITY), Tier-1 findability:** promoted to
+  production. (1) Typo-tolerant search — bounded Levenshtein fallback tier in
+  `loader.js` `search()` (fires only when exact/prefix/substring miss; 3+ chars,
+  cap 1–2, closest-first). (2) Alias coverage — every ring-2 word + 15 leaves had
+  none; added a curated label-keyed `ALIASES` map merged at flatten time in
+  `build-dataset.mjs`; **dataset bumped to v2**; all 126 nodes now have aliases.
+  (3) Session recent-words — in-memory `recent` array in feelings `index.js`,
+  surfaced as chips on the feelings home, never persisted (cleared on reload).
+  Verified end-to-end in headless Chromium incl. a gibberish control and a
+  reload-clears-recents control. Idea menu lives in the plan file from that session.
 
 ## Roadmap / open loops
+Idea menu (from the "increasingly useful" session) — Tier 1 shipped; remaining:
+- **Tier 2 — deepen payoff:** gentle "one option" guidance for the 84 leaf words
+  (they only have a definition today); recognition lines for the body signals.
+- **Tier 3 — connect the tools:** Body→Feelings bridge (after a check-in, offer to
+  name the feeling); "Help me say it" (turn a named feeling into a shareable
+  sentence). Most distinctive; needs Noah's taste on copy/placement.
+- **Tier 4 — lower the barrier:** calm skippable first-run; on-device read-aloud
+  (needs device verification); quiet non-nagging export-health note.
 - **Screen-reader passes:** VoiceOver (iPad/iPhone) + NVDA — needs Noah's hardware.
-  This is the main remaining a11y item the runner can't cover; the computed gates
-  (contrast + axe + custom focus/live-region/reflow checks) are all automated now.
+  The computed gates (contrast + axe + custom focus/live-region/reflow) are all
+  automated; this is the main remaining a11y item the runner can't cover.
 - **Repo metadata** (Doctrine §10, manual): description / website / topics /
   social-preview are GitHub-UI steps the session token cannot set. When touched,
   list exact values and have Noah confirm each.
