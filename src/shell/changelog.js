@@ -6,7 +6,7 @@ export const CHANGELOG = [
     version: '0.4.0',
     title: 'A little more to sit with',
     notes: [
-      'Every landing word now has an optional, gentle note — what the feeling often points to, and one small thing you might do — tucked behind a tap, never in the way. Take it or leave it; it’s not advice.',
+      'Every landing word now has an optional, gentle note — what the feeling often points to, and one small thing you might do — tucked behind a tap, never in the way. A note to sit with, not advice.',
       'The body check-in now says what each signal can feel like, so it’s easier to recognise what you’re noticing.',
     ],
   },

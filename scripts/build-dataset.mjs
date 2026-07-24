@@ -372,7 +372,7 @@ function withAliases(label, base) {
 // VOICE (unchanged from cores/secondaries, and load-bearing here): every line is
 // non-clinical, non-moralizing, and optional in tone. `pointsTo` validates and
 // gently locates the feeling; it never pathologizes or implies a flaw. `oneOption`
-// is a small, take-it-or-leave-it thing you *might* do — never advice, never a fix,
+// is a small, optional thing you *might* do — never advice, never a fix,
 // never a should. The panel is collapsed by default, so it never blocks the word.
 const g = (pointsTo, oneOption) => ({ pointsTo, oneOption });
 const LEAF_GUIDANCE = {

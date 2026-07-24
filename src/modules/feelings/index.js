@@ -304,7 +304,7 @@ function guidancePanel(g) {
       el('p', {}, g.pointsTo),
       g.oneOption ? el('p', { class: 'guidance-option' }, g.oneOption) : null,
       el('p', { class: 'muted guidance-note' },
-        'A gentle note, not advice or a diagnosis. Take it or leave it.'),
+        'A gentle note, not advice or a diagnosis. There if it helps.'),
     ]),
   ]);
 }
